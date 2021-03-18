@@ -1,20 +1,20 @@
 === Geoffrey Crofte ===
 
-Contributors: automattic
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+Contributors: Geoffrey Crofte
+Tags: custom-menu, featured-images, threaded-comments, translation-ready
 
 Requires at least: 4.5
-Tested up to: 5.4
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
 
-A starter theme called Geoffrey Crofte.
+My personal theme for GeoffreyCrofte.com
 
 == Description ==
 
-Geoffrey\'s personal blog and portfolio theme
+Geoffrey's personal blog and portfolio theme
 
 == Installation ==
 
