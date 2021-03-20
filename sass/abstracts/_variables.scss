@@ -1,37 +1,119 @@
 // Colors
+$colors: (
+	// Neutral
+	'neutral-050': '#F7F9FC',
+	'neutral-100': '#D8E2F1',
+	'neutral-200': '#B0C2DC',
+	'neutral-300': '#94A8C7',
+	'neutral-400': '#798FB0',
+	'neutral-500': '#62779C',
+	'neutral-600': '#53688B',
+	'neutral-700': '#425471',
+	'neutral-800': '#32435C',
+	'neutral-900': '#26344B',
 
-$color__background-body: #fff;
-$color__background-screen: #f1f1f1;
-$color__background-hr: #ccc;
-$color__background-button: #e6e6e6;
-$color__background-pre: #eee;
-$color__background-ins: #fff9c0;
+	// Primary
+	'primary-050': '#FEF7FB',
+	'primary-100': '#F8D8EB',
+	'primary-200': '#EFADD5',
+	'primary-300': '#E888C1',
+	'primary-400': '#E05DAB',
+	'primary-500': '#D13693',
+	'primary-600': '#BE217F',
+	'primary-700': '#A40162',
+	'primary-800': '#83024F',
+	'primary-900': '#680440',
 
-$color__text-screen: #21759b;
-$color__text-input: #666;
-$color__text-input-focus: #111;
-$color__link: #4169e1; //royalblue
-$color__link-visited: #800080; //purple
-$color__link-hover: #191970; //midnightblue
-$color__text-main: #404040;
+	// Secondary
+	'secondary-050': '#FBF7FE',
+	'secondary-100': '#ECDAFB',
+	'secondary-200': '#D7B2F6',
+	'secondary-300': '#C096E1',
+	'secondary-400': '#A67CC8',
+	'secondary-500': '#8F64B2',
+	'secondary-600': '#8054A4',
+	'secondary-700': '#6A418C',
+	'secondary-800': '#573077',
+	'secondary-900': '#472265',
 
-$color__border-button: #ccc #ccc #bbb;
-$color__border-button-hover: #ccc #bbb #aaa;
-$color__border-button-focus: #aaa #bbb #bbb;
-$color__border-input: #ccc;
-$color__border-abbr: #666;
+
+	// Tertiary
+	'tertiary-050': '#EEFCFB',
+	'tertiary-100': '#A9EDEA',
+	'tertiary-200': '#72D0CD',
+	'tertiary-300': '#46B7B2',
+	'tertiary-400': '#1E9C98',
+	'tertiary-500': '#168480',
+	'tertiary-600': '#107370',
+	'tertiary-700': '#0B5D5B',
+	'tertiary-800': '#094B48',
+	'tertiary-900': '#073A39',
+
+	// Information
+	'info-050': '#F5F9FC',
+	'info-100': '#CFE4F2',
+	'info-200': '#9AC6E5',
+	'info-300': '#73ADD8',
+	'info-400': '#5793BE',
+	'info-500': '#3F7CA7',
+	'info-600': '#306C98',
+	'info-700': '#20577F',
+	'info-800': '#1A4665',
+	'info-900': '#14364F',
+
+	// Negative
+	'negative-050': '#FDF7F7',
+	'negative-100': '#F7DADA',
+	'negative-200': '#EEB1B1',
+	'negative-300': '#E68F8F',
+	'negative-400': '#DC6A6A',
+	'negative-500': '#C74F4F',
+	'negative-600': '#B83B3B',
+	'negative-700': '#A11F1F',
+	'negative-800': '#841616',
+	'negative-900': '#6A0D0D',
+
+	// Positive
+	'positive-050': '#F1FCF3',
+	'positive-100': '#B6EFC2',
+	'positive-200': '#63D77F',
+	'positive-300': '#42BD6A',
+	'positive-400': '#20A253',
+	'positive-500': '#178849',
+	'positive-600': '#117742',
+	'positive-700': '#0B6037',
+	'positive-800': '#094D2C',
+	'positive-900': '#073D23',
+);
+
+$color-background-body: #fff;
+$color-background-screen: #f1f1f1;
+$color-background-hr: #ccc;
+$color-background-button: #e6e6e6;
+$color-background-pre: #eee;
+$color-background-ins: #fff9c0;
+
+$color-text-screen: #21759b;
+$color-text-input: #666;
+$color-text-input-focus: #111;
+$color-link: #4169e1; //royalblue
+$color-link-visited: #800080; //purple
+$color-link-hover: #191970; //midnightblue
+$color-text-main: #404040;
+
+$color-border-button: #ccc #ccc #bbb;
+$color-border-button-hover: #ccc #bbb #aaa;
+$color-border-button-focus: #aaa #bbb #bbb;
+$color-border-input: #ccc;
+$color-border-abbr: #666;
 
 // Typography
-// stylelint-disable value-keyword-case
-$font__main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-// stylelint-enable value-keyword-case
-$font__code: monaco, consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-$font__pre: "Courier 10 Pitch", courier, monospace;
-$font__line-height-body: 1.5;
-$font__line-height-pre: 1.6;
+$font-main: "Fira Sans", "Helvetica Neue", Helvetica, sans-serif;
+$font-code: consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+$font-line-height-body: 1.5;
+$font-line-height-pre: 1.6;
 
 // Columns
-
 $columns: (
 	1: 100%,
 	2: 50%,
@@ -44,4 +126,7 @@ $columns: (
 	9: 11.11%
 );
 
-$columns__margin: 3.8%;
+$columns-margin: 3.8%;
+
+// Widths here and there
+$w-container: 1305px;

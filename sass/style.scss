@@ -3,7 +3,7 @@ Theme Name: Geoffrey Crofte
 Theme URI: http://underscores.me/
 Author: Geoffrey Crofte
 Author URI: https://geoffreycrofte.com
-Description: Geoffrey\'s personal blog and portfolio theme
+Description: Geoffrey's personal blog and portfolio theme
 Version: 1.0.0
 Tested up to: 5.4
 Requires PHP: 5.6
@@ -17,80 +17,539 @@ Use it to make something cool, have fun, and share what you've learned.
 
 Geoffrey Crofte is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
 Underscores is distributed under the terms of the GNU GPL v2 or later.
-
-Normalizing styles have been helped along thanks to the fine work of
-Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
-
-/*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
-# Generic
-	- Normalize
-	- Box sizing
-# Base
-	- Typography
-	- Elements
-	- Links
-	- Forms
-# Components
-	- Navigation
-	- Posts and pages
-	- Comments
-	- Widgets
-	- Media
-	- Captions
-	- Galleries
-# plugins
-	- Jetpack infinite scroll
-# Utilities
-	- Accessibility
-	- Alignments
-
---------------------------------------------------------------*/
 
 // Import variables and mixins.
 @import "abstracts/variables";
 @import "abstracts/mixins";
+@import "abstracts/font-face";
 
-/*--------------------------------------------------------------
-# Generic
---------------------------------------------------------------*/
+/**
+ * Root level
+ */
+:root {
+//@each $name, $hex in $colors {
+//	--crofte-#{$name}: #{$hex};
+//}
+}
 
-/* Normalize
---------------------------------------------- */
-@import "generic/normalize";
+/**
+ * Box Sizing
+ */
 
-/* Box sizing
---------------------------------------------- */
-@import "generic/box-sizing";
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
 
-/*--------------------------------------------------------------
-# Base
---------------------------------------------------------------*/
-@import "base/base";
+html {
+	box-sizing: border-box;
+	-webkit-text-size-adjust: 100%;
+}
 
-/*--------------------------------------------------------------
-# Components
---------------------------------------------------------------*/
-@import "components/components";
+body {
+	background: $color-background-body;
+}
 
-/*--------------------------------------------------------------
-# Plugins
---------------------------------------------------------------*/
+/**
+ * Base HTML Elements
+ */
 
-/* Jetpack infinite scroll
---------------------------------------------- */
-@import "plugins/jetpack/infinite-scroll";
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+	color: $color-text-main;
+	font-family: $font-main;
+	font-size: 1rem;
+	line-height: $font-line-height-body;
+}
 
-/*--------------------------------------------------------------
-# Utilities
---------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
 
-/* Accessibility
---------------------------------------------- */
-@import "utilities/accessibility";
+p {
+	margin-bottom: 1.5em;
+}
 
-/* Alignments
---------------------------------------------- */
-@import "utilities/alignments";
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	margin: 0 1.5em;
+}
+
+address {
+	margin: 0 0 1.5em;
+}
+
+pre {
+	background: $color-background-pre;
+	line-height: $font-line-height-pre;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1.6em;
+}
+
+code,
+kbd,
+tt,
+var,
+pre {
+	font-family: $font-code;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted $color-border-abbr;
+	cursor: help;
+}
+
+mark,
+ins {
+	background: $color-background-ins;
+	text-decoration: none;
+}
+
+big {
+	font-size: 125%;
+}
+
+ul,
+ol {
+	margin: 0 0 1.5em 3em;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.5em;
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 1em 0;
+}
+
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+
+a {
+	color: $color-link;
+
+	&:visited {
+		color: $color-link-visited;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-link-hover;
+	}
+
+	&:focus {
+		outline: thin dotted;
+	}
+
+	&:hover,
+	&:active {
+		outline: 0;
+	}
+}
+
+/**
+ * Utilities
+ */
+.alignleft {
+	/*rtl:ignore*/
+	float: left;
+	/*rtl:ignore*/
+	margin-right: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.alignright {
+	/*rtl:ignore*/
+	float: right;
+	/*rtl:ignore*/
+	margin-left: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1.5em;
+}
+
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important; // Many screen reader and browser combinations announce broken words as they would appear visually.
+
+	&:focus {
+		background-color: $color-background-screen;
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		clip: auto !important;
+		clip-path: none;
+		color: $color-text-screen;
+		display: block;
+		font-size: 0.875rem;
+		font-weight: 700;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000; // Above WP toolbar.
+	}
+}
+
+/**
+ * Containers
+ */
+
+.container {
+	width: $w-container;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.section {
+	--section-background: #fff;
+	--section-color: inherit;
+
+	background: var(--section-background);
+	color: var(--section-color);
+}
+
+/**
+ * Header
+ */
+
+.site-header {
+	.container {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+/**
+ * Navigation
+ */
+
+.site-header {
+	ul, li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	ul {
+		display: flex;
+	}
+
+	a {
+		display: block;
+	}
+}
+	
+.menu-toggle {
+	display: none;
+}
+
+/**
+ * Forms
+ */
+input,
+textarea,
+select {
+	color: $color-text-input;
+	border: 1px solid $color-border-input;
+	border-radius: 3px;
+	padding: 3px;
+
+	&:focus {
+		color: $color-text-input-focus;
+	}
+}
+
+textarea {
+	width: 100%;
+}
+
+// 1. Change the font styles in all browsers.
+// 2. Remove the margin in Firefox and Safari.
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: inherit;
+	font-size: 100%;
+	line-height: 1.15;
+	margin: 0;
+	overflow: visible; // shows the overflow in IE/EDGE
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	border: 1px solid;
+	border-color: $color-border-button;
+	border-radius: 3px;
+	background: $color-background-button;
+	color: rgba(0, 0, 0, 0.8);
+	line-height: 1;
+	padding: 0.6em 1em 0.4em;
+	-webkit-appearance: button;
+
+	&::-moz-focus-inner {
+		border-style: none;
+		padding: 0;
+	}
+
+	&:-moz-focusring {
+		outline: 1px dotted ButtonText
+	}
+
+	&:hover {
+		border-color: $color-border-button-hover;
+	}
+
+	&:active,
+	&:focus {
+		border-color: $color-border-button-focus;
+	}
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select {
+	text-transform: none;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *		`fieldset` elements in all browsers.
+ */
+legend {
+	box-sizing: border-box;
+	color: inherit;
+	display: table;
+	max-width: 100%;
+	padding: 0;
+	white-space: normal;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+	vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+	overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type="checkbox"],
+[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+	height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type="search"] {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+/**
+ * Page Contents
+ */
+.page-content,
+.entry-content,
+.entry-summary {
+	margin: 1.5em 0 0;
+}
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
+
+// Media
+.page-content .wp-smiley,
+.entry-content .wp-smiley,
+.comment-content .wp-smiley {
+	border: none;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+
+	img[class*="wp-image-"] {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.wp-caption-text {
+		margin: 0.8075em 0;
+	}
+}
+
+.wp-caption-text {
+	text-align: center;
+}
+
+
+// Galleries
+.gallery {
+	margin-bottom: 1.5em;
+	display: grid;
+	grid-gap: 1.5em;
+}
+
+.gallery-item {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+// Loops to enumerate the classes for gallery columns.
+@for $i from 2 through 9 {
+	.gallery-columns-#{$i} {
+		grid-template-columns: repeat($i, 1fr);
+	}
+}
+
+.gallery-caption {
+	display: block;
+}
+
+/**
+ * Comments
+ */
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.bypostauthor {
+	display: block;
+}
+
+/**
+ * Widgets
+ */
+
+.widget {
+	margin: 0 0 1.5em;
+
+	// Make sure select elements fit in widgets.
+	select {
+		max-width: 100%;
+	}
+}
+

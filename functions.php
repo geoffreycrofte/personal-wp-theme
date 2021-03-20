@@ -12,6 +12,11 @@ if ( ! defined( 'GEOFFREYCROFTE_VERSION' ) ) {
 	define( 'GEOFFREYCROFTE_VERSION', '1.0.0' );
 }
 
+if ( ! defined( 'GC_ASSETS' ) ) {
+	// Replace the version number of the theme on each release.
+	define( 'GC_ASSETS', get_template_directory_uri() . '/assets/' );
+}
+
 if ( ! function_exists( 'geoffreycrofte_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -131,6 +136,11 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Admin functions
+ */
+require get_template_directory() . '/inc/admin.php';
 
 /**
  * Load Jetpack compatibility file.
