@@ -14,6 +14,10 @@ get_header();
 
 	<main id="primary" class="site-main">
 		<div class="container">
+			<div class="blob">
+				<svg width="605" height="664" viewBox="0 0 605 664" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.38" fill-rule="evenodd" clip-rule="evenodd" d="M265.055 4.2205C361.222 -17.5123 458.196 47.5391 520.399 133.863C583.68 221.683 634.111 349.857 585.685 449.183C540.991 540.854 416.033 481.596 331.12 522.09C257.653 557.125 217.535 682.249 139.95 661.744C56.7984 639.768 6.64642 531.623 0.299822 434.656C-5.28135 349.384 68.3742 296.312 111.449 226.282C161.394 145.082 179.68 23.5146 265.055 4.2205Z" fill="#EBF3FA"/></svg>
+			</div>
+
 			<div class="ninja-desc">
 			<?php
 				if ( have_posts() ) :
@@ -28,64 +32,166 @@ get_header();
 				endif;
 			?>
 			</div>
-
-			<?php
-				if ( function_exists( 'have_rows' ) && have_rows( 'what_i_do_best', 7850 ) ):
-			?>
-			
-			<div class="skills flex">
-
-			<?php
-				while ( have_rows('what_i_do_best') ) : the_row();
-					$icon     = get_sub_field('icon');
-					$title    = get_sub_field('title');
-					$desc     = get_sub_field('description');
-					$btn_text = get_sub_field('button_text');
-					$btn_url  = get_sub_field('button_url');
-			?>
-
-				<article class="skill-item col-3">
-					<div class="skill-icon">
-						<?php echo $icon; ?>
-					</div>
-					<h3 class="skill-title">
-						<?php echo $title; ?>
-					</h3>
-					<p class="skill-desc">
-						<?php echo $desc; ?>
-					</p>
-					<p class="skill-cta">
-						<a href="<?php echo $btn_url; ?>" class="button-primary"><?php echo $btn_text; ?></a>
-					</p>
-				</article>
-
-			<?php endwhile; ?>
-
-			</div>
-
-			<?php endif; ?>
 		</div>
+
+		<div class="wave">
+			<svg preserveAspectRatio="none" width="1680" height="218" viewBox="0 0 1680 218" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M754.5 103C961.916 195.057 1268.35 235.385 1678.5 52.0001V217.5L3.76617e-06 213L0 19C262 -24.5 547.083 10.9434 754.5 103Z" fill="#E05DAB"/><path d="M756 113.5C970.5 209 1252.5 229.499 1680 22L1680 218H0L1.32798e-07 53.4999C260.549 2.06553 541.5 17.9997 756 113.5Z" fill="#8F64B2"/><path d="M746 119.5C966 209.5 1258.7 242.919 1680 25V218L1.21204e-05 214.418L0 84C259.113 25.7629 526 29.4995 746 119.5Z" fill="#CFE4F2"/><path d="M758 164.5C972 240 1285.5 244 1680 29.0001V218H0V142C257.5 77.0001 544 89.0007 758 164.5Z" fill="#FBF7FE"/></svg>
+		</div>
+		
+		<?php
+			if ( function_exists( 'have_rows' ) && have_rows( 'what_i_do_best' ) ):
+		?>
+
+		<section class="section is-alt">
+			<div class="container">
+				<div class="skills grid is-text-center" style="--xs-repeat:1;--md-repeat:3;">
+
+				<?php
+					while ( have_rows('what_i_do_best') ) : the_row();
+						$icon     = get_sub_field( 'icon' );
+						$title    = get_sub_field( 'title' );
+						$desc     = get_sub_field( 'description' );
+						$btn_text = get_sub_field( 'button_text' );
+						$btn_url  = get_sub_field( 'button_url' );
+				?>
+
+					<article class="skill-item">
+						<div class="skill-icon">
+							<?php echo $icon; ?>
+						</div>
+						<h3 class="skill-title">
+							<?php echo $title; ?>
+						</h3>
+						<div class="skill-desc">
+							<?php echo $desc; ?>
+						</div>
+						<p class="skill-cta">
+							<a href="<?php echo $btn_url; ?>" class="button-primary is-big"><?php echo $btn_text; ?></a>
+						</p>
+					</article>
+
+				<?php endwhile; ?>
+
+				</div>
+			</div><!-- .container #2-->
+		</section>
+		<?php endif; ?>
+
 	</main><!-- #main -->
 
-	<section id="projects">
+	<section class="section is-alt is-reference" id="projects">
+		<div class="wavy-bg">
+			<svg preserveAspectRatio="none" width="1680" height="2036" viewBox="0 0 1680 2036" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.05" d="M751.778 392.135C995.867 403.696 1329.83 338.343 1686.43 18.0024C1686.43 18.0024 1965.79 165.307 1748.64 837.653C921.5 792 298.905 1961.06 -15.5083 1319.78C-141.334 1063.15 -53.4702 588.879 -53.4702 588.879C199.15 452.456 507.689 380.575 751.778 392.135Z" fill="#D13693"/><path opacity="0.5" d="M920.079 854.125C675.99 865.685 342.025 800.332 -14.5724 479.992C-14.5724 479.992 -293.932 627.297 -76.7877 1299.64C750.357 1253.99 1372.95 2423.05 1687.37 1781.77C1813.19 1525.14 1725.33 1050.87 1725.33 1050.87C1472.71 914.446 1164.17 842.565 920.079 854.125Z" fill="#EBF3FA"/></svg>
+
+		</div>
 		<div class="container">
 			<h2 class="section-title">
-				<?php _e('My latest works', 'geoffreycrofte'); ?>
+				<?php echo get_field( 'latest_work_title' ); ?>
 			</h2>
-
-			<p class="section-subtitlre">
-				<?php _e('I work on different kinds of project, from the user research, passing by the UI, followed by user testing and continuous care for product improvement.', 'geoffreycrofte'); ?>
+			<p class="section-subtitle">
+				<?php echo get_field( 'latest_work_description', false, false ); ?>
 			</p>
 		</div>
 
 		<div class="container is-bleeding">
-			
+			<?php
+				$usecases = new WP_Query(array(
+					'post_type' => array('portfolio'),
+					'post_count' => 6,
+				));
+				// The Loop
+				if ( $usecases->have_posts() ) :
+			?>
+
+			<ul class="portfolio grid" style="--xs-repeat:1;--md-repeat:2;--l-repeat:3;">
+
+			<?php
+				while ( $usecases->have_posts() ) :
+					$usecases->the_post();
+					
+					$title = get_the_title();
+					$img   = get_the_post_thumbnail();
+					$desc  = get_the_excerpt();
+					$link  = get_the_permalink();
+			?>
+
+				<li class="case-study">
+					<a href="<?php echo esc_url( $link ); ?>">
+						<?php echo $img; ?>
+						<div class="case-study-text">
+							<h3 class="case-study-title"><?php echo $title; ?></h3>
+							<p class="case-study-desc">
+								<?php echo $desc; ?>
+							</p>
+						</div>
+					</a>
+				</li>
+
+				<li class="case-study">
+					<a href="<?php echo esc_url( $link ); ?>">
+						<?php echo $img; ?>
+						<div class="case-study-text">
+							<h3 class="case-study-title"><?php echo $title; ?></h3>
+							<p class="case-study-desc">
+								<?php echo $desc; ?>
+							</p>
+						</div>
+					</a>
+				</li>
+
+			<?php endwhile; ?>
+
+			</ul>
+
+			<p class="section-cta is-text-center">
+				<a class="button-primary is-big" href="<?php echo get_post_type_archive_link( 'portfolio' ); ?>"><?php echo _e( 'See all my Design Works', 'geoffreycrofte' ) ?></a>
+			</p>
+
+			<?php 
+				endif; 
+				wp_reset_postdata();
+			?>
+
 		</div>
 	</section>
 
-	<section id="trusted">
-		<div class="container">
-			
+
+	<section id="trusted" class="section is-reference">
+		<div class="container grid" style="--l-pattern: 4fr 1fr 7fr; --repeat: 1;">
+			<div>
+				<h2 class="section-title is-text-left">
+					<?php echo get_field( 'trusted_title' ); ?>
+				</h2>
+				<p class="section-subtitle is-text-left">
+					<?php echo get_field( 'trusted_description', false, false ); ?>
+				</p>
+			</div>
+			<div></div>
+			<div>
+
+			<?php
+				if ( function_exists( 'have_rows' ) && have_rows( 'trusted_companies' ) ):
+			?>
+
+				<ul class="logos is-clean">
+					<?php
+					while ( have_rows( 'trusted_companies' ) ) : the_row();
+						$name = get_sub_field( 'company_name' );
+						$link = get_sub_field( 'company_link' );
+						$logo = get_sub_field( 'company_logo' );
+
+						$img = '<img src="' . $logo['url'] . '" alt="' . $logo['alt'] . '" width="' . ( $logo['width'] / 2 ) . '" height="' . ( $logo['height'] / 2 ) . '">';
+
+						$img = empty( $link ) ? $img : '<a href="' . esc_url( $link ) . '"> ' . $img . '</a>';
+					?>
+
+					<li><?php echo $img; ?></li>
+
+					<?php endwhile; ?>
+				</ul>
+			<?php endif; ?>
+				
+			</div>
 		</div>
 	</section>
 
