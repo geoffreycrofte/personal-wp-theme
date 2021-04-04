@@ -257,6 +257,13 @@ a {
 	margin: 0;
 	border: 0;
 	background: none;
+
+	li,
+	dd,
+	dt {
+		padding: 0;
+		margin: 0;
+	}
 }
 
 .is-text-center {
@@ -344,6 +351,7 @@ a {
 .section {
 	--section-background: #fff;
 	--section-color: inherit;
+	--section-title-color: var(--gc-color-primary);
 
 	padding: 40px 0;
 	background: var(--section-background);
@@ -357,6 +365,12 @@ a {
 		--section-background: var(--gc-color-background-alt);
 	}
 
+	@include dark {
+		--section-background: #{map-get($colors, neutral-900)};
+		--section-color: #{map-get($colors, neutral-200)};
+		--section-title-color: #{map-get($colors, primary-500)};
+	}
+
 	&.is-reference {
 		position: relative;
 	}
@@ -365,11 +379,13 @@ a {
 		position: relative;
 		padding-bottom: 32px;
 		text-align: center;
-		color: var(--gc-color-primary);
+		color: var(--section-title-color);
 
 		&:after {
-			$c-1: #{map-get($colors, secondary-700)};
-			$c-2: #{map-get($colors, secondary-300)};
+			--c1: #{map-get($colors, secondary-700)};
+			--c2: #{map-get($colors, secondary-500)};
+			--c3: #{map-get($colors, secondary-300)};
+			--c4: #{map-get($colors, secondary-200)};
 
 			content: '';
 			width: 48px;
@@ -378,14 +394,16 @@ a {
 			bottom: 0;
 			left: 50%;
 			transform: translateX(-50%);
-			background: radial-gradient(circle, $c-1, $c-1 7px, transparent 7.5px), radial-gradient(circle at 4.5px 50%, $c-2, $c-2 4px, transparent 4.5px), radial-gradient(circle at 43.5px 50%, $c-2, $c-2 4px, transparent 4.5px);
+			background: radial-gradient(circle, var(--c1), var(--c1) 7px, transparent 7.5px), radial-gradient(circle at 4.5px 50%, var(--c3), var(--c3) 4px, transparent 4.5px), radial-gradient(circle at 43.5px 50%, var(--c3), var(--c3) 4px, transparent 4.5px);
 		}
 
 		&.is-text-left {
 			text-align: left;
 
 			&:after {
+				transform: none;
 				left: 0;
+				background: radial-gradient(circle at 8px 50%, var(--c2), var(--c2) 7px, transparent 7.5px), radial-gradient(circle at 26px 50%, var(--c3), var(--c3) 6px, transparent 6.5px), radial-gradient(circle at 42px 50%, var(--c4), var(--c4) 4px, transparent 4.5px);
 			}
 		}
 	}
@@ -551,6 +569,12 @@ a {
 /**
  * Decorations
  */
+.wave,
+.wavy-bg {
+	~ * {
+		position: relative;
+	}
+}
 .wave {
 	width: 100%;
 	height: 218px;
@@ -697,14 +721,14 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 [class^="button-"] {
-	--btn-bg: var(--gc-color-primary);
+	--btn-background: var(--gc-color-primary);
 	--btn-color: var(--gc-color-background);
 
 	padding: 10px 16px;
 	font-weight: 700;
 	text-decoration: none;
 	color: var(--btn-color);
-	background: var(--btn-bg);
+	background: var(--btn-background);
 	border-radius: 80px; // pills
 	-webkit-appearance: button;
 	transition: all .3s;
@@ -729,13 +753,18 @@ input[type="submit"],
 
 	&:hover,
 	&:focus {
-		--btn-bg: var(--gc-color-link-hover);
+		--btn-background: var(--gc-color-link-hover);
 		color: var(--btn-color);
 	}
 
 	&.is-big {
 		font-size: 1.125rem;
 		padding: 12px 24px;
+	}
+
+	@include dark {
+		--btn-background: #{map-get($colors, info-050)};
+		--btn-color: #{map-get($colors, info-500)};
 	}
 }
 
@@ -863,6 +892,131 @@ textarea {
 .wp-caption-text {
 	text-align: center;
 }
+
+/**
+ * Card System
+ */
+.card {
+	--r: 66;
+	--g: 11;
+	--b: 89;
+	--card-background: #FFF;
+	--card-text-color: #{map-get($colors, neutral-700)};
+	--card-title-color: #{map-get($colors, primary-700)};
+	--card-title-color-hover: #{map-get($colors, primary-900)};
+	--card-padding: 12px 32px;
+	--card-meta-background: #{map-get($colors, primary-100)};
+	--card-meta-color: #{map-get($colors, primary-700)};
+
+
+	color: var(--card-text-color);
+	background: var(--card-background);
+	border-radius: 24px;
+	overflow: hidden;
+	box-shadow: 0px 18px 58px rgba(var(--r), var(--g), var(--b), 0.07),
+				0px 6.5703px 21.171px rgba(var(--r), var(--g), var(--b), 0.0482987),
+				0px 3.18976px 10.2781px rgba(var(--r), var(--g), var(--b), 0.0389404),
+				0px 1.56368px 5.03852px rgba(var(--r), var(--g), var(--b), 0.0310596),
+				0px 0.618281px 1.99224px rgba(var(--r), var(--g), var(--b), 0.0217013);
+
+	p,
+	h1 {
+		margin: 0;
+	}
+
+	// When in list.
+	&-list {
+
+	}
+
+	&-item {
+
+	}
+
+	// Usual content
+	&-image {
+
+	}
+
+	&-content {
+		h1 {
+			font-size: 1.25rem;
+			line-height: 1.55;
+			color: var(--card-title-color);
+
+			a {
+				color: inherit;
+				text-decoration: none;
+
+				&:hover,
+				&:focus {
+					color: var(--card-title-color-hover);
+				}
+			}
+		}
+
+		header {
+			padding: var(--card-padding);
+		}
+
+	}
+
+	&-description {
+		padding: var(--card-padding);
+	}
+
+	&-cta {
+		padding: var(--card-padding);
+
+		[class^="button-"] {
+
+		}
+	}
+
+	// When has a meta line.
+	&-meta {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		margin-top: 16px;
+		padding: var(--card-padding);
+		padding-top: 12px;
+		padding-bottom: 12px;
+		background: var(--card-meta-background);
+		color: var(--card-meta-color);
+
+		.card-meta-name {
+			line-height: .8; // SVG bug that adds line-heigh to the svg size.
+			margin-right: 8px;
+		}
+
+		&-value {
+			font-size: 0.875rem;
+			font-weight: 700;
+		}
+
+		a {
+			&,
+			&:hover,
+			&:focus {
+				color: inherit;
+			}
+		}
+	}
+
+	@include dark {
+		--r: 27;
+		--g: 7;
+		--b: 70;
+		--card-background: #{map-get($colors, neutral-800)};
+		--card-text-color: #{map-get($colors, neutral-200)};
+		--card-title-color: #{map-get($colors, neutral-100)};
+		--card-title-color-hover: white;
+		--card-meta-background: #{map-get($colors, neutral-700)};
+		--card-meta-color: #{map-get($colors, neutral-050)};
+	}
+}
+
 
 
 // Galleries

@@ -2,3 +2,16 @@
 @mixin column-width($numberColumns: 3) {
 	width: map-get($columns, $numberColumns) - ( ( $columns__margin * ( $numberColumns - 1 ) ) / $numberColumns );
 }
+
+@mixin dark() {
+  @media (prefers-color-scheme: dark) {
+    @at-root :root:not(.is-light) #{&} {
+      @content;
+    }
+  }
+
+  @at-root .is-dark #{&},
+  .is-dark#{&} {
+    @content;
+  }
+}

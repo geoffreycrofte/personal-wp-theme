@@ -195,9 +195,148 @@ get_header();
 		</div>
 	</section>
 
-	<section id="talks">
+	<section id="talks" class="section is-dark">
 		<div class="container">
-			
+			<h2 class="section-title">
+				<?php echo get_field( 'latest_talks_title' ); ?>
+			</h2>
+			<p class="section-subtitle">
+				<?php echo get_field( 'latest_talks_description', false, false ); ?>
+			</p>
+
+			<?php $posts = get_field( 'latest_talks_posts' ); ?>
+
+			<ul class="card-list grid is-clean" style="--xs-repeat:1;--md-repeat:2;--l-repeat:3;">
+				<?php
+				foreach ($posts as $post) {
+					$post_link = get_the_permalink( $post->ID );
+					$post_metas = get_post_meta( $post->ID );
+
+					$talk_media_links = unserialize( $post_metas['speekr-media-links'][0] ); // array
+					$talk_conf_infos = unserialize( $post_metas['speekr-conf'][0] ); // array
+					$talk_summary = $post_metas['speekr-summary'][0]; // string
+					$talk_as_article = $post_metas['speekr-as-article'][0]; // "on"
+				?>
+
+				<li class="card-item">
+					<article class="card">
+						<div class="card-image">
+							<?php echo get_the_post_thumbnail( $post->ID ); ?>
+						</div>
+						<div class="card-content">
+							<header>
+								<h1>
+								<?php echo $talk_as_article === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
+								</h1>
+							</header>
+							<div class="card-description">
+								<?php echo $talk_summary; ?>
+							</div>
+
+							<?php if ( $talk_as_article === 'on' ) { ?>
+
+							<p class="card-cta">
+								<a class="button-primary" href="<?php echo get_the_permalink( $post->ID ); ?>">
+									<?php _e('Read the transcript', 'geoffreycrofte' ); ?>
+								</a>	
+							</p>
+
+							<?php } ?>
+
+							<?php if ( $talk_conf_infos && ! empty( $talk_conf_infos['name'] ) ) { ?>
+							<dl class="card-meta">
+								<dt class="card-meta-name">
+									<?php get_icon('map-plan', __( 'Conference Info', 'geoffreycrofte' ) ); ?>
+								</dt>
+								<dd class="card-meta-value">
+									<?php echo ! empty( $talk_conf_infos['url'] ) ? '<a href="' . esc_url( $talk_conf_infos['url'] ) . '" rel="nofollow">' . esc_html( $talk_conf_infos['name'] ) . '</a>' : esc_html( $talk_conf_infos['name'] ); ?>
+								</dd>
+							</dl>
+							<?php } ?>
+						</div>
+					</article>
+				</li>
+
+				<li class="card-item">
+					<article class="card">
+						<div class="card-image">
+							<?php echo get_the_post_thumbnail( $post->ID ); ?>
+						</div>
+						<div class="card-content">
+							<header>
+								<h1>
+								<?php echo $talk_as_article === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
+								</h1>
+							</header>
+							<div class="card-description">
+								<?php echo $talk_summary; ?>
+							</div>
+
+							<?php if ( $talk_as_article === 'on' ) { ?>
+
+							<p class="card-cta">
+								<a class="button-primary" href="<?php echo get_the_permalink( $post->ID ); ?>">
+									<?php _e('Read the transcript', 'geoffreycrofte' ); ?>
+								</a>	
+							</p>
+
+							<?php } ?>
+
+							<?php if ( $talk_conf_infos && ! empty( $talk_conf_infos['name'] ) ) { ?>
+							<dl class="card-meta">
+								<dt class="card-meta-name">
+									<?php get_icon('map-plan', __( 'Conference Info', 'geoffreycrofte' ) ); ?>
+								</dt>
+								<dd class="card-meta-value">
+									<?php echo ! empty( $talk_conf_infos['url'] ) ? '<a href="' . esc_url( $talk_conf_infos['url'] ) . '" rel="nofollow">' . esc_html( $talk_conf_infos['name'] ) . '</a>' : esc_html( $talk_conf_infos['name'] ); ?>
+								</dd>
+							</dl>
+							<?php } ?>
+						</div>
+					</article>
+				</li>
+
+				<li class="card-item">
+					<article class="card">
+						<div class="card-image">
+							<?php echo get_the_post_thumbnail( $post->ID ); ?>
+						</div>
+						<div class="card-content">
+							<header>
+								<h1>
+								<?php echo $talk_as_article === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
+								</h1>
+							</header>
+							<div class="card-description">
+								<?php echo $talk_summary; ?>
+							</div>
+
+							<?php if ( $talk_as_article === 'on' ) { ?>
+
+							<p class="card-cta">
+								<a class="button-primary" href="<?php echo get_the_permalink( $post->ID ); ?>">
+									<?php _e('Read the transcript', 'geoffreycrofte' ); ?>
+								</a>	
+							</p>
+
+							<?php } ?>
+
+							<?php if ( $talk_conf_infos && ! empty( $talk_conf_infos['name'] ) ) { ?>
+							<dl class="card-meta">
+								<dt class="card-meta-name">
+									<?php get_icon('map-plan', __( 'Conference Info', 'geoffreycrofte' ) ); ?>
+								</dt>
+								<dd class="card-meta-value">
+									<?php echo ! empty( $talk_conf_infos['url'] ) ? '<a href="' . esc_url( $talk_conf_infos['url'] ) . '" rel="nofollow">' . esc_html( $talk_conf_infos['name'] ) . '</a>' : esc_html( $talk_conf_infos['name'] ); ?>
+								</dd>
+							</dl>
+							<?php } ?>
+						</div>
+					</article>
+				</li>
+
+				<?php } ?>
+			</ul>
 		</div>
 	</section>
 
