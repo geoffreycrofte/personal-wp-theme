@@ -20,7 +20,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
 @font-face {
 	font-family: 'Fira Sans';
-	font-display: optional;
+	font-display: swap;
 	src: url("assets/fonts/FiraSans-Bold.woff2") format("woff2"), url("assets/fonts/FiraSans-Bold.woff") format("woff"), url("assets/fonts/FiraSans-Bold.ttf") format("truetype");
 	font-weight: 700;
 	font-style: normal;
@@ -28,7 +28,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 
 @font-face {
 	font-family: 'Fira Sans';
-	font-display: optional;
+	font-display: swap;
 	src: url("assets/fonts/FiraSans-Regular.woff2") format("woff2"), url("assets/fonts/FiraSans-Regular.woff") format("woff"), url("assets/fonts/FiraSans-Regular.ttf") format("truetype");
 	font-weight: 400;
 	font-style: normal;
@@ -36,7 +36,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 
 @font-face {
 	font-family: 'Fira Sans';
-	font-display: optional;
+	font-display: swap;
 	src: url("assets/fonts/FiraSans-Italic.woff2") format("woff2"), url("assets/fonts/FiraSans-Italic.woff") format("woff"), url("assets/fonts/FiraSans-Italic.ttf") format("truetype");
 	font-weight: 400;
 	font-style: italic;
@@ -75,6 +75,10 @@ body {
 	margin: 0;
 	color: var(--gc-color-text);
 	background: var(--gc-color-background);
+}
+
+body {
+	overflow-x: hidden;
 }
 
 /**
@@ -289,6 +293,10 @@ a:visited:hover {
 	text-align: left;
 }
 
+.is-text-right {
+	text-align: right;
+}
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -369,9 +377,11 @@ a:visited:hover {
 }
 
 .section {
+	--section-margin-top: 0;
 	--section-background: #fff;
 	--section-color: inherit;
 	--section-title-color: var(--gc-color-primary);
+	margin: var(--section-margin-top) 0 0 0;
 	padding: 40px 0;
 	background: var(--section-background);
 	color: var(--section-color);
@@ -387,23 +397,56 @@ a:visited:hover {
 	--section-background: var(--gc-color-background-alt);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root:not(.is-light) .section {
-		--section-background: #26344B;
-		--section-color: #B0C2DC;
-		--section-title-color: #D13693;
-	}
+.section.is-alt + .has-ovale::after {
+	background: var(--gc-color-background-alt);
 }
 
-.is-dark .section,
-.is-dark.section {
+.section.is-dark {
 	--section-background: #26344B;
 	--section-color: #B0C2DC;
 	--section-title-color: #D13693;
 }
 
+.section.is-dark + .has-ovale::after {
+	background: #26344B;
+}
+
+.section.is-dark + .has-ovale::after, .section.is-alt + .has-ovale::after {
+	content: '';
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	right: 0;
+	height: 80px;
+}
+
 .section.is-reference {
 	position: relative;
+}
+
+.section.has-ovale {
+	--section-margin-top: 72px;
+	position: relative;
+	padding-top: 48px;
+}
+
+.section.has-ovale:before {
+	content: '';
+	position: absolute;
+	z-index: 1;
+	top: calc(-1 * var(--section-margin-top));
+	left: -33%;
+	right: -10%;
+	background: var(--section-background);
+	width: 140%;
+	height: 190px;
+	border-radius: 100%;
+	transform: rotate(-2.47deg);
+}
+
+.section.has-ovale > * {
+	position: relative;
+	z-index: 2;
 }
 
 .section-title {
@@ -736,6 +779,10 @@ input[type="submit"],
 [class^="button-"] {
 	--btn-background: var(--gc-color-primary);
 	--btn-color: var(--gc-color-background);
+	--icon-size: 24px;
+	--icon-spacing: 8px;
+	display: inline-flex;
+	align-items: center;
 	padding: 10px 16px;
 	font-weight: 700;
 	text-decoration: none;
@@ -792,24 +839,55 @@ input[type="submit"]:focus,
 	color: var(--btn-color);
 }
 
+button svg,
+input[type="button"] svg,
+input[type="reset"] svg,
+input[type="submit"] svg,
+[class^="button-"] svg {
+	width: var(--icon-size);
+	height: var(--icon-size);
+}
+
+button span + svg,
+button svg + span,
+input[type="button"] span + svg,
+input[type="button"] svg + span,
+input[type="reset"] span + svg,
+input[type="reset"] svg + span,
+input[type="submit"] span + svg,
+input[type="submit"] svg + span,
+[class^="button-"] span + svg,
+[class^="button-"] svg + span {
+	margin-left: var(--icon-spacing);
+}
+
 button.is-big,
 input[type="button"].is-big,
 input[type="reset"].is-big,
 input[type="submit"].is-big,
 [class^="button-"].is-big {
+	--icon-size: 32px;
+	--icon-spacing: 16px;
 	font-size: 1.125rem;
 	padding: 12px 24px;
 }
 
 @media (prefers-color-scheme: dark) {
-	:root:not(.is-light) button, input[type="button"], input[type="reset"], input[type="submit"], [class^="button-"] {
+	:root:not(.is-light) button, :root:not(.is-light)
+	input[type="button"], :root:not(.is-light)
+	input[type="reset"], :root:not(.is-light)
+	input[type="submit"], :root:not(.is-light)
+	[class^="button-"] {
 		--btn-background: #F5F9FC;
 		--btn-color: #3F7CA7;
 	}
 }
 
-.is-dark button, input[type="button"], input[type="reset"], input[type="submit"], [class^="button-"],
-.is-darkbutton, input[type="button"], input[type="reset"], input[type="submit"], [class^="button-"] {
+.is-dark button, .is-dark
+input[type="button"], .is-dark
+input[type="reset"], .is-dark
+input[type="submit"], .is-dark
+[class^="button-"] {
 	--btn-background: #F5F9FC;
 	--btn-color: #3F7CA7;
 }
@@ -1030,8 +1108,7 @@ textarea {
 	}
 }
 
-.is-dark .card,
-.is-dark.card {
+.is-dark .card {
 	--r: 27;
 	--g: 7;
 	--b: 70;
@@ -1112,5 +1189,9 @@ textarea {
 .widget select {
 	max-width: 100%;
 }
+
+/**
+ * Footer
+ */
 
 /*# sourceMappingURL=style.css.map */

@@ -13,8 +13,10 @@ if ( ! function_exists( 'geoffreycrofte_posted_on' ) ) :
 	 */
 	function geoffreycrofte_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			$time_string  = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
+			$time_string .= '<!--time class="updated" datetime="%3$s">%4$s</time-->';
 		}
 
 		$time_string = sprintf(
@@ -27,8 +29,9 @@ if ( ! function_exists( 'geoffreycrofte_posted_on' ) ) :
 
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'geoffreycrofte' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+			esc_html_x( '%sPosted on %s', 'post date', 'geoffreycrofte' ),
+			'<span class="screen-reader-text">',
+			'</span><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
 		echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -112,6 +115,16 @@ if ( ! function_exists( 'geoffreycrofte_entry_footer' ) ) :
 	}
 endif;
 
+/**
+ * Customize excerpt lentght
+ * @param  (int) $length The amount of words.
+ * @return (int)         The amount of words.
+ */
+function geoffreycrofte_excerpt_length( $length ) {
+    return 42;
+}
+add_filter( 'excerpt_length', 'geoffreycrofte_excerpt_length', 999 );
+
 if ( ! function_exists( 'geoffreycrofte_post_thumbnail' ) ) :
 	/**
 	 * Displays an optional post thumbnail.
@@ -124,7 +137,7 @@ if ( ! function_exists( 'geoffreycrofte_post_thumbnail' ) ) :
 			return;
 		}
 
-		if ( is_singular() ) :
+		if ( is_singular() && ! is_front_page() ) :
 			?>
 
 			<div class="post-thumbnail">

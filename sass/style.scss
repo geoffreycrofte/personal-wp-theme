@@ -61,6 +61,10 @@ body {
 	background: var(--gc-color-background);
 }
 
+body {
+	overflow-x: hidden;
+}
+
 /**
  * Base HTML Elements
  */
@@ -274,6 +278,10 @@ a {
 	text-align: left;
 }
 
+.is-text-right {
+	text-align: right;
+}
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -349,10 +357,12 @@ a {
 }
 
 .section {
+	--section-margin-top: 0;
 	--section-background: #fff;
 	--section-color: inherit;
 	--section-title-color: var(--gc-color-primary);
 
+	margin: var(--section-margin-top) 0 0 0;
 	padding: 40px 0;
 	background: var(--section-background);
 	color: var(--section-color);
@@ -363,16 +373,64 @@ a {
 
 	&.is-alt {
 		--section-background: var(--gc-color-background-alt);
+
+		+ .has-ovale::after {
+			background: var(--gc-color-background-alt);
+		}
 	}
 
-	@include dark {
+	&.is-dark {
 		--section-background: #{map-get($colors, neutral-900)};
 		--section-color: #{map-get($colors, neutral-200)};
 		--section-title-color: #{map-get($colors, primary-500)};
+
+		+ .has-ovale::after {
+			background: #{map-get($colors, neutral-900)};
+		}
+	}
+
+	&.is-dark,
+	&.is-alt {
+		+ .has-ovale {
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 100%;
+				left: 0;
+				right: 0;
+				height: 80px;
+			}
+		}
 	}
 
 	&.is-reference {
 		position: relative;
+	}
+
+	&.has-ovale {
+		--section-margin-top: 72px;
+
+		position: relative;
+		padding-top: 48px;
+
+		&:before {
+			content: '';
+			position: absolute;
+			z-index: 1;
+			top: calc(-1 * var(--section-margin-top));
+			left: -33%;
+			right: -10%;
+			background: var(--section-background);
+			width: 140%;
+			height: 190px;
+			border-radius: 100%;
+			transform: rotate(-2.47deg);
+		}
+
+		> * {
+			position: relative;
+			z-index: 2;
+		}
 	}
 
 	&-title {
@@ -723,7 +781,11 @@ input[type="submit"],
 [class^="button-"] {
 	--btn-background: var(--gc-color-primary);
 	--btn-color: var(--gc-color-background);
+	--icon-size: 24px;
+	--icon-spacing: 8px;
 
+	display: inline-flex;
+	align-items: center;
 	padding: 10px 16px;
 	font-weight: 700;
 	text-decoration: none;
@@ -757,7 +819,20 @@ input[type="submit"],
 		color: var(--btn-color);
 	}
 
+	svg {
+		width: var(--icon-size);
+		height: var(--icon-size);
+	}
+
+	span + svg,
+	svg + span {
+		margin-left: var(--icon-spacing);
+	}
+
 	&.is-big {
+		--icon-size: 32px;
+		--icon-spacing: 16px;
+
 		font-size: 1.125rem;
 		padding: 12px 24px;
 	}
@@ -1067,3 +1142,10 @@ textarea {
 	}
 }
 
+/**
+ * Footer
+ */
+
+.site-footer {
+
+}

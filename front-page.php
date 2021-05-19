@@ -98,6 +98,9 @@ get_header();
 				$usecases = new WP_Query(array(
 					'post_type' => array('portfolio'),
 					'post_count' => 6,
+					'no_found_rows' => true, 
+					'update_post_meta_cache' => false, 
+					'update_post_term_cache' => false,
 				));
 				// The Loop
 				if ( $usecases->have_posts() ) :
@@ -144,7 +147,10 @@ get_header();
 			</ul>
 
 			<p class="section-cta is-text-center">
-				<a class="button-primary is-big" href="<?php echo get_post_type_archive_link( 'portfolio' ); ?>"><?php echo _e( 'See all my Design Works', 'geoffreycrofte' ) ?></a>
+				<a class="button-primary is-big" href="<?php echo get_post_type_archive_link( 'portfolio' ); ?>">
+					<span><?php echo _e( 'See all my Design Works', 'geoffreycrofte' ) ?></span>
+					<?php get_icon('arrow-right'); ?>
+				</a>
 			</p>
 
 			<?php 
@@ -156,7 +162,7 @@ get_header();
 	</section>
 
 
-	<section id="trusted" class="section is-reference">
+	<section id="trusted" class="section is-reference has-ovale">
 		<div class="container grid" style="--l-pattern: 4fr 1fr 7fr; --repeat: 1;">
 			<div>
 				<h2 class="section-title is-text-left">
@@ -195,7 +201,7 @@ get_header();
 		</div>
 	</section>
 
-	<section id="talks" class="section is-dark">
+	<section id="talks" class="section is-dark has-ovale">
 		<div class="container">
 			<h2 class="section-title">
 				<?php echo get_field( 'latest_talks_title' ); ?>
@@ -204,18 +210,18 @@ get_header();
 				<?php echo get_field( 'latest_talks_description', false, false ); ?>
 			</p>
 
-			<?php $posts = get_field( 'latest_talks_posts' ); ?>
+			<?php
+			$posts = get_field( 'latest_talks_posts' );
+			if ( ! empty( $posts ) ) {
+			?>
 
 			<ul class="card-list grid is-clean" style="--xs-repeat:1;--md-repeat:2;--l-repeat:3;">
 				<?php
-				foreach ($posts as $post) {
-					$post_link = get_the_permalink( $post->ID );
-					$post_metas = get_post_meta( $post->ID );
+					foreach ($posts as $post) {
+						$post_link = get_the_permalink( $post->ID );
+						$talk_metas = speekr_get_talk_metas( $post->ID );
 
-					$talk_media_links = unserialize( $post_metas['speekr-media-links'][0] ); // array
-					$talk_conf_infos = unserialize( $post_metas['speekr-conf'][0] ); // array
-					$talk_summary = $post_metas['speekr-summary'][0]; // string
-					$talk_as_article = $post_metas['speekr-as-article'][0]; // "on"
+						if ( $talk_metas['error'] ) return;
 				?>
 
 				<li class="card-item">
@@ -226,30 +232,32 @@ get_header();
 						<div class="card-content">
 							<header>
 								<h1>
-								<?php echo $talk_as_article === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
+								<?php echo $talk_metas['as_article'] === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
 								</h1>
 							</header>
+
 							<div class="card-description">
-								<?php echo $talk_summary; ?>
+								<?php echo $talk_metas['summary']; ?>
 							</div>
 
-							<?php if ( $talk_as_article === 'on' ) { ?>
+							<?php if ( $talk_metas['as_article'] === 'on' ) { ?>
 
 							<p class="card-cta">
 								<a class="button-primary" href="<?php echo get_the_permalink( $post->ID ); ?>">
-									<?php _e('Read the transcript', 'geoffreycrofte' ); ?>
+									<?php get_icon('read'); ?>
+									<span><?php _e('Read the transcript', 'geoffreycrofte' ); ?></span>
 								</a>	
 							</p>
 
 							<?php } ?>
 
-							<?php if ( $talk_conf_infos && ! empty( $talk_conf_infos['name'] ) ) { ?>
+							<?php if ( $talk_metas['conf_infos'] && ! empty( $talk_metas['conf_infos']['name'] ) ) { ?>
 							<dl class="card-meta">
 								<dt class="card-meta-name">
 									<?php get_icon('map-plan', __( 'Conference Info', 'geoffreycrofte' ) ); ?>
 								</dt>
 								<dd class="card-meta-value">
-									<?php echo ! empty( $talk_conf_infos['url'] ) ? '<a href="' . esc_url( $talk_conf_infos['url'] ) . '" rel="nofollow">' . esc_html( $talk_conf_infos['name'] ) . '</a>' : esc_html( $talk_conf_infos['name'] ); ?>
+									<?php echo ! empty( $talk_metas['conf_infos']['url'] ) ? '<a href="' . esc_url( $talk_metas['conf_infos']['url'] ) . '" rel="nofollow">' . esc_html( $talk_metas['conf_infos']['name'] ) . '</a>' : esc_html( $talk_metas['conf_infos']['name'] ); ?>
 								</dd>
 							</dl>
 							<?php } ?>
@@ -257,92 +265,109 @@ get_header();
 					</article>
 				</li>
 
-				<li class="card-item">
-					<article class="card">
-						<div class="card-image">
-							<?php echo get_the_post_thumbnail( $post->ID ); ?>
-						</div>
-						<div class="card-content">
-							<header>
-								<h1>
-								<?php echo $talk_as_article === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
-								</h1>
-							</header>
-							<div class="card-description">
-								<?php echo $talk_summary; ?>
-							</div>
-
-							<?php if ( $talk_as_article === 'on' ) { ?>
-
-							<p class="card-cta">
-								<a class="button-primary" href="<?php echo get_the_permalink( $post->ID ); ?>">
-									<?php _e('Read the transcript', 'geoffreycrofte' ); ?>
-								</a>	
-							</p>
-
-							<?php } ?>
-
-							<?php if ( $talk_conf_infos && ! empty( $talk_conf_infos['name'] ) ) { ?>
-							<dl class="card-meta">
-								<dt class="card-meta-name">
-									<?php get_icon('map-plan', __( 'Conference Info', 'geoffreycrofte' ) ); ?>
-								</dt>
-								<dd class="card-meta-value">
-									<?php echo ! empty( $talk_conf_infos['url'] ) ? '<a href="' . esc_url( $talk_conf_infos['url'] ) . '" rel="nofollow">' . esc_html( $talk_conf_infos['name'] ) . '</a>' : esc_html( $talk_conf_infos['name'] ); ?>
-								</dd>
-							</dl>
-							<?php } ?>
-						</div>
-					</article>
-				</li>
-
-				<li class="card-item">
-					<article class="card">
-						<div class="card-image">
-							<?php echo get_the_post_thumbnail( $post->ID ); ?>
-						</div>
-						<div class="card-content">
-							<header>
-								<h1>
-								<?php echo $talk_as_article === 'on' ? '<a href="' . get_the_permalink( $post->ID ) . '">' . $post->post_title . '</a>' : $post->post_title; ?>
-								</h1>
-							</header>
-							<div class="card-description">
-								<?php echo $talk_summary; ?>
-							</div>
-
-							<?php if ( $talk_as_article === 'on' ) { ?>
-
-							<p class="card-cta">
-								<a class="button-primary" href="<?php echo get_the_permalink( $post->ID ); ?>">
-									<?php _e('Read the transcript', 'geoffreycrofte' ); ?>
-								</a>	
-							</p>
-
-							<?php } ?>
-
-							<?php if ( $talk_conf_infos && ! empty( $talk_conf_infos['name'] ) ) { ?>
-							<dl class="card-meta">
-								<dt class="card-meta-name">
-									<?php get_icon('map-plan', __( 'Conference Info', 'geoffreycrofte' ) ); ?>
-								</dt>
-								<dd class="card-meta-value">
-									<?php echo ! empty( $talk_conf_infos['url'] ) ? '<a href="' . esc_url( $talk_conf_infos['url'] ) . '" rel="nofollow">' . esc_html( $talk_conf_infos['name'] ) . '</a>' : esc_html( $talk_conf_infos['name'] ); ?>
-								</dd>
-							</dl>
-							<?php } ?>
-						</div>
-					</article>
-				</li>
-
-				<?php } ?>
+			<?php 
+				}
+				wp_reset_postdata();
+			}
+			?>
 			</ul>
+
+			<p class="section-cta is-text-center">
+				<a class="button-primary is-big" href="<?php echo get_post_type_archive_link( 'talks' ); ?>">
+					<span><?php echo _e( 'See all the talks', 'geoffreycrofte' ) ?></span>
+					<?php get_icon('arrow-right'); ?>
+				</a>
+			</p>
 		</div>
 	</section>
 
-	<section id="blog">
+	<section id="blog" class="section has-ovale">
 		<div class="container">
-			
+			<h2 class="section-title">
+				<?php echo get_field( 'latest_posts_title' ); ?>
+			</h2>
+			<p class="section-subtitle">
+				<?php echo get_field( 'latest_posts_description', false, false ); ?>
+			</p>
+
+			<?php
+			$posts = new WP_Query( array(
+				'post_type' => 'post',
+				'post_status' => 'publish',
+				'posts_per_page' => 3,
+				'no_found_rows' => true, 
+				'update_post_meta_cache' => false, 
+				'update_post_term_cache' => false,
+			) );
+
+			$posts = $posts->get_posts();
+			if ( ! empty( $posts ) ) {
+			?>
+
+			<ul class="card-list grid is-clean" style="--xs-repeat:1;--md-repeat:2;--l-repeat:3;">
+				<?php
+				foreach ( $posts as $post ) {
+					$post_link = get_the_permalink();
+				?>
+
+				<li class="card-item">
+					<article class="card">
+						<div class="card-image">
+							<?php echo /*get_the_post_thumbnail()*/geoffreycrofte_post_thumbnail(); ?>
+						</div>
+						<div class="card-content">
+							<header>
+								<h1>
+								<a href="<?php echo get_the_permalink(); ?>">
+									<?php echo get_the_title() ?>
+								</a>
+								</h1>
+							</header>
+
+							<div class="card-description">
+								<?php echo get_the_excerpt(); ?>
+							</div>
+
+							<p class="card-cta">
+								<a class="button-primary" href="<?php echo get_the_permalink(); ?>">
+									<?php get_icon('read'); ?>
+									<span>
+									<?php
+										printf( 
+										_x( 'Read this post %sabout%s', 'Blog Post Lists' , 'geoffreycrofte' ),
+										'<span class="screen-reader-text">',
+										' "' . esc_html( get_the_title() ) . '"</span>' );
+									?>
+									</span>
+									</span>
+								</a>	
+							</p>
+
+							<dl class="card-meta">
+								<dt class="card-meta-name">
+									<?php get_icon('calendar', __( 'Written on', 'geoffreycrofte' ) ); ?>
+								</dt>
+								<dd class="card-meta-value">
+									<?php geoffreycrofte_posted_on(); ?>
+								</dd>
+							</dl>
+						</div>
+					</article>
+				</li>
+
+			<?php 
+				}
+				wp_reset_postdata();
+			}
+			?>
+			</ul>
+
+			<p class="section-cta is-text-center">
+				<a class="button-primary is-big" href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>">
+					<span><?php echo _e( 'See all articles', 'geoffreycrofte' ) ?></span>
+					<?php get_icon('arrow-right'); ?>
+				</a>
+			</p>
 		</div>
 	</section>
 <?php
