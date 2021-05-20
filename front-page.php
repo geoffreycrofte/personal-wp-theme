@@ -350,6 +350,24 @@ get_header();
 								<dd class="card-meta-value">
 									<?php geoffreycrofte_posted_on(); ?>
 								</dd>
+								<?php if ( comments_open() || get_comments_number() ) { ?>
+								<dt class="card-meta-name">
+									<?php get_icon('chat-bubble', __( 'Comments', 'geoffreycrofte' ) ); ?>
+								</dt>
+								<dd class="card-meta-value">
+
+									<?php $nb_comments = (int) get_comments_number(); ?>
+
+									<a href="<?php comments_link(); ?>"><?php printf(
+										/* translators: %s: post title */
+										_n( '%s comment', '%s comments', $nb_comments, 'geoffreycrofte' ),
+										number_format_i18n( $nb_comments )
+									); ?></a>
+
+								</dd>
+
+							<?php } ?>
+
 							</dl>
 						</div>
 					</article>
