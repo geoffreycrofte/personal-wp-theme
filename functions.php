@@ -117,6 +117,38 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/admin.php';
 
 /**
+ * Widgets functions
+ */
+require get_template_directory() . '/inc/widgets/class-gc-widget-search.php';
+require get_template_directory() . '/inc/widgets/class-gc-widget-categories.php';
+require get_template_directory() . '/inc/widgets/class-gc-widget-ads.php';
+require get_template_directory() . '/inc/widgets/class-gc-widget-recent-comments.php';
+require get_template_directory() . '/inc/widgets/class-gc-widget-links.php';
+
+if ( ! function_exists( 'gc_register_widgets' ) ) {
+	function gc_register_widgets() {
+		register_widget( 'GC_Widget_Search' );
+		register_widget( 'GC_Widget_Categories' );
+		register_widget( 'GC_Ads_Widget' );
+		register_widget( 'GC_Widget_Recent_Comments' );
+		register_widget( 'GC_Widget_Links' );
+		//register_widget( 'Juiz_Newsletter_Widget' );
+		//register_widget( 'Juiz_Categories_Widget' );
+		//register_widget( 'Juiz_WP_Plugin_Widget' );
+		//register_widget( 'Juiz_Video_Information_Widget' );
+		
+		add_filter( 'wp_list_categories', 'gc_wp_list_categories' );
+	}
+	add_action( 'widgets_init', 'gc_register_widgets' );
+
+	function gc_wp_list_categories( $html ) {
+		$post_text = get_locale() === 'fr_FR' ? 'articles' : 'posts';
+		$html = preg_replace( '#\(([0-9]{1,})\)#', '<span>($1 ' . $post_text . ')</span>', $html );
+		return $html;
+	}
+}
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {

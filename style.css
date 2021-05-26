@@ -53,6 +53,7 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 	--gc-color-link-visited: #6A418C;
 	--gc-color-link-hover: #680440;
 	--gc-color-link-vhover: #472265;
+	--gc-input-background: #F8D8EB;
 }
 
 /**
@@ -77,7 +78,7 @@ body {
 	background: var(--gc-color-background);
 }
 
-body {
+[id="page"] {
 	overflow-x: hidden;
 }
 
@@ -149,7 +150,7 @@ address {
 }
 
 pre {
-	background: #eee;
+	background: #32435C;
 	margin-bottom: 1.75em;
 	max-width: 100%;
 	overflow: auto;
@@ -166,13 +167,13 @@ pre {
 
 abbr,
 acronym {
-	border-bottom: 1px dotted #666;
+	border-bottom: 1px dotted #94A8C7;
 	cursor: help;
 }
 
 mark,
 ins {
-	background: #fff9c0;
+	background: yellow;
 	text-decoration: none;
 }
 
@@ -311,6 +312,18 @@ a:visited:hover {
 	font-size: .75em;
 }
 
+.pt-0.pt-0.pt-0 {
+	padding-top: 0;
+}
+
+.pb-0.pb-0.pb-0 {
+	padding-bottom: 0;
+}
+
+.pb-40.pb-40.pb-40 {
+	padding-bottom: 40px;
+}
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -325,12 +338,12 @@ a:visited:hover {
 }
 
 .screen-reader-text:focus {
-	background-color: #f1f1f1;
+	background-color: var(--gc-color-background);
 	border-radius: 3px;
 	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 	clip: auto !important;
 	clip-path: none;
-	color: #21759b;
+	color: inherit;
 	display: block;
 	font-size: 0.875rem;
 	font-weight: 700;
@@ -367,6 +380,14 @@ a:visited:hover {
 		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-cold, 2)));
 		grid-template-columns: repeat(var(--repeat), var(--l-pattern, 1fr));
 		grid-gap: var(--l-gap, 40px);
+	}
+}
+
+@media (min-width: 1680px) {
+	.grid {
+		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-cold, 2))));
+		grid-template-columns: repeat(var(--repeat), var(--xl-pattern, 1fr));
+		grid-gap: var(--xl-gap, 40px);
 	}
 }
 
@@ -759,16 +780,27 @@ a:visited:hover {
 input,
 textarea,
 select {
-	color: #666;
-	border: 1px solid #ccc;
+	padding: 10px 16px;
+	color: inherit;
+	border: 1px solid transparent;
+	background: var(--gc-input-background);
 	border-radius: 3px;
-	padding: 3px;
+	border-radius: 80px;
+	transition: all .3s;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+	color: var(--gc-color-primary);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-	color: #111;
+	outline: none;
+	border: 1px solid var(--gc-color-primary);
+	background: var(--gc-color-background);
 }
 
 textarea {
@@ -799,6 +831,7 @@ input[type="submit"],
 	align-items: center;
 	padding: 10px 16px;
 	font-weight: 700;
+	border: 0 none;
 	text-decoration: none;
 	color: var(--btn-color);
 	background: var(--btn-background);
@@ -1050,12 +1083,18 @@ textarea {
 	box-shadow: 0px 18px 58px rgba(var(--r), var(--g), var(--b), 0.07), 0px 6.5703px 21.171px rgba(var(--r), var(--g), var(--b), 0.0483), 0px 3.18976px 10.2781px rgba(var(--r), var(--g), var(--b), 0.03894), 0px 1.56368px 5.03852px rgba(var(--r), var(--g), var(--b), 0.03106), 0px 0.61828px 1.99224px rgba(var(--r), var(--g), var(--b), 0.0217);
 }
 
-.card p,
-.card h1 {
-	margin: 0;
+.card, .card-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.card-content {
+	height: 100%;
 }
 
 .card-content h1 {
+	margin: 0;
 	font-size: 1.25rem;
 	line-height: 1.55;
 	color: var(--card-title-color);
@@ -1075,10 +1114,12 @@ textarea {
 }
 
 .card-description {
+	margin-top: 0;
 	padding: var(--card-padding);
 }
 
 .card-cta {
+	margin: auto 0 8px 0;
 	padding: var(--card-padding);
 }
 
@@ -1086,7 +1127,7 @@ textarea {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	margin-top: 16px;
+	margin: 0;
 	padding: var(--card-padding);
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -1136,6 +1177,50 @@ textarea {
 	--card-title-color-hover: white;
 	--card-meta-background: #425471;
 	--card-meta-color: #F7F9FC;
+}
+
+/** 
+ * Blog + Sidebar
+ */
+.page-header,
+.page-header > * {
+	position: relative;
+	z-index: 1;
+}
+
+.page-header svg {
+	position: absolute;
+	bottom: -30%;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 0;
+}
+
+a.post-thumbnail {
+	display: flex;
+	justify-content: center;
+}
+
+a.post-thumbnail img {
+	min-width: 200px;
+}
+
+@supports (aspect-ratio: 2/1) {
+	a.post-thumbnail {
+		aspect-ratio: 2 / 1;
+	}
+	a.post-thumbnail img {
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+.content-n-sidebar {
+	display: grid;
+	grid-template-columns: 1fr 408px;
+	padding: 40px;
+	grid-gap: 40px;
 }
 
 .gallery {
@@ -1200,12 +1285,112 @@ textarea {
 /**
  * Widgets
  */
-.widget {
-	margin: 0 0 1.5em;
-}
-
 .widget select {
 	max-width: 100%;
+}
+
+.widget ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.widget ul:not(.gc-promo-link) li {
+	position: relative;
+	margin: 8px 0;
+	padding: 14px 32px;
+	font-size: .875rem;
+	color: #62779C;
+	border-radius: 80px;
+	box-shadow: 0 3.18976px 10.2781px rgba(66, 11, 89, 0.0389404), 0 1.56368px 5.03852px rgba(66, 11, 89, 0.0310596), 0 0.61828px 1.99224px rgba(66, 11, 89, 0.0217013);
+	transition: all .3s;
+}
+
+.widget ul:not(.gc-promo-link) li:hover {
+	transform: translateX(-8px);
+}
+
+.widget ul:not(.gc-promo-link) li a {
+	font-size: 1rem;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.widget ul:not(.gc-promo-link) li a:visited {
+	color: var(--gc-color-primary);
+}
+
+.widget ul:not(.gc-promo-link) li a:hover:visited, .widget ul:not(.gc-promo-link) li a:focus:visited {
+	color: var(--gc-color-link-hover);
+}
+
+.widget ul:not(.gc-promo-link) li a::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transition: all .3s;
+	border-radius: 80px;
+}
+
+.widget ul:not(.gc-promo-link) li a:hover::before {
+	box-shadow: 0 3.18976px 10.2781px rgba(66, 11, 89, 0.0389404), 0 1.56368px 5.03852px rgba(66, 11, 89, 0.0310596), 0 0.61828px 1.99224px rgba(66, 11, 89, 0.0217013);
+}
+
+.widget-title {
+	position: relative;
+	margin: 0;
+	padding-left: 2rem;
+	font-size: 2rem;
+	color: var(--gc-color-primary);
+}
+
+.widget-title::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: .7em;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	background: #C096E1;
+}
+
+.widget-subtitle {
+	margin: 24px 0;
+	font-size: 1rem;
+	color: #62779C;
+}
+
+.widget + .widget {
+	margin-top: 72px;
+}
+
+.widget .gc-promo-link {
+	margin-top: 24px;
+	display: flex;
+	gap: 8px;
+}
+
+.widget .search-form {
+	display: flex;
+}
+
+.widget .search-form label {
+	flex-grow: 1;
+}
+
+.widget .search-form label input {
+	width: 100%;
+	padding-right: 40px;
+}
+
+.widget .search-form label + input {
+	padding-left: 24px;
+	padding-right: 24px;
+	margin-left: -40px;
 }
 
 /**

@@ -28,14 +28,19 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
  * Root level
  */
 :root {
+	// Text and background for main contents
 	--gc-color-primary: #{map-get($colors, primary-700)};
 	--gc-color-text: #{map-get($colors, neutral-700)};
 	--gc-color-background: #FFF;
 	--gc-color-background-alt: #{map-get($colors, secondary-050)};
 
+	// Links
 	--gc-color-link-visited: #{map-get($colors, secondary-700)};
 	--gc-color-link-hover: #{map-get($colors, primary-900)};
 	--gc-color-link-vhover: #{map-get($colors, secondary-900)};
+
+	// Forms
+	--gc-input-background: #{map-get($colors, primary-100)};
 }
 
 /**
@@ -60,7 +65,7 @@ body {
 	background: var(--gc-color-background);
 }
 
-body {
+[id="page"] {
 	overflow-x: hidden;
 }
 
@@ -129,7 +134,7 @@ address {
 }
 
 pre {
-	background: $color-background-pre;
+	background: map-get($colors, neutral-800);
 	margin-bottom: 1.75em;
 	max-width: 100%;
 	overflow: auto;
@@ -146,13 +151,13 @@ pre {
 
 abbr,
 acronym {
-	border-bottom: 1px dotted $color-border-abbr;
+	border-bottom: 1px dotted map-get($colors, neutral-300);
 	cursor: help;
 }
 
 mark,
 ins {
-	background: $color-background-ins;
+	background: yellow;
 	text-decoration: none;
 }
 
@@ -294,6 +299,18 @@ a {
 	font-size: .75em; // 12px
 }
 
+.pt-0.pt-0.pt-0 {
+	padding-top: 0;
+}
+
+.pb-0.pb-0.pb-0 {
+	padding-bottom: 0;
+}
+
+.pb-40.pb-40.pb-40 {
+	padding-bottom: 40px;
+}
+
 .screen-reader-text {
 	border: 0;
 	clip: rect(1px, 1px, 1px, 1px);
@@ -307,12 +324,12 @@ a {
 	word-wrap: normal !important; // Many screen reader and browser combinations announce broken words as they would appear visually.
 
 	&:focus {
-		background-color: $color-background-screen;
+		background-color:var(--gc-color-background);
 		border-radius: 3px;
 		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 		clip: auto !important;
 		clip-path: none;
-		color: $color-text-screen;
+		color: inherit;
 		display: block;
 		font-size: 0.875rem;
 		font-weight: 700;
@@ -347,6 +364,12 @@ a {
 		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-cold, 2)));
 		grid-template-columns: repeat(var(--repeat), var(--l-pattern, 1fr));
 		grid-gap: var(--l-gap, 40px);
+	}
+
+	@media (min-width: 1680px) {
+		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-cold, 2))));
+		grid-template-columns: repeat(var(--repeat), var(--xl-pattern, 1fr));
+		grid-gap: var(--xl-gap, 40px);
 	}
 }
 
@@ -759,13 +782,22 @@ a {
 input,
 textarea,
 select {
-	color: $color-text-input;
-	border: 1px solid $color-border-input;
+	padding: 10px 16px;
+	color: inherit;
+	border: 1px solid transparent;
+	background: var(--gc-input-background);
 	border-radius: 3px;
-	padding: 3px;
+	border-radius: 80px;
+	transition: all .3s;
+
+	&::placeholder {
+		color: var(--gc-color-primary);
+	}
 
 	&:focus {
-		color: $color-text-input-focus;
+		outline: none;
+		border: 1px solid var(--gc-color-primary);
+		background: var(--gc-color-background);
 	}
 }
 
@@ -800,6 +832,7 @@ input[type="submit"],
 	align-items: center;
 	padding: 10px 16px;
 	font-weight: 700;
+	border: 0 none;
 	text-decoration: none;
 	color: var(--btn-color);
 	background: var(--btn-background);
@@ -995,7 +1028,6 @@ textarea {
 	--card-meta-background: #{map-get($colors, primary-100)};
 	--card-meta-color: #{map-get($colors, primary-700)};
 
-
 	color: var(--card-text-color);
 	background: var(--card-background);
 	border-radius: 24px;
@@ -1006,9 +1038,12 @@ textarea {
 				0px 1.56368px 5.03852px rgba(var(--r), var(--g), var(--b), 0.0310596),
 				0px 0.618281px 1.99224px rgba(var(--r), var(--g), var(--b), 0.0217013);
 
-	p,
-	h1 {
-		margin: 0;
+
+	&,
+	&-content {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 	}
 
 	// When in list.
@@ -1026,7 +1061,10 @@ textarea {
 	}
 
 	&-content {
+		height: 100%;
+
 		h1 {
+			margin: 0;
 			font-size: 1.25rem;
 			line-height: 1.55;
 			color: var(--card-title-color);
@@ -1049,15 +1087,13 @@ textarea {
 	}
 
 	&-description {
+		margin-top: 0;
 		padding: var(--card-padding);
 	}
 
 	&-cta {
+		margin: auto 0 8px 0;
 		padding: var(--card-padding);
-
-		[class^="button-"] {
-
-		}
 	}
 
 	// When has a meta line.
@@ -1065,7 +1101,7 @@ textarea {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		margin-top: 16px;
+		margin: 0;
 		padding: var(--card-padding);
 		padding-top: 12px;
 		padding-bottom: 12px;
@@ -1108,6 +1144,49 @@ textarea {
 	}
 }
 
+/** 
+ * Blog + Sidebar
+ */
+.page-header {
+	&,
+	> * {
+		position: relative;
+		z-index: 1;
+	} 
+
+	svg {
+		position: absolute;
+		bottom: -30%;
+		left: 0; right: 0;
+		width: 100%;
+		z-index: 0;
+	}
+}
+
+a.post-thumbnail {
+	display: flex;
+	justify-content: center;
+
+	img {
+		min-width: 200px;
+	}
+
+	@supports (aspect-ratio: 2 / 1) {
+		aspect-ratio: 2 / 1;
+
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+.content-n-sidebar {
+	display: grid;
+	grid-template-columns: 1fr 408px;
+	padding: 40px;
+	grid-gap: 40px;
+}
 
 
 // Galleries
@@ -1150,11 +1229,118 @@ textarea {
  */
 
 .widget {
-	margin: 0 0 1.5em;
-
 	// Make sure select elements fit in widgets.
 	select {
 		max-width: 100%;
+	}
+
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	ul:not(.gc-promo-link) li {
+		position: relative;
+		margin: 8px 0;
+		padding: 14px 32px;
+		font-size: .875rem;
+		color: map-get($colors, neutral-500);
+		border-radius: 80px;
+		box-shadow: 0 3.18976px 10.2781px rgba(66, 11, 89, 0.0389404),
+					0 1.56368px 5.03852px rgba(66, 11, 89, 0.0310596),
+					0 0.618281px 1.99224px rgba(66, 11, 89, 0.0217013);
+		transition: all .3s;
+
+		&:hover {
+			transform: translateX(-8px);
+		}
+
+		a {
+			font-size: 1rem;
+			font-weight: 700;
+			text-decoration: none;
+
+			&:visited {
+				color: var(--gc-color-primary);
+			}
+
+			&:hover:visited,
+			&:focus:visited {
+				color: var(--gc-color-link-hover);
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				transition: all .3s;
+				border-radius: 80px;
+			}
+
+			&:hover::before {
+				box-shadow: 0 3.18976px 10.2781px rgba(66, 11, 89, 0.0389404),
+					0 1.56368px 5.03852px rgba(66, 11, 89, 0.0310596),
+					0 0.618281px 1.99224px rgba(66, 11, 89, 0.0217013);
+			}
+		}
+	}
+
+	&-title {
+		position: relative;
+		margin: 0;
+		padding-left: 2rem;
+		font-size: 2rem;
+		color: var(--gc-color-primary);
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: .7em;
+			width: 1rem;
+			height: 1rem;
+			border-radius: 50%;
+			background: map-get($colors, secondary-300);
+		}
+	}
+
+	&-subtitle {
+		margin: 24px 0;
+		font-size: 1rem;
+		color: map-get($colors, neutral-500);
+	}
+
+	& + & {
+		margin-top: 72px;
+	}
+
+	.gc-promo-link {
+		margin-top: 24px;
+		display: flex;
+		gap: 8px;
+	}
+
+	.search-form {
+		display: flex;
+
+		label {
+			flex-grow: 1;
+
+			input {
+				width: 100%;
+				padding-right: 40px;
+			}
+
+			+ input {
+				padding-left: 24px;
+				padding-right: 24px;
+				margin-left: -40px;
+			}
+		}
 	}
 }
 
