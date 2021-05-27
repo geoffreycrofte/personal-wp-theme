@@ -349,27 +349,35 @@ a {
  */
 .grid {
 	--repeat: var(--xs-repeat, 2);
+	--pattern: var(--xs-pattern, 1fr);
+	--gap: var(--xs-gap, 24px);
 
 	display: grid;
-	grid-template-columns: repeat(var(--repeat), var(--xs-pattern, 1fr));
-	grid-gap: var(--xs-gap, 24px);
+	grid-template-columns: repeat(var(--repeat), var(--pattern));
+	grid-gap: var(--gap);
 
-	@media (min-width: 640px) {
+	@media (min-width: map-get($breakpoints, 'md')) {
 		--repeat: var(--md-repeat, var(--xs-repeat, 2));
-		grid-template-columns: repeat(var(--repeat), var(--md-pattern, 1fr));
-		grid-gap: var(--md-gap, 40px);
+		--pattern: var(--md-pattern, var(--xs-pattern, 1fr));
+		--gap: var(--md-gap, var(--xs-gap, 40px));
 	}
 
-	@media (min-width: 860px) {
-		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-cold, 2)));
-		grid-template-columns: repeat(var(--repeat), var(--l-pattern, 1fr));
-		grid-gap: var(--l-gap, 40px);
+	@media (min-width:  map-get($breakpoints, 'l')) {
+		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-repeat, 2)));
+		--pattern: var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr)));
+		--gap: var(--l-gap, var(--md-gap, var(--xs-gap, 40px)));
 	}
 
-	@media (min-width: 1680px) {
-		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-cold, 2))));
-		grid-template-columns: repeat(var(--repeat), var(--xl-pattern, 1fr));
-		grid-gap: var(--xl-gap, 40px);
+	@media (min-width:  map-get($breakpoints, 'xl')) {
+		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-repeat, 2))));
+		--pattern: var(--xl-pattern, var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr))));
+		--gap: var(--xl-gap, var(--l-gap, var(--md-gap, var(--xs-gap, 48px))));
+	}
+
+	@media (min-width:  map-get($breakpoints, 'xxl')) {
+		--repeat: var(--xxl-repeat, var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-repeat, 2)))));
+		--pattern: var(--xxl-pattern, var(--xl-pattern, var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr)))));
+		--gap: var(--xxl-gap, var(--xl-gap, var(--l-gap, var(--md-gap, var(--xs-gap, 56px)))));
 	}
 }
 
@@ -837,6 +845,7 @@ input[type="submit"],
 	color: var(--btn-color);
 	background: var(--btn-background);
 	border-radius: 80px; // pills
+	cursor: pointer;
 	-webkit-appearance: button;
 	transition: all .3s;
 
@@ -885,6 +894,21 @@ input[type="submit"],
 	@include dark {
 		--btn-background: #{map-get($colors, info-050)};
 		--btn-color: #{map-get($colors, info-500)};
+	}
+}
+
+.button {
+	&-primary {
+		&.is-light {
+			--btn-background: #{map-get($colors, primary-100)};
+			--btn-color: #{map-get($colors, primary-700)};
+
+			&:hover,
+			&:focus {
+				--btn-background: #{map-get($colors, primary-200)};
+				--btn-color: #{map-get($colors, primary-800)};				
+			}
+		}
 	}
 }
 
@@ -1142,6 +1166,10 @@ textarea {
 		--card-meta-background: #{map-get($colors, neutral-700)};
 		--card-meta-color: #{map-get($colors, neutral-050)};
 	}
+
+	&-list + &-list {
+		margin-top: var(--blog-gap, 40px);
+	}
 }
 
 /** 
@@ -1182,10 +1210,26 @@ a.post-thumbnail {
 }
 
 .content-n-sidebar {
+	--blog-gap: 32px;
+
 	display: grid;
 	grid-template-columns: 1fr 408px;
 	padding: 40px;
-	grid-gap: 40px;
+	grid-gap: var(--blog-gap);
+
+	@media (min-width: map-get($breakpoints, 'l')) {
+		--blog-gap: 40px; // used into the inner grid itself (see HTML)
+	}
+
+	@media (min-width: map-get($breakpoints, 'xl')) {
+		--blog-gap: 64px; // used into the inner grid itself (see HTML)
+		padding: 40px 80px;
+	}
+}
+
+.posts-navigation {
+	padding: 40px 0;
+	text-align: center;
 }
 
 

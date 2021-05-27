@@ -35,7 +35,7 @@ get_header();
 			<?php
 			if ( have_posts() ) :
 			?>
-			<ul class="card-list grid is-clean" style="--xs-repeat:1;--md-repeat:2;--xl-repeat:3;--xl-gap:64px">
+			<ul class="card-list grid is-clean" style="--xs-repeat:1;--md-repeat:2;--xxl-repeat:3;--md-gap:var(--blog-gap, 24px)">
 			
 			<?php
 

@@ -362,32 +362,42 @@ a:visited:hover {
  */
 .grid {
 	--repeat: var(--xs-repeat, 2);
+	--pattern: var(--xs-pattern, 1fr);
+	--gap: var(--xs-gap, 24px);
 	display: grid;
-	grid-template-columns: repeat(var(--repeat), var(--xs-pattern, 1fr));
-	grid-gap: var(--xs-gap, 24px);
+	grid-template-columns: repeat(var(--repeat), var(--pattern));
+	grid-gap: var(--gap);
 }
 
 @media (min-width: 640px) {
 	.grid {
 		--repeat: var(--md-repeat, var(--xs-repeat, 2));
-		grid-template-columns: repeat(var(--repeat), var(--md-pattern, 1fr));
-		grid-gap: var(--md-gap, 40px);
+		--pattern: var(--md-pattern, var(--xs-pattern, 1fr));
+		--gap: var(--md-gap, var(--xs-gap, 40px));
 	}
 }
 
 @media (min-width: 860px) {
 	.grid {
-		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-cold, 2)));
-		grid-template-columns: repeat(var(--repeat), var(--l-pattern, 1fr));
-		grid-gap: var(--l-gap, 40px);
+		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-repeat, 2)));
+		--pattern: var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr)));
+		--gap: var(--l-gap, var(--md-gap, var(--xs-gap, 40px)));
+	}
+}
+
+@media (min-width: 1200px) {
+	.grid {
+		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-repeat, 2))));
+		--pattern: var(--xl-pattern, var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr))));
+		--gap: var(--xl-gap, var(--l-gap, var(--md-gap, var(--xs-gap, 48px))));
 	}
 }
 
 @media (min-width: 1680px) {
 	.grid {
-		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-cold, 2))));
-		grid-template-columns: repeat(var(--repeat), var(--xl-pattern, 1fr));
-		grid-gap: var(--xl-gap, 40px);
+		--repeat: var(--xxl-repeat, var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-repeat, 2)))));
+		--pattern: var(--xxl-pattern, var(--xl-pattern, var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr)))));
+		--gap: var(--xxl-gap, var(--xl-gap, var(--l-gap, var(--md-gap, var(--xs-gap, 56px)))));
 	}
 }
 
@@ -836,6 +846,7 @@ input[type="submit"],
 	color: var(--btn-color);
 	background: var(--btn-background);
 	border-radius: 80px;
+	cursor: pointer;
 	-webkit-appearance: button;
 	transition: all .3s;
 }
@@ -937,6 +948,16 @@ input[type="submit"], .is-dark
 [class^="button-"] {
 	--btn-background: #F5F9FC;
 	--btn-color: #3F7CA7;
+}
+
+.button-primary.is-light {
+	--btn-background: #F8D8EB;
+	--btn-color: #A40162;
+}
+
+.button-primary.is-light:hover, .button-primary.is-light:focus {
+	--btn-background: #EFADD5;
+	--btn-color: #83024F;
 }
 
 /**
@@ -1179,6 +1200,10 @@ textarea {
 	--card-meta-color: #F7F9FC;
 }
 
+.card-list + .card-list {
+	margin-top: var(--blog-gap, 40px);
+}
+
 /** 
  * Blog + Sidebar
  */
@@ -1217,10 +1242,29 @@ a.post-thumbnail img {
 }
 
 .content-n-sidebar {
+	--blog-gap: 32px;
 	display: grid;
 	grid-template-columns: 1fr 408px;
 	padding: 40px;
-	grid-gap: 40px;
+	grid-gap: var(--blog-gap);
+}
+
+@media (min-width: 860px) {
+	.content-n-sidebar {
+		--blog-gap: 40px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.content-n-sidebar {
+		--blog-gap: 64px;
+		padding: 40px 80px;
+	}
+}
+
+.posts-navigation {
+	padding: 40px 0;
+	text-align: center;
 }
 
 .gallery {

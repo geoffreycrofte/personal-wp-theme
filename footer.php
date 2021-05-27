@@ -12,7 +12,7 @@
 ?>
 
 	<footer id="colophon" class="site-footer section is-dark has-ovale">
-		<div class="site-info container grid" style="--l-pattern: 3fr 2fr 2fr 2fr 3fr; --repeat: 1;">
+		<div class="site-info container grid" style="--l-pattern: 3fr 2fr 2fr 2fr 3fr; --xl-pattern: 3fr 2fr 2fr 2fr 3fr; --repeat: 1;">
 			<div class="footer-logo">
 				<img loading="lazy" src="<?php echo GC_ASSETS; ?>img/geoffreycrofte-logo-neutral.svg" width="123" height="100" alt="">
 			</div>

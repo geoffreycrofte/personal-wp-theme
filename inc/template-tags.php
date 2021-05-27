@@ -180,7 +180,7 @@ endif;
 /**
  * SVG Sprite for icon
  */
-function geoffrey_crofte_get_icon_def( $name, $title ){
+function geoffrey_crofte_get_icon_def( $name, $title = null ){
 	$title = isset( $title ) ? 'title="' . $title . '" tabindex="0"' : 'role="presentation" tabindex="-1"';
 
 	$icons = array(
@@ -206,7 +206,7 @@ function geoffrey_crofte_get_icon_def( $name, $title ){
 
 	  'plus-circle' => '<path d="M16 29.333c7.364 0 13.333-5.97 13.333-13.333 0-7.364-5.97-13.333-13.333-13.333C8.636 2.667 2.667 8.637 2.667 16c0 7.364 5.97 13.333 13.333 13.333zm0-18.666v10.666M10.667 16h10.666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
 
-	  'loader' => '<path d="M16 2.667V8m0 16v5.333M6.573 6.573l3.774 3.774m11.306 11.306l3.774 3.774M2.667 16H8m16 0h5.333m-22.76 9.427l3.774-3.774m11.306-11.306l3.774-3.774" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>',
+	  'loader' => '<style>#path-rotate{transform-origin:50%;animation:rotate 2s linear infinite}@keyframes rotate{100%{transform: rotate(1turn)}}</style><path id="path-rotate" d="M16 2.667V8m0 16v5.333M6.573 6.573l3.774 3.774m11.306 11.306l3.774 3.774M2.667 16H8m16 0h5.333m-22.76 9.427l3.774-3.774m11.306-11.306l3.774-3.774" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>',
 
 	  'read' => '<path fill-rule="evenodd" clip-rule="evenodd" d="M27.296 25.091H4.573a.852.852 0 100 1.703h22.723a.85.85 0 100-1.703zM4.573 20.166h14.501a.85.85 0 100-1.702H4.573a.852.852 0 100 1.702zm0-6.626h22.723a.85.85 0 100-1.703H4.573a.852.852 0 100 1.703zm-.852-7.48c0-.47.38-.852.852-.852h14.501a.852.852 0 110 1.703H4.573a.85.85 0 01-.852-.85z" fill="currentColor"></path>',
 

@@ -87,19 +87,7 @@ add_action( 'after_setup_theme', 'geoffreycrofte_setup' );
  */
 
 require get_template_directory() . '/inc/registers.php';
-
-/**
- * Enqueue scripts and styles.
- */
-function geoffreycrofte_scripts() {
-	wp_enqueue_style( 'geoffreycrofte-style', get_stylesheet_uri(), array(), GEOFFREYCROFTE_VERSION );
-	wp_style_add_data( 'geoffreycrofte-style', 'rtl', 'replace' );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'geoffreycrofte_scripts' );
+require get_template_directory() . '/inc/enqueues.php';
 
 /**
  * Custom template tags for this theme.
