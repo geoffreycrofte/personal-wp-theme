@@ -1,0 +1,222 @@
+/** 
+ * Blog + Sidebar
+ */
+.page-header {
+	&,
+	> * {
+		position: relative;
+		z-index: 1;
+	} 
+
+	.wave {
+		position: absolute;
+		bottom: -30%;
+		left: 0; right: 0;
+		width: 100%;
+		z-index: 0;
+	}
+
+	.section-title {
+		width: $w-titles;
+		max-width: 100%;
+		margin-inline: auto;
+		padding-bottom: 0;
+		font-weight: 900;
+
+		&::after {
+			content: none;
+		}
+	}
+
+	dl.post-meta {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		justify-content: center;
+		color: var(--wp--preset--color--neutral-500);
+
+		a {
+			--effect-color: var(--wp--preset--color--neutral-500);
+			color: inherit;
+
+			&:hover,
+			&:focus {
+				color: #fff;
+			}
+		}
+
+		dt {
+			display: flex;
+			align-items: center;
+			margin-left: 64px;
+		}
+
+		dd {
+			margin: 0;
+			font-weight: 500;
+
+			&:last-child {
+				margin-right: 64px;
+			}
+		}
+	}
+}
+
+a.post-thumbnail {
+	display: flex;
+	justify-content: center;
+	background: none;
+
+	img {
+		min-width: 200px;
+	}
+
+	@supports (aspect-ratio: 2 / 1) {
+		aspect-ratio: 2 / 1;
+
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+.post-thumbnail {
+	position: relative;
+	z-index: 1;
+
+	img {
+		max-width: 944px;
+		width: 100%;
+		height: auto;
+		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+		border-radius: 24px;
+
+		// Legacy thumbnail sizes.
+		&[width="200"],
+		&[width="100"] {
+			max-width: 100px;
+		}
+	}
+
+	.post:not(.card) & {
+		min-height: 250px;
+		display: flex;
+		padding: 16px 0;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -20px;
+			right: -20px;
+			bottom: -20px;
+			left: -20px;
+			background-image: var(--bg-img);
+			background-size: cover;
+			background-position: center;
+			filter: blur(20px);
+		}
+	}
+}
+
+.content-n-sidebar {
+	--blog-gap: 32px;
+
+	display: grid;
+	grid-template-columns: 1fr 408px;
+	padding: 40px;
+	grid-gap: var(--blog-gap);
+
+	@media (min-width: map-get($breakpoints, 'l')) {
+		--blog-gap: 40px; // used into the inner grid itself (see HTML)
+	}
+
+	@media (min-width: map-get($breakpoints, 'xl')) {
+		--blog-gap: 64px; // used into the inner grid itself (see HTML)
+		padding: 40px 80px;
+	}
+}
+
+.posts-navigation {
+	padding: 40px 0;
+	text-align: center;
+}
+
+/**
+ * Blog contents
+ */
+.single .entry-content {
+	--color-h2: var(--wp--preset--color--primary-600);
+	--color-h3: var(--wp--preset--color--primary-700);
+	--color-h4: var(--wp--preset--color--primary-800);
+
+	max-width: 72ch;
+	padding: 64px 24px;
+	margin: 0 auto;
+	font-size: 1.25rem;
+	line-height: 1.75;
+
+	@media (min-width: 1074px) {
+		p:first-child {
+			margin-inline: -10ch;
+			font-size: 1.5rem;
+		}
+	}
+
+	p, ul, ol, figure {
+		margin: 2em 0;
+	}
+
+	ul,
+	ol {
+		ol,
+		ul {
+			margin-top: 0;
+		}
+	}
+
+	h2, h3, h4 {
+		margin-top: 1.5em;
+		margin-bottom: .5em;
+	}
+
+	h2 {
+		color: var(--color-h2);
+		font-size: 1.77em;
+	}
+
+	h3 {
+		color: var(--color-h3);
+		font-size: 1.33em;
+	}
+
+	h4 {
+		color: var(--color-h4);
+		font-size: 1.115em;
+	}
+
+	@media (min-width: map-get($breakpoints, l)) {
+		h2, h3, h4 {
+			margin-top: 2em;
+			margin-bottom: .75em;
+		}
+
+		h2 {
+			font-size: 2.22em;
+		}
+
+		h3 {
+			font-size: 1.77em;
+		}
+
+		h4 {
+			font-size: 1.33em;
+		}
+	}
+}

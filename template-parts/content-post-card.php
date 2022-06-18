@@ -30,14 +30,14 @@
 			<p class="card-cta">
 				<a class="button-primary" href="<?php echo get_the_permalink(); ?>">
 					<?php get_icon('read'); ?>
+
 					<span>
-					<?php
-						printf( 
-						_x( 'Read this post %sabout%s', 'Blog Post Lists' , 'geoffreycrofte' ),
-						'<span class="screen-reader-text">',
-						' "' . esc_html( get_the_title() ) . '"</span>' );
-					?>
-					</span>
+						<?php
+							printf( 
+							_x( 'Read this post %sabout%s', 'Blog Post Lists' , 'geoffreycrofte' ),
+							'<span class="screen-reader-text">',
+							' "' . esc_html( get_the_title() ) . '"</span>' );
+						?>
 					</span>
 				</a>	
 			</p>

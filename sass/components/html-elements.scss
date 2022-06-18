@@ -1,0 +1,220 @@
+/**
+ * Basic HTML Elements
+ */
+body {
+	// Text and background for main contents
+	--gc-color-primary: var(--wp--preset--color--primary-700);
+	--gc-color-text: var(--wp--preset--color--neutral-700);
+	--gc-color-background: #FFFFFF;
+	--gc-color-background-alt: var(--wp--preset--color--secondary-050);
+
+	// Links
+	--gc-color-link-visited: var(--wp--preset--color--secondary-700);
+	--gc-color-link-hover: var(--wp--preset--color--primary-800);
+
+	// Forms
+	--gc-input-background: var(--wp--preset--color--primary-100);
+}
+
+/**
+ * Box Sizing
+ */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	-webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	color: var(--gc-color-text);
+	background: var(--gc-color-background);
+}
+
+[id="page"] {
+	overflow-x: hidden;
+}
+
+::-moz-selection {
+	background: var(--gc-color-primary);
+	color: white;
+}
+::selection {
+	background: var(--gc-color-primary);
+	color: white;
+}
+
+/**
+ * Base HTML Elements
+ */
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+	font-family: $font-main;
+	font-size: 1rem;
+	line-height: 1.75;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
+
+h1,
+.section-title {
+	margin-top: 0;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.2;
+
+	@media (min-width: 640px) {
+		font-size: 3rem;
+	}
+}
+
+p {
+	margin-bottom: 1.7em;
+}
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	margin: 0 1.75em;
+}
+
+address {
+	margin: 0 0 1.75em;
+}
+
+pre {
+	background: var(--wp--preset--color--neutral-800);
+	margin-bottom: 1.75em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1.75em;
+}
+
+code,
+kbd,
+tt,
+var,
+pre {
+	font-family: $font-code;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted var(--wp--preset--color--neutral-300);
+	cursor: help;
+}
+
+mark,
+ins {
+	background: yellow;
+	text-decoration: none;
+}
+
+big {
+	font-size: 125%;
+}
+
+ul,
+ol {
+	margin: 0 0 1.5em 3em;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.5em;
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 1em 0;
+}
+
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+
+a {
+	--effect-color: var(--gc-color-primary);
+	position: relative;
+	color: var(--gc-color-primary);
+	transition: all .3s;
+	text-decoration: none;
+	background: linear-gradient(to top, var(--effect-color), var(--effect-color)) left 100% no-repeat;
+	background-size: auto 1px;
+
+	&:visited {
+		--effect-color: var(--gc-color-link-visited);
+		color: var(--gc-color-link-visited);
+	}
+
+	&:hover,
+	&:focus {
+		color: #fff;
+		background-size: auto 1.7em;
+		border-radius: 4px;
+	}
+
+	&:active {
+		--effect-color: var(--gc-color-link-hover);
+		color: var(--gc-color-link-hover);
+	}
+
+	&:focus-visible {
+		outline: 2px dotted var(--effect-color);
+		outline-offset: 4px;
+		border-radius: 4px;
+	}
+}

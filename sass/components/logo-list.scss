@@ -1,0 +1,14 @@
+/**
+ * Logo List
+ */
+.logos {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 8px;
+	justify-content: space-between;
+	gap: 56px 64px;
+
+	a[href] {
+		--effect-color: transparent;
+	}
+}

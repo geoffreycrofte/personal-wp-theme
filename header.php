@@ -18,8 +18,8 @@
 
 	<?php wp_head(); ?>
 
-	<!--link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Bold.woff2" type="font/woff2" crossorigin>
-	<link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Regular.woff2" type="font/woff2" crossorigin-->
+	<link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Bold.woff2" type="font/woff2" crossorigin>
+	<link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Regular.woff2" type="font/woff2" crossorigin>
 </head>
 
 <body <?php body_class(); ?>>

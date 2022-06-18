@@ -16,7 +16,7 @@ if ( ! function_exists( 'geoffreycrofte_posted_on' ) ) :
 		
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 			$time_string  = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
-			$time_string .= '<!--time class="updated" datetime="%3$s">%4$s</time-->';
+			$time_string .= '<time class="updated screen-reader-text" datetime="%3$s">%4$s</time>';
 		}
 
 		$time_string = sprintf(
@@ -31,7 +31,7 @@ if ( ! function_exists( 'geoffreycrofte_posted_on' ) ) :
 			/* translators: %s: post date. */
 			esc_html_x( '%sPosted on %s', 'post date', 'geoffreycrofte' ),
 			'<span class="screen-reader-text">',
-			'</span><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+			'</span>' . $time_string
 		);
 
 		echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -140,7 +140,7 @@ if ( ! function_exists( 'geoffreycrofte_post_thumbnail' ) ) :
 		if ( is_singular() && ! is_front_page() ) :
 			?>
 
-			<div class="post-thumbnail">
+			<div class="post-thumbnail" style="--bg-img: url(<?php echo get_the_post_thumbnail_url(); ?>)">
 				<?php the_post_thumbnail(); ?>
 			</div><!-- .post-thumbnail -->
 
@@ -181,7 +181,8 @@ endif;
  * SVG Sprite for icon
  */
 function geoffrey_crofte_get_icon_def( $name, $title = null ){
-	$title = isset( $title ) ? 'title="' . $title . '" tabindex="0"' : 'role="presentation" tabindex="-1"';
+	$attrs = isset( $title ) ? 'aria-labelledby="' . $title . '"' : 'role="presentation" tabindex="-1"';
+	$title = isset( $title ) ? '<title>' . $title . '</title>' : '';
 
 	$icons = array(
 		'book-open' => '<path d="M2.667 4h8A5.333 5.333 0 0116 9.333V28a4 4 0 00-4-4H2.667V4zm26.666 0h-8A5.333 5.333 0 0016 9.333V28a4 4 0 014-4h9.333V4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
@@ -242,9 +243,9 @@ function geoffrey_crofte_get_icon_def( $name, $title = null ){
 	);
 
 	if ( isset( $name ) && isset( $icons[ $name ] ) ) {
-		return '<svg ' . $title . ' fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" id="icon-' . esc_attr( $name ) . '">' . $icons[ $name ] . '</svg>';
+		return '<svg ' . $attrs . ' fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" id="icon-' . esc_attr( $name ) . '">' . $title . $icons[ $name ] . '</svg>';
 	} else if ( isset( $name ) && ! isset( $icons[ $name ] ) ) {
-		return 'This icon name does’nt exist.';
+		return 'This icon name doesn’t exist.';
 	} else {
 		return $icons;
 	}

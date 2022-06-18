@@ -1,0 +1,96 @@
+/**
+ * All kind of buttons
+ */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+[class^="button-"] {
+	--btn-background: var(--gc-color-primary);
+	--btn-color: var(--gc-color-background);
+	--icon-size: 24px;
+	--icon-spacing: 8px;
+
+	display: inline-flex;
+	align-items: center;
+	padding: 10px 16px;
+	font-weight: 700;
+	border: 0 none;
+	text-decoration: none;
+	color: var(--btn-color);
+	background: var(--btn-background);
+	border-radius: 80px; // pills
+	cursor: pointer;
+	-webkit-appearance: button;
+	transition: all .3s;
+
+	// Avoid link.button being purple-color (:visited state)
+	&:visited {
+		&,
+		&:hover,
+		&:focus {
+			color: var(--btn-color);
+			border-radius: 80px; // pills
+		}
+	}
+
+
+
+	&::-moz-focus-inner {
+		border-style: none;
+		padding: 0;
+	}
+
+	&:-moz-focusring {
+		outline: 1px dotted ButtonText
+	}
+
+	&:hover,
+	&:focus {
+		--btn-background: var(--gc-color-link-hover);
+		color: var(--btn-color);
+		border-radius: 80px; // pills
+	}
+
+	&:focus-visible {
+		outline-width: 2px;
+	}
+
+	svg {
+		width: var(--icon-size);
+		height: var(--icon-size);
+	}
+
+	span + svg,
+	svg + span {
+		margin-left: var(--icon-spacing);
+	}
+
+	&.is-big {
+		--icon-size: 32px;
+		--icon-spacing: 16px;
+
+		font-size: 1.125rem;
+		padding: 12px 24px;
+	}
+
+	@include dark {
+		--btn-background: var(--wp--preset--color--information-050);
+		--btn-color: var(--wp--preset--color--information-500);
+	}
+}
+
+.button {
+	&-primary {
+		&.is-light {
+			--btn-background: var(--wp--preset--color--primary-100);
+			--btn-color: var(--wp--preset--color--primary-700);
+
+			&:hover,
+			&:focus {
+				--btn-background: var(--wp--preset--color--primary-200);
+				--btn-color: var(--wp--preset--color--primary-800);				
+			}
+		}
+	}
+}

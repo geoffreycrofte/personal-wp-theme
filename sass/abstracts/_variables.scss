@@ -97,6 +97,7 @@ $colors: (
 
 // Typography
 $font-main: "Fira Sans", "Helvetica Neue", Helvetica, sans-serif;
+//$font-main: "Poppins", "Helvetica Neue", Helvetica, sans-serif;
 $font-code: consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 $font-line-height-body: 1.5;
 $font-line-height-pre: 1.6;
@@ -117,4 +118,5 @@ $columns: (
 $columns-margin: 3.8%;
 
 // Widths here and there
-$w-container: 1305px;
+$w-container: 1362px;
+$w-titles: 990px;

@@ -1,0 +1,121 @@
+/**
+ * Utilities (including WordPress ones)
+ */
+.alignleft {
+	/*rtl:ignore*/
+	float: left;
+	/*rtl:ignore*/
+	margin-right: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.alignright {
+	/*rtl:ignore*/
+	float: right;
+	/*rtl:ignore*/
+	margin-left: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1.5em;
+}
+
+.is-clean {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	background: none;
+
+	li,
+	dd,
+	dt {
+		padding: 0;
+		margin: 0;
+	}
+}
+
+.is-text-center {
+	text-align: center;
+}
+
+.is-text-left {
+	text-align: left;
+}
+
+.is-text-right {
+	text-align: right;
+}
+
+.is-text-left {
+	text-align: left;
+}
+
+.is-text-small {
+	font-size: .75em; // 12px
+}
+
+.pt-0.pt-0.pt-0 {
+	padding-top: 0;
+}
+
+.pt-16.pt-16.pt-16 {
+	padding-top: 16px;
+}
+
+.pt-40.pt-40.pt-40 {
+	padding-top: 40px;
+}
+
+.pb-0.pb-0.pb-0 {
+	padding-bottom: 0;
+}
+
+.pb-16.pb-16.pb-16 {
+	padding-bottom: 16px;
+}
+
+.pb-40.pb-40.pb-40 {
+	padding-bottom: 40px;
+}
+
+/**
+ * Accessibility
+ */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important; // Many screen reader and browser combinations announce broken words as they would appear visually.
+
+	&:focus {
+		background-color:var(--gc-color-background);
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		clip: auto !important;
+		clip-path: none;
+		color: inherit;
+		display: block;
+		font-size: 0.875rem;
+		font-weight: 700;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000; // Above WP toolbar.
+	}
+}

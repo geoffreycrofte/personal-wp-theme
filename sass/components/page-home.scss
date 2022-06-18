@@ -1,0 +1,90 @@
+// Home page header
+.home .site-main {
+	--top-spacing: 48px;
+	--bottom-spacing: 32px;
+
+	width: 100%;
+	overflow: hidden;
+
+	.container {
+		position: relative;
+	}
+
+	.blob {
+		position: absolute;
+		top: calc(var(--top-spacing) * -1 - 40px);
+		right: -116px;
+	}
+
+	section {
+		padding-top: 40px;
+	}
+}
+
+.ninja-desc {
+	max-width: 714px;
+	padding-bottom: var(--bottom-spacing);
+
+	h2 {
+		margin-top: var(--top-spacing);
+		margin-bottom: 32px;
+		font-size: 2rem;
+		font-weight: normal;
+		line-height: 1.2;
+		color: var(--gc-color-primary);
+	}
+
+	p {
+		font-weight: 400;
+		font-size: 1.25;
+
+		strong {
+			color: var(--gc-color-primary);
+		}
+	}
+
+	@media (min-width: 640px) {
+		--top-spacing: 96px;
+		--bottom-spacing: 64px;
+
+		h2 {
+			margin-bottom: 40px;
+			font-size: 3.5rem; // 56px
+		}
+
+		p {
+			font-size: 1.4375rem; // 23px
+		}
+	}
+}
+
+.skill {
+	&-item {
+		display: flex;
+		flex-direction: column;
+		padding: 0 24px;
+
+		> * {
+			margin: 6px 0;
+		}
+	}
+
+	&-icon,
+	&-title {
+		margin-top: 0;
+	}
+
+	&-title {
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: var(--gc-color-primary);
+	}
+
+	&-desc {
+		text-align: left;
+	}
+
+	&-cta {
+		margin-top: auto;
+	}
+}

@@ -7,13 +7,14 @@
  * @package Geoffrey_Crofte
  */
 
+include_once('inc/colors.php');
+
 if ( ! defined( 'GEOFFREYCROFTE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	define( 'GEOFFREYCROFTE_VERSION', '1.0.0' );
 }
 
 if ( ! defined( 'GC_ASSETS' ) ) {
-	// Replace the version number of the theme on each release.
 	define( 'GC_ASSETS', get_template_directory_uri() . '/assets/' );
 }
 
@@ -78,6 +79,9 @@ if ( ! function_exists( 'geoffreycrofte_setup' ) ) :
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		// Set color palette for the editor.
+		add_theme_support( 'editor-color-palette', geoffreycrofte_get_color_palette()  );  
 	}
 endif;
 add_action( 'after_setup_theme', 'geoffreycrofte_setup' );
@@ -135,11 +139,3 @@ if ( ! function_exists( 'gc_register_widgets' ) ) {
 		return $html;
 	}
 }
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
-
