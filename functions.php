@@ -79,6 +79,8 @@ if ( ! function_exists( 'geoffreycrofte_setup' ) ) :
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
+		add_theme_support( 'custom-line-height' );
+		add_theme_support( 'custom-units', array('px', 'em', 'rem', 'vh', 'vw', 'ch') );
 
 		// Set color palette for the editor.
 		add_theme_support( 'editor-color-palette', geoffreycrofte_get_color_palette()  );  

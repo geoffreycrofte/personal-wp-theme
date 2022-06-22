@@ -1,3 +1,8 @@
+// Link image
+a:has(img) {
+	background: none;
+}
+
 // Galleries
 .gallery {
 	margin-bottom: 1.5em;

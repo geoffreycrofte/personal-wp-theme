@@ -35,14 +35,19 @@
 	 * Says hello to all the ninjas of the world.
 	 */
 	let cons_msg1 = 'Hello you ninja!';
-	let cons_msg2 = 'If you have question, contact me on Twitter';
+	let cons_msg2 = 'If you have a question, contact me on Twitter';
 
 	if ( is_fr ) {
 		cons_msg1 = 'Salut ninja !';
 		cons_msg2 = 'Si tu as des questions, contacte-moi sur Twitter';		
 	}
 
-	console.log("%c" + cons_msg1 + " %c" + cons_msg2 + " %c@geoffreycrofte", "color:#A40162;font-size:40px;font-weight:bold;", "display:block;color:#999;font-size: 16px", "color:#A40162;font-size: 24px;");
+	console.log(
+		"%c" + cons_msg1 + " %c" + cons_msg2 + " %c@geoffreycrofte",
+		"color:#A40162;font-size:40px;font-weight:bold;",
+		"display:block;color:#999;font-size: 16px",
+		"color:#A40162;font-size: 24px;"
+	);
 
 	/**
 	 * Replace next/prev links by a Button

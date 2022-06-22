@@ -1,0 +1,373 @@
+{
+    "version": 2,
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "name"  : "Neutral 050",
+                    "slug"  : "neutral-050",
+                    "color" : "#F7F9FC"
+                },
+                {
+                    "name"  : "Neutral 100",
+                    "slug"  : "neutral-100",
+                    "color" : "#D8E2F1"
+                },
+                {
+                    "name"  : "Neutral 200",
+                    "slug"  : "neutral-200",
+                    "color" : "#B0C2DC"
+                },
+                {
+                    "name"  : "Neutral 300",
+                    "slug"  : "neutral-300",
+                    "color" : "#94A8C7"
+                },
+                {
+                    "name"  : "Neutral 400",
+                    "slug"  : "neutral-400",
+                    "color" : "#798FB0"
+                },
+                {
+                    "name"  : "Neutral 500",
+                    "slug"  : "neutral-500",
+                    "color" : "#62779C"
+                },
+                {
+                    "name"  : "Neutral 600",
+                    "slug"  : "neutral-600",
+                    "color" : "#53688B"
+                },
+                {
+                    "name"  : "Neutral 700",
+                    "slug"  : "neutral-700",
+                    "color" : "#425471"
+                },
+                {
+                    "name"  : "Neutral 800",
+                    "slug"  : "neutral-800",
+                    "color" : "#32435C"
+                },
+                {
+                    "name"  : "Neutral 900",
+                    "slug"  : "neutral-900",
+                    "color" : "#26344B"
+                },
+                {
+                    "name"  : "Primary 050",
+                    "slug"  : "primary-050",
+                    "color" : "#FEF7FB"
+                },
+                {
+                    "name"  : "Primary 100",
+                    "slug"  : "primary-100",
+                    "color" : "#F8D8EB"
+                },
+                {
+                    "name"  : "Primary 200",
+                    "slug"  : "primary-200",
+                    "color" : "#EFADD5"
+                },
+                {
+                    "name"  : "Primary 300",
+                    "slug"  : "primary-300",
+                    "color" : "#E888C1"
+                },
+                {
+                    "name"  : "Primary 400",
+                    "slug"  : "primary-400",
+                    "color" : "#E05DAB"
+                },
+                {
+                    "name"  : "Primary 500",
+                    "slug"  : "primary-500",
+                    "color" : "#D13693"
+                },
+                {
+                    "name"  : "Primary 600",
+                    "slug"  : "primary-600",
+                    "color" : "#BE217F"
+                },
+                {
+                    "name"  : "Primary 700",
+                    "slug"  : "primary-700",
+                    "color" : "#A40162"
+                },
+                {
+                    "name"  : "Primary 800",
+                    "slug"  : "primary-800",
+                    "color" : "#83024F"
+                },
+                {
+                    "name"  : "Primary 900",
+                    "slug"  : "primary-900",
+                    "color" : "#680440"
+                },
+                {
+                    "name"  : "Secondary 050",
+                    "slug"  : "secondary-050",
+                    "color" : "#FBF7FE"
+                },
+                {
+                    "name"  : "Secondary 100",
+                    "slug"  : "secondary-100",
+                    "color" : "#ECDAFB"
+                },
+                {
+                    "name"  : "Secondary 200",
+                    "slug"  : "secondary-200",
+                    "color" : "#D7B2F6"
+                },
+                {
+                    "name"  : "Secondary 300",
+                    "slug"  : "secondary-300",
+                    "color" : "#C096E1"
+                },
+                {
+                    "name"  : "Secondary 400",
+                    "slug"  : "secondary-400",
+                    "color" : "#A67CC8"
+                },
+                {
+                    "name"  : "Secondary 500",
+                    "slug"  : "secondary-500",
+                    "color" : "#8F64B2"
+                },
+                {
+                    "name"  : "Secondary 600",
+                    "slug"  : "secondary-600",
+                    "color" : "#8054A4"
+                },
+                {
+                    "name"  : "Secondary 700",
+                    "slug"  : "secondary-700",
+                    "color" : "#6A418C"
+                },
+                {
+                    "name"  : "Secondary 800",
+                    "slug"  : "secondary-800",
+                    "color" : "#573077"
+                },
+                {
+                    "name"  : "Secondary 900",
+                    "slug"  : "secondary-900",
+                    "color" : "#472265"
+                },
+                {
+                    "name"  : "Tertiary 050",
+                    "slug"  : "tertiary-050",
+                    "color" : "#EEFCFB"
+                },
+                {
+                    "name"  : "Tertiary 100",
+                    "slug"  : "tertiary-100",
+                    "color" : "#A9EDEA"
+                },
+                {
+                    "name"  : "Tertiary 200",
+                    "slug"  : "tertiary-200",
+                    "color" : "#72D0CD"
+                },
+                {
+                    "name"  : "Tertiary 300",
+                    "slug"  : "tertiary-300",
+                    "color" : "#46B7B2"
+                },
+                {
+                    "name"  : "Tertiary 400",
+                    "slug"  : "tertiary-400",
+                    "color" : "#1E9C98"
+                },
+                {
+                    "name"  : "Tertiary 500",
+                    "slug"  : "tertiary-500",
+                    "color" : "#168480"
+                },
+                {
+                    "name"  : "Tertiary 600",
+                    "slug"  : "tertiary-600",
+                    "color" : "#107370"
+                },
+                {
+                    "name"  : "Tertiary 700",
+                    "slug"  : "tertiary-700",
+                    "color" : "#0B5D5B"
+                },
+                {
+                    "name"  : "Tertiary 800",
+                    "slug"  : "tertiary-800",
+                    "color" : "#094B48"
+                },
+                {
+                    "name"  : "Tertiary 900",
+                    "slug"  : "tertiary-900",
+                    "color" : "#073A39"
+                },
+                {
+                    "name"  : "Information 050",
+                    "slug"  : "information-050",
+                    "color" : "#F5F9FC"
+                },
+                {
+                    "name"  : "Information 100",
+                    "slug"  : "information-100",
+                    "color" : "#CFE4F2"
+                },
+                {
+                    "name"  : "Information 200",
+                    "slug"  : "information-200",
+                    "color" : "#9AC6E5"
+                },
+                {
+                    "name"  : "Information 300",
+                    "slug"  : "information-300",
+                    "color" : "#73ADD8"
+                },
+                {
+                    "name"  : "Information 400",
+                    "slug"  : "information-400",
+                    "color" : "#5793BE"
+                },
+                {
+                    "name"  : "Information 500",
+                    "slug"  : "information-500",
+                    "color" : "#3F7CA7"
+                },
+                {
+                    "name"  : "Information 600",
+                    "slug"  : "information-600",
+                    "color" : "#306C98"
+                },
+                {
+                    "name"  : "Information 700",
+                    "slug"  : "information-700",
+                    "color" : "#20577F"
+                },
+                {
+                    "name"  : "Information 800",
+                    "slug"  : "information-800",
+                    "color" : "#1A4665"
+                },
+                {
+                    "name"  : "Information 900",
+                    "slug"  : "information-900",
+                    "color" : "#14364F"
+                },
+                {
+                    "name"  : "Negative 050",
+                    "slug"  : "negative-050",
+                    "color" : "#FDF7F7"
+                },
+                {
+                    "name"  : "Negative 100",
+                    "slug"  : "negative-100",
+                    "color" : "#F7DADA"
+                },
+                {
+                    "name"  : "Negative 200",
+                    "slug"  : "negative-200",
+                    "color" : "#EEB1B1"
+                },
+                {
+                    "name"  : "Negative 300",
+                    "slug"  : "negative-300",
+                    "color" : "#E68F8F"
+                },
+                {
+                    "name"  : "Negative 400",
+                    "slug"  : "negative-400",
+                    "color" : "#DC6A6A"
+                },
+                {
+                    "name"  : "Negative 500",
+                    "slug"  : "negative-500",
+                    "color" : "#C74F4F"
+                },
+                {
+                    "name"  : "Negative 600",
+                    "slug"  : "negative-600",
+                    "color" : "#B83B3B"
+                },
+                {
+                    "name"  : "Negative 700",
+                    "slug"  : "negative-700",
+                    "color" : "#A11F1F"
+                },
+                {
+                    "name"  : "Negative 800",
+                    "slug"  : "negative-800",
+                    "color" : "#841616"
+                },
+                {
+                    "name"  : "Negative 900",
+                    "slug"  : "negative-900",
+                    "color" : "#6A0D0D"
+                },
+                {
+                    "name"  : "Positive 050",
+                    "slug"  : "positive-050",
+                    "color" : "#F1FCF3"
+                },
+                {
+                    "name"  : "Positive 100",
+                    "slug"  : "positive-100",
+                    "color" : "#B6EFC2"
+                },
+                {
+                    "name"  : "Positive 200",
+                    "slug"  : "positive-200",
+                    "color" : "#63D77F"
+                },
+                {
+                    "name"  : "Positive 300",
+                    "slug"  : "positive-300",
+                    "color" : "#42BD6A"
+                },
+                {
+                    "name"  : "Positive 400",
+                    "slug"  : "positive-400",
+                    "color" : "#20A253"
+                },
+                {
+                    "name"  : "Positive 500",
+                    "slug"  : "positive-500",
+                    "color" : "#178849"
+                },
+                {
+                    "name"  : "Positive 600",
+                    "slug"  : "positive-600",
+                    "color" : "#117742"
+                },
+                {
+                    "name"  : "Positive 700",
+                    "slug"  : "positive-700",
+                    "color" : "#0B6037"
+                },
+                {
+                    "name"  : "Positive 800",
+                    "slug"  : "positive-800",
+                    "color" : "#094D2C"
+                },
+                {
+                    "name"  : "Positive 900",
+                    "slug"  : "positive-900",
+                    "color" : "#073D23"
+                }
+            ],
+            "gradients": [
+                {
+                    "slug": "positive",
+                    "gradient": "linear-gradient(160deg, var(--wp--preset--color--positive-800), var(--wp--preset--color--positive-500))",
+                    "name": "Green gradient"
+                }
+            ],
+            "duotone": [
+                {
+                    "slug": "purple-and-violet",					
+                    "colors": [ "#D7B2F6", "#A40162" ],
+                    "name": "Purple and violet"
+                }
+            ]
+        }
+    }
+}

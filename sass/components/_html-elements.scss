@@ -14,6 +14,12 @@ body {
 
 	// Forms
 	--gc-input-background: var(--wp--preset--color--primary-100);
+
+	// Some default values
+	padding: 0;
+	margin: 0;
+	color: var(--gc-color-text);
+	background: var(--gc-color-background);
 }
 
 /**
@@ -28,14 +34,10 @@ body {
 html {
 	box-sizing: border-box;
 	-webkit-text-size-adjust: 100%;
-}
-
-html,
-body {
+	background: #A40162; // to make the scroll top colored.
+	color: white; // to make it accessible, but not texts should appear there.
 	padding: 0;
 	margin: 0;
-	color: var(--gc-color-text);
-	background: var(--gc-color-background);
 }
 
 [id="page"] {
