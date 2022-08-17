@@ -55,66 +55,6 @@ if ( ! function_exists( 'geoffreycrofte_posted_by' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'geoffreycrofte_entry_footer' ) ) :
-	/**
-	 * Prints HTML with meta information for the categories, tags and comments.
-	 */
-	function geoffreycrofte_entry_footer() {
-		// Hide category and tag text for pages.
-		if ( 'post' === get_post_type() ) {
-			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'geoffreycrofte' ) );
-			if ( $categories_list ) {
-				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'geoffreycrofte' ) . '</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			}
-
-			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'geoffreycrofte' ) );
-			if ( $tags_list ) {
-				/* translators: 1: list of tags. */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'geoffreycrofte' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			}
-		}
-
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			echo '<span class="comments-link">';
-			comments_popup_link(
-				sprintf(
-					wp_kses(
-						/* translators: %s: post title */
-						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'geoffreycrofte' ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
-					),
-					wp_kses_post( get_the_title() )
-				)
-			);
-			echo '</span>';
-		}
-
-		edit_post_link(
-			sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Edit <span class="screen-reader-text">%s</span>', 'geoffreycrofte' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				wp_kses_post( get_the_title() )
-			),
-			'<span class="edit-link">',
-			'</span>'
-		);
-	}
-endif;
-
 /**
  * Customize excerpt lentght
  * @param  (int) $length The amount of words.
@@ -177,6 +117,128 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	}
 endif;
 
+/*
+ * Author box below the article
+ */
+if ( ! function_exists('geoffreycrofte_get_author_box') ) {
+	function geoffreycrofte_get_author_box() {
+
+		global $post;
+
+		$description = substr(strip_tags($post->post_content), 0, 250).'[...]';
+		$permalink = esc_url(get_the_permalink($post->ID));
+		$the_title = esc_attr(get_the_title($post->ID));
+		$markup = '';
+
+		$current_lang = apply_filters( 'wpml_current_language', NULL );
+		$default_lang = apply_filters( 'wpml_default_language', NULL );
+		$authorized_html = array(
+			'a' => array(
+				'href' => array(),
+				'title' => array(),
+				'target' => array()
+			),
+			'br' => array(),
+			'em' => array(),
+			'strong' => array()
+		);
+
+		// if coauthors plugin is activated
+    	if ( is_single() && get_the_author_meta( 'description' ) && function_exists('coauthors') )  {
+
+    		$co_authors = get_coauthors();
+			$i = 0;
+
+			foreach( $co_authors as $co_author ) {
+
+				$multilingual_desc = get_the_author_meta('description', $co_author->ID);
+				if ( ! empty( $current_lang ) && ! empty( $default_lang ) ) {
+					$multilingual_desc = ( $current_lang === $default_lang || get_the_author_meta( 'description_' . $current_lang, $co_author->ID ) === '' ) ? $multilingual_desc : wp_kses( get_the_author_meta( 'description_' . $current_lang, $co_author->ID ), $authorized_html );
+				}
+
+				$url_extra = $i === 0 ? '' : '?alt-'.$i;
+				// all about donation links
+				$author_donation = '<div class="author-donation"><p class="support-title">' . __( 'Support this author', 'juiz' ) . '</p><p>';
+				$author_donation .= get_the_author_meta('contact_paypal', $co_author->ID) != '' 
+									? 
+									'<a href="'.esc_url(get_the_author_meta('contact_paypal', $co_author->ID)).'" class="paypal-btn"><img src="' . get_stylesheet_directory_uri() . '/img/paypal-icon.png" alt="" width="13" height="13">' . __( 'PayPal Donation', 'juiz' ) . '</a>' 
+									: 
+									'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=P39NJPCWVXGDY&amp;lc=FR&amp;item_name=Creative%20Juiz%20-%20Article&amp;item_number=%23post'.$post->ID.'&amp;currency_code=' . _x( 'USD', 'currency', 'juiz' ) . '&amp;bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted" class="paypal-btn"><img src="' . get_stylesheet_directory_uri() . '/img/paypal-icon.png" alt="" width="13" height="13">' . __( 'PayPal Donation', 'juiz' ) . '</a>';
+				$author_donation .= get_the_author_meta('contact_flattr', $co_author->ID) != '' 
+									? 
+									'<a class="flattr-btn" href="https://flattr.com/submit/auto?user_id=' . esc_attr( get_the_author_meta('contact_flattr', $co_author->ID ) ) . '&amp;url=' . $permalink . $url_extra . '&amp;title=' . urlencode( $the_title ) . '&amp;language=fr_FR&amp;tags=webdesign&amp;category=text&amp;description=' . urlencode( $description ) . '" title="' . __( 'Flattr Donation', 'juiz' ) . '"><img src="' . get_stylesheet_directory_uri() . '/img/flattr-icon.png" width="13" height="13" alt="">Flattr</a>'
+									:
+									'<a class="flattr-btn" href="https://flattr.com/submit/auto?user_id=CreativeJuiz&amp;url=' . $permalink . '&amp;title=' . urlencode( $the_title ) . '&amp;language=fr_FR&amp;tags=webdesign&amp;category=text&amp;description=' . urlencode( $description ) . '" title="' . __( 'Flattr Donation', 'juiz' ) . '"><img src="' . get_stylesheet_directory_uri() . '/img/flattr-icon.png" width="13" height="13" alt="">Flattr</a></p>';
+				$author_donation .= '</div>';
+
+				// all about other links
+		    	$a_author_link = ( $co_author->user_url != '' ) ? '<a class="author_site" title="' . sprintf( _x("See %s's personal website", 'about an author', 'juiz' ), $co_author->display_name ) . '" href="' . $co_author->user_url . '" itemprop="url"><i class="icon-cursor"></i>' . _x('Website', 'about an author', 'juiz') . '</a>' : '';
+
+		    	$a_author_twitter = ( get_the_author_meta( 'contact_twitter', $co_author->ID ) != '' ) ? '<a rel="nofollow" class="author_twitter" href="https://twitter.com/' . preg_replace( '#@#', '', get_the_author_meta('contact_twitter', $co_author->ID ) ) . '"><i class="icon-twitter"></i>' . _x( 'Twitter', 'about an author', 'juiz' ) . '</a>' : '';
+
+		    	$presents = ( $i===0 ) ? __( 'Written by', 'juiz' ) : __( 'With the participation of', 'juiz' );
+
+		    		// main markup
+		    	$markup .= '
+					<div class="vcard author-box" id="author-info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+						<div class="author-avatar" itemprop="image">' . get_avatar( $co_author->user_email, 100 ) . '</div>
+						<div class="author-description">
+							<h2>' . $presents . ' <span itemprop="name">' . $co_author->display_name . '</span></h2>
+							<p class="note author-note" itemprop="description">' . $multilingual_desc . '</p>
+							<p class="author-link">
+								<a rel="nofollow" class="author_articles" title="' . sprintf( _x('See all posts by %s on Creative Juiz', 'author','juiz'), $co_author->display_name ) . '" href="'.esc_url( get_author_posts_url( $co_author->ID ) ).'"  itemprop="url"><i class="icon-article-liste"></i>' . _x( 'See posts', 'about an author', 'juiz' ) . '</a>' . $a_author_link . $a_author_twitter . '
+							</p>
+						</div>
+						' . $author_donation . '
+					</div>';
+				$i++;
+			}
+
+		}
+
+		// if coauthors is deactivated
+		if ( is_single() && get_the_author_meta( 'description' ) && !function_exists('coauthors')) {
+
+			$multilingual_desc = get_the_author_meta('description');
+			if ( ! empty( $current_lang ) && ! empty( $default_lang ) ) {
+				$multilingual_desc = ( $current_lang === $default_lang || get_the_author_meta( 'description_' . $current_lang ) === '' ) ? $multilingual_desc : wp_kses( get_the_author_meta( 'description_' . $current_lang ), $authorized_html );
+			}
+
+			$author_donation = '<div class="author-donation"><p class="support-title">' . __( 'Support this author', 'juiz' ) . '</p><p>';
+			$author_donation .= get_the_author_meta('contact_paypal') != '' 
+								? 
+								'<a href="'.esc_url(get_the_author_meta('contact_paypal')).'" class="paypal-btn"><img src="' . get_stylesheet_directory_uri() . '/img/paypal-icon.png" alt="" width="13" height="13">' . __( 'PayPal Donation', 'juiz' ) . '</a>' 
+								: 
+								'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=P39NJPCWVXGDY&amp;lc=FR&amp;item_name=Creative%20Juiz%20-%20Article&amp;item_number=%23post'.$post->ID.'&amp;currency_code=' . _x( 'USD', 'currency', 'juiz' ) . '&amp;bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted" class="paypal-btn"><img src="' . get_stylesheet_directory_uri() . '/img/paypal-icon.png" alt="" width="13" height="13">' . __( 'PayPal Donation', 'juiz' ) . '</a>';
+			$author_donation .= get_the_author_meta('contact_flattr') != '' 
+								? 
+								'<a class="flattr-btn" href="https://flattr.com/submit/auto?user_id=' . esc_attr( get_the_author_meta('contact_flattr') ) . '&amp;url='.$permalink.'&amp;title=' . urlencode( $the_title ) . '&amp;language=fr_FR&amp;tags=webdesign&amp;category=text&amp;description=' . urlencode( $description ) .'" title="' . __( 'Flattr Donation', 'juiz' ) . '"><img src="' . get_stylesheet_directory_uri() . '/img/flattr-icon.png" width="13" height="13" alt="">Flattr</a>'
+								:
+								'<a class="flattr-btn" href="https://flattr.com/submit/auto?user_id=CreativeJuiz&amp;url= ' . $permalink . '&amp;title=' . urlencode( $the_title ) . '&amp;language=fr_FR&amp;tags=webdesign&amp;category=text&amp;description=' . urlencode( $description ) . '" title="' . __( 'Flattr Donation', 'juiz' ) . '"><img src="' . get_stylesheet_directory_uri() . '/img/flattr-icon.png" width="13" height="13" alt="">Flattr</a></p>';
+			$author_donation .= '</div>';
+
+			$a_author_link = ( get_the_author_meta('url') != '' ) ? '<a class="author_site" title="' . sprintf( _x("See %s's personal website", 'about an author', 'juiz' ), get_the_author() ) . '" href="' . get_the_author_meta('url') . '" itemprop="url"><i class="icon-cursor"></i>' . _x('Website', 'about an author', 'juiz') . '</a>' : '';
+	    	$a_author_twitter = ( get_the_author_meta('contact_twitter') != '') ? '<a rel="nofollow" class="author_twitter" href="https://twitter.com/'.preg_replace('#@#','',get_the_author_meta('contact_twitter')).'"><i class="icon-twitter"></i>' . _x('Twitter', 'about an author', 'juiz') . '</a>' : '';
+
+	    	$markup .= '
+				<div class="vcard author-box" id="author-info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+					<div class="author-avatar" itemprop="image">'. get_avatar( get_the_author_meta( 'user_email' ),100).'</div>
+					<div class="author-description">
+						<h2>' . sprintf( __( 'About %s', 'juiz' ), '<span itemprop="name">'.get_the_author().'</span>' ) . '</h2>
+						<p class="note author-note" itemprop="description">' . $multilingual_desc . '</p>
+						<p class="author-link">
+							<a rel="nofollow" class="author_articles" title="' . sprintf( _x('See all posts by %s on Creative Juiz', 'author','juiz'), get_the_author() ) . '" href="'.esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ).'"  itemprop="url"><i class="icon-article-liste"></i>' . _x( 'See posts', 'about an author', 'juiz' ) . '</a>' . $a_author_link . $a_author_twitter . '
+						</p>
+					</div>
+					' . $author_donation . '
+				</div>';
+
+		}
+
+		return $markup;
+	}
+}
+
 /**
  * SVG Sprite for icon
  */
@@ -187,9 +249,9 @@ function geoffrey_crofte_get_icon_def( $name, $title = null ){
 	$icons = array(
 		'book-open' => '<path d="M2.667 4h8A5.333 5.333 0 0116 9.333V28a4 4 0 00-4-4H2.667V4zm26.666 0h-8A5.333 5.333 0 0016 9.333V28a4 4 0 014-4h9.333V4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
 
-	  'trash' => '<path d="M4 8h24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.667 8V5.333a2.667 2.667 0 012.666-2.666h5.334a2.667 2.667 0 012.666 2.666V8m4 0v18.667a2.667 2.667 0 01-2.666 2.666H9.333a2.667 2.667 0 01-2.666-2.666V8h18.666zm-12 6.667v8m5.334-8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
+		'trash' => '<path d="M4 8h24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.667 8V5.333a2.667 2.667 0 012.666-2.666h5.334a2.667 2.667 0 012.666 2.666V8m4 0v18.667a2.667 2.667 0 01-2.666 2.666H9.333a2.667 2.667 0 01-2.666-2.666V8h18.666zm-12 6.667v8m5.334-8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
 	  
-	  'alert-triangle' => '<path d="M13.72 5.147L2.427 24a2.667 2.667 0 002.28 4h22.586a2.666 2.666 0 002.28-4L18.28 5.147a2.667 2.667 0 00-4.56 0v0zM16 12v5.333m0 5.334h.013" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
+		'alert-triangle' => '<path d="M13.72 5.147L2.427 24a2.667 2.667 0 002.28 4h22.586a2.666 2.666 0 002.28-4L18.28 5.147a2.667 2.667 0 00-4.56 0v0zM16 12v5.333m0 5.334h.013" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
 	  
 	  'info' => '<path d="M16 29.333c7.364 0 13.333-5.97 13.333-13.333 0-7.364-5.97-13.333-13.333-13.333C8.636 2.667 2.667 8.637 2.667 16c0 7.364 5.97 13.333 13.333 13.333zm0-8V16m0-5.333h.013" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>',
 

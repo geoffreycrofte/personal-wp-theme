@@ -2,6 +2,8 @@
  * Blog + Sidebar
  */
 .page-header {
+	padding-inline: 24px;
+
 	&,
 	> * {
 		position: relative;
@@ -28,12 +30,24 @@
 		}
 	}
 
-	dl.post-meta {
+	.post-meta {
 		display: flex;
-		gap: 8px;
+		gap: 24px;
 		align-items: center;
 		justify-content: center;
+		flex-wrap: wrap;
+		padding: 0;
+		margin: 0;
+		list-style: none;
 		color: var(--wp--preset--color--neutral-500);
+
+		@media (min-width: map-get($breakpoints, 'md')) {
+			gap: 64px;
+		}
+
+		@media (min-width: map-get($breakpoints, 'xl')) {
+			gap: 80px;
+		}
 
 		a {
 			--effect-color: var(--wp--preset--color--neutral-500);
@@ -45,19 +59,21 @@
 			}
 		}
 
-		dt {
+		li {
 			display: flex;
 			align-items: center;
-			margin-left: 64px;
 		}
 
-		dd {
+		.post-meta-name {
+			display: flex;
+			align-items: center;
+			margin-right: 8px;
+		}
+
+		.post-meta-value {
 			margin: 0;
 			font-weight: 500;
-
-			&:last-child {
-				margin-right: 64px;
-			}
+			white-space: nowrap;
 		}
 	}
 }
@@ -162,8 +178,12 @@ a.post-thumbnail {
 	font-size: 1.25rem;
 	line-height: 1.75;
 
-	@media (min-width: 1074px) {
-		p:first-child {
+	
+	p:first-child {
+		font-size: 1.25rem;
+		margin-bottom: 3em;
+
+		@media (min-width: 1074px) {
 			margin-inline: -10ch;
 			font-size: 1.5rem;
 		}
@@ -189,16 +209,19 @@ a.post-thumbnail {
 	h2 {
 		color: var(--color-h2);
 		font-size: 1.77em;
+		line-height: 1.25;
 	}
 
 	h3 {
 		color: var(--color-h3);
 		font-size: 1.33em;
+		line-height: 1.35;
 	}
 
 	h4 {
 		color: var(--color-h4);
 		font-size: 1.115em;
+		line-height: 1.45;
 	}
 
 	@media (min-width: map-get($breakpoints, l)) {
@@ -218,5 +241,87 @@ a.post-thumbnail {
 		h4 {
 			font-size: 1.33em;
 		}
+	}
+
+	a:has(img){
+		display: block;
+
+		&, &:hover, &:focus-visible {
+			background: none;
+		}
+
+		&:hover,
+		&:focus-visible {
+			outline: 4px solid var(--wp--preset--color--primary-600);
+			outline-offset: 8px;
+			border-radius: 8px;
+		}
+	}
+}
+
+/* Former blog contents */
+.message {
+	--msg-icon-size: 64px;
+	--msg-padding: 24px;
+	--msg-bg: var(--wp--preset--color--information-100);
+	--msg-txt: var(--wp--preset--color--information-700);
+
+	position: relative;
+	padding: var(--msg-padding);
+	padding-left: calc(var(--msg-icon-size) + var(--msg-padding) + 16px );
+	background: var(--msg-bg);
+	color: var(--msg-txt);
+	font-size: 1.125rem;
+	border-radius: 8px;
+
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: var(--msg-padding);
+		left: var(--msg-padding);
+		width: 64px;
+		height: 64px;
+		background: url(assets/img/icon-info.svg);
+	}
+
+	.remember {
+		--msg-bg: var(--wp--preset--color--tertiary-100);
+		--msg-txt: var(--wp--preset--color--tertiary-700);
+
+		&::before {
+			background: url(assets/img/icon-bookmark.svg);
+		}
+	}
+	.important {
+		--msg-bg: var(--wp--preset--color--primary-100);
+		--msg-txt: var(--wp--preset--color--primary-700);
+
+		&::before {
+			background: url(assets/img/icon-alert-triangle.svg);
+		}
+	}
+}
+
+/* Table of content */
+.tdm, .toc {
+	h2 {
+
+	}
+
+	ol {
+
+	}
+
+	li {
+
+	}
+
+	a {
+
+	}
+
+	.current {
+
 	}
 }
