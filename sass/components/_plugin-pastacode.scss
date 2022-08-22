@@ -1,0 +1,99 @@
+/**
+* prism.js tomorrow night eighties for JavaScript,CoffeeScript,CSS and HTML
+* Based on https://github.com/chriskempson/tomorrow-theme
+* @author Rose Pritchard
+*/
+
+.code-embed-wrapper.code-embed-wrapper {
+	:not(pre) > code[class*="language-"],
+	pre[class*="language-"] {
+		background: var(--wp--preset--color--neutral-900);
+	}
+
+	.code-embed-infos {
+		border-top-color: var(--wp--preset--color--neutral-900);
+
+		a {
+			color: var(--wp--preset--color--primary-600);
+
+			&:hover,
+			&:focus,
+			&:active {
+				color: var(--wp--preset--color--primary-700);
+			}
+		}
+	}
+
+	pre + .code-embed-infos {
+		border-bottom-color: var(--wp--preset--color--neutral-900);
+	}
+
+	.code-embed-infos span {
+		color: var(--wp--preset--color--neutral-900);
+	}
+}
+
+/* Inline code */
+.token.token {
+	&.comment,
+	&.block-comment,
+	&.prolog,
+	&.doctype,
+	&.cdata {
+		color: var(--wp--preset--color--neutral-300);
+	}
+
+	&.punctuation {
+		color: var(--wp--preset--color--neutral-400);
+	}
+
+	&.tag,
+	&.attr-name,
+	&.namespace,
+	&.deleted {
+		color: var(--wp--preset--color--primary-300);
+	}
+
+	&.function-name {
+		color: var(--wp--preset--color--information-200);
+	}
+
+	&.boolean,
+	&.number,
+	&.function {
+		color: var(--wp--preset--color--negative-300);
+	}
+
+	&.property,
+	&.class-name,
+	&.constant,
+	&.symbol {
+		color: #f8c555;
+	}
+
+	&.selector,
+	&.important,
+	&.atrule,
+	&.keyword,
+	&.builtin {
+		color: var(--wp--preset--color--secondary-300);
+	}
+
+	&.string,
+	&.char,
+	&.attr-value,
+	&.regex,
+	&.variable {
+		color: var(--wp--preset--color--tertiary-300);
+	}
+
+	&.operator,
+	&.entity,
+	&.url {
+		color: var(--wp--preset--color--tertiary-400);
+	}
+
+	&.inserted {
+		color: var(--wp--preset--color--positive-300);
+	}
+}

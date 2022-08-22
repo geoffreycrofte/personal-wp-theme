@@ -33,7 +33,7 @@
 
 	a {
 		display: block;
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 		font-weight: bold;
 		color: var(--wp--preset--color--primary-900);
 		background: none;
@@ -137,7 +137,7 @@
 	a:hover,
 	a:focus {
 		+ .sub-menu {
-			z-index: 1;
+			z-index: 10;
 			opacity: 1;
 			pointer-events: all;
 			transform: translateY(0);

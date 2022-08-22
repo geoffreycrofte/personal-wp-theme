@@ -260,6 +260,16 @@ a.post-thumbnail {
 }
 
 /* Former blog contents */
+p {
+	&.center {
+		text-align: center;
+	}
+}
+
+.wp-video {
+	margin: 2rem auto;
+}
+
 .message {
 	--msg-icon-size: 64px;
 	--msg-padding: 24px;
@@ -273,15 +283,17 @@ a.post-thumbnail {
 	color: var(--msg-txt);
 	font-size: 1.125rem;
 	border-radius: 8px;
+	text-align: left;
 
 
 	&::before {
 		content: '';
 		position: absolute;
-		top: var(--msg-padding);
+		top: 50%;
 		left: var(--msg-padding);
 		width: 64px;
 		height: 64px;
+		transform: translateY(-50%);
 		background: url(assets/img/icon-info.svg);
 	}
 

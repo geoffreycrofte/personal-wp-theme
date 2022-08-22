@@ -101,7 +101,20 @@ i {
 }
 
 blockquote {
+	display: flex;
 	margin: 0 1.75em;
+
+	&::before {
+		content: '“';
+		color: var(--wp--preset--color--tertiary-100);
+		font-size: 10rem;
+		line-height: 1;
+	}
+
+	p {
+		font-size: 2.375rem;
+		line-height: 1.55;
+	}
 }
 
 address {
@@ -109,12 +122,26 @@ address {
 }
 
 pre {
-	background: var(--wp--preset--color--neutral-800);
+	background: var(--wp--preset--color--neutral-900);
 	margin-bottom: 1.75em;
 	max-width: 100%;
 	overflow: auto;
 	padding: 1.75em;
+	color: var(--wp--preset--color--neutral-100);
+
+	code {
+		color: inherit;
+	}
 }
+
+code:not(pre code) {
+	padding: 4px 4px 3px 4px;
+	vertical-align: middle;
+	color: var(--wp--preset--color--tertiary-600);
+	background: var(--wp--preset--color--tertiary-100)
+}
+
+@import 'plugin-pastacode';
 
 code,
 kbd,

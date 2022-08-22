@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 Theme Name: Geoffrey Crofte
 Theme URI: http://underscores.me/
@@ -182,7 +183,20 @@ i {
 }
 
 blockquote {
+	display: flex;
 	margin: 0 1.75em;
+}
+
+blockquote::before {
+	content: '“';
+	color: var(--wp--preset--color--tertiary-100);
+	font-size: 10rem;
+	line-height: 1;
+}
+
+blockquote p {
+	font-size: 2.375rem;
+	line-height: 1.55;
 }
 
 address {
@@ -190,11 +204,94 @@ address {
 }
 
 pre {
-	background: var(--wp--preset--color--neutral-800);
+	background: var(--wp--preset--color--neutral-900);
 	margin-bottom: 1.75em;
 	max-width: 100%;
 	overflow: auto;
 	padding: 1.75em;
+	color: var(--wp--preset--color--neutral-100);
+}
+
+pre code {
+	color: inherit;
+}
+
+code:not(pre code) {
+	padding: 4px 4px 3px 4px;
+	vertical-align: middle;
+	color: var(--wp--preset--color--tertiary-600);
+	background: var(--wp--preset--color--tertiary-100);
+}
+
+/**
+* prism.js tomorrow night eighties for JavaScript,CoffeeScript,CSS and HTML
+* Based on https://github.com/chriskempson/tomorrow-theme
+* @author Rose Pritchard
+*/
+.code-embed-wrapper.code-embed-wrapper :not(pre) > code[class*="language-"],
+.code-embed-wrapper.code-embed-wrapper pre[class*="language-"] {
+	background: var(--wp--preset--color--neutral-900);
+}
+
+.code-embed-wrapper.code-embed-wrapper .code-embed-infos {
+	border-top-color: var(--wp--preset--color--neutral-900);
+}
+
+.code-embed-wrapper.code-embed-wrapper .code-embed-infos a {
+	color: var(--wp--preset--color--primary-600);
+}
+
+.code-embed-wrapper.code-embed-wrapper .code-embed-infos a:hover, .code-embed-wrapper.code-embed-wrapper .code-embed-infos a:focus, .code-embed-wrapper.code-embed-wrapper .code-embed-infos a:active {
+	color: var(--wp--preset--color--primary-700);
+}
+
+.code-embed-wrapper.code-embed-wrapper pre + .code-embed-infos {
+	border-bottom-color: var(--wp--preset--color--neutral-900);
+}
+
+.code-embed-wrapper.code-embed-wrapper .code-embed-infos span {
+	color: var(--wp--preset--color--neutral-900);
+}
+
+/* Inline code */
+.token.token.comment, .token.token.block-comment, .token.token.prolog, .token.token.doctype, .token.token.cdata {
+	color: var(--wp--preset--color--neutral-300);
+}
+
+.token.token.punctuation {
+	color: var(--wp--preset--color--neutral-400);
+}
+
+.token.token.tag, .token.token.attr-name, .token.token.namespace, .token.token.deleted {
+	color: var(--wp--preset--color--primary-300);
+}
+
+.token.token.function-name {
+	color: var(--wp--preset--color--information-200);
+}
+
+.token.token.boolean, .token.token.number, .token.token.function {
+	color: var(--wp--preset--color--negative-300);
+}
+
+.token.token.property, .token.token.class-name, .token.token.constant, .token.token.symbol {
+	color: #f8c555;
+}
+
+.token.token.selector, .token.token.important, .token.token.atrule, .token.token.keyword, .token.token.builtin {
+	color: var(--wp--preset--color--secondary-300);
+}
+
+.token.token.string, .token.token.char, .token.token.attr-value, .token.token.regex, .token.token.variable {
+	color: var(--wp--preset--color--tertiary-300);
+}
+
+.token.token.operator, .token.token.entity, .token.token.url {
+	color: var(--wp--preset--color--tertiary-400);
+}
+
+.token.token.inserted {
+	color: var(--wp--preset--color--positive-300);
 }
 
 code,
@@ -917,7 +1014,7 @@ input[type="submit"], .is-dark
 
 .site-header a {
 	display: block;
-	font-size: 1.25rem;
+	font-size: 1.125rem;
 	font-weight: bold;
 	color: var(--wp--preset--color--primary-900);
 	background: none;
@@ -1012,7 +1109,7 @@ input[type="submit"], .is-dark
 
 .site-header a:hover + .sub-menu,
 .site-header a:focus + .sub-menu {
-	z-index: 1;
+	z-index: 10;
 	opacity: 1;
 	pointer-events: all;
 	transform: translateY(0);
@@ -1689,6 +1786,14 @@ a.post-thumbnail img {
 }
 
 /* Former blog contents */
+p.center {
+	text-align: center;
+}
+
+.wp-video {
+	margin: 2rem auto;
+}
+
 .message {
 	--msg-icon-size: 64px;
 	--msg-padding: 24px;
@@ -1701,15 +1806,17 @@ a.post-thumbnail img {
 	color: var(--msg-txt);
 	font-size: 1.125rem;
 	border-radius: 8px;
+	text-align: left;
 }
 
 .message::before {
 	content: '';
 	position: absolute;
-	top: var(--msg-padding);
+	top: 50%;
 	left: var(--msg-padding);
 	width: 64px;
 	height: 64px;
+	transform: translateY(-50%);
 	background: url(assets/img/icon-info.svg);
 }
 

@@ -44,7 +44,7 @@
 
 	console.log(
 		"%c" + cons_msg1 + " %c" + cons_msg2 + " %c@geoffreycrofte",
-		"color:#A40162;font-size:40px;font-weight:bold;",
+		"color:#A40162;font-size:32px;font-weight:bold;",
 		"display:block;color:#999;font-size: 16px",
 		"color:#A40162;font-size: 24px;"
 	);
@@ -58,31 +58,33 @@
 	let is_page = window.location.href.match('https:\/\/geoffreycrofte.local\/[^\/]+\/page\/[0-9]+');
 	let current_page = is_page === null ? null : is_page[0].split('/page/')[1];
 	let get_next_page = function(next_page, callback) {
-			let request = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-			let current_url = window.location.href;
-			let request_url = current_url.match('https:\/\/geoffreycrofte.local\/[^\/]+\/page\/[0-9]+') ? current_url.split('/page/')[0] + '/page/' + next_page : current_url + '/page/' + next_page;
+		let request = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+		let current_url = window.location.href;
+		let request_url = current_url.match('https:\/\/geoffreycrofte.local\/[^\/]+\/page\/[0-9]+') ? current_url.split('/page/')[0] + '/page/' + next_page : current_url + '/page/' + next_page;
 
-			request.onreadystatechange = function() {
-				if ( request.readyState === 4 ) {
-					callback( request.response, next_page );
-				}
+		request.onreadystatechange = function() {
+			if ( request.readyState === 4 ) {
+				callback( request.response, next_page );
 			}
+		}
 
-			request.onabort = request.onerror = function() {
-				callback(false, {'requestedURL' : request_url, 'error': 'abort or error'});
-			}
+		request.onabort = request.onerror = function() {
+			callback(false, {'requestedURL' : request_url, 'error': 'abort or error'});
+		}
 
-			try {
-				request.open( 'GET', request_url , true );
-				request.responseType = 'document';
-				request.send();
-			} catch (e) {
-				e.requestedURL = request_url;
-				callback(false, e);
-			}
-		};
+		try {
+			request.open( 'GET', request_url , true );
+			request.responseType = 'document';
+			request.send();
+		} catch (e) {
+			e.requestedURL = request_url;
+			callback(false, e);
+		}
+	};
 	let cb_add_new_articles = function(xhr_response, next_page) {
 		let more_button = document.getElementById('load-more');
+
+		console.log(xhr_response, next_page);
 
 		// If something went wrong.
 		if ( xhr_response === false ) {
@@ -111,7 +113,7 @@
 		
 		// New articles found.
 		if ( new_articles ) {
-			document.querySelector('#primary .card-list').after( new_articles );
+			document.querySelector('#primary .navigation').before( new_articles );
 		}
 
 		// Check if there is more articles or if we need to replace the button.
@@ -122,10 +124,11 @@
 		} else {
 			posts_nav.innerHTML = '<div class="message">' + gct.noMorePosts + '</div>';
 		}
-	}
+	};
 
 	// Replace pagination with a load more button.
-	if ( posts_nav.querySelector('.nav-previous') ) {
+	// If we don't have a "nav-previous" already in the DOM, it's because we are at the last page of the archive.
+	if ( posts_nav?.querySelector('.nav-previous') ) {
 		current_page = current_page === null ? '1' : current_page;
 		posts_nav.innerHTML = '<button type="button" class="button-primary is-light is-big" id="load-more" data-page="' + current_page + '">' + gct.iconBook + '<span>' + gct.loadMoreButtonLabel + '</<span></button>';
 
