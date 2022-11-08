@@ -31,6 +31,7 @@
 		}
 
 		a {
+			position: static;
 			font-size: 1rem;
 			font-weight: 700;
 			text-decoration: none;
@@ -41,7 +42,7 @@
 
 			&:hover:visited,
 			&:focus:visited {
-				color: var(--gc-color-link-hover);
+				color: white;
 			}
 
 			&::before {

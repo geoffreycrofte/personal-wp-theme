@@ -106,11 +106,11 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<aside aria-label="<?php _e('Author Info', 'juiz'); ?>" class="article-aside">
+	<aside aria-label="<?php _e('Author Info', 'juiz'); ?>" class="article-aside section is-dark">
 		<?php echo geoffreycrofte_get_author_box(); ?>
 	</aside>
 
-	<?php edit_post_link('<i class="icon-gear"></i>&nbsp;Modifier cet article','',''); ?>
+	<?php edit_post_link( geoffrey_crofte_get_icon_def('edit') ,'',''); ?>
 
 	<footer class="article-footer cols-3 entry-footer">
 		<div class="col col-art-1">

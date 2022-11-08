@@ -40,10 +40,6 @@ html {
 	margin: 0;
 }
 
-[id="page"] {
-	overflow-x: hidden;
-}
-
 ::-moz-selection {
 	background: var(--gc-color-primary);
 	color: white;
@@ -184,6 +180,39 @@ li > ul,
 li > ol {
 	margin-bottom: 0;
 	margin-left: 1.5em;
+}
+
+ol {
+	--ol-counter-bg: var(--wp--preset--color--information-100);
+	--ol-counter-txt: var(--wp--preset--color--information-700);
+	
+	padding: 0;
+	margin: 2em auto;
+	list-style: none;
+	counter-reset: ollvl1;
+
+	> li {
+		position: relative;
+		padding-left: 2.75rem;
+		margin: .5em 0;
+		counter-increment: ollvl1;
+
+		&::before {
+			content: counter(ollvl1);
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 2rem;
+			height: 2rem;
+			font-size: 1rem;
+			color: var(--ol-counter-txt);
+			background: var(--ol-counter-bg);
+			border-radius: 56% 44% 42% 58% / 41% 50% 50% 59%;
+		}
+	}
 }
 
 dt {

@@ -14,7 +14,7 @@
  * Navigation
  */
 .main-navigation,
-.menu-main-menu-container {
+.main-navigation > [class$="-container"] {
 	display: flex;
 }
 .site-header {
