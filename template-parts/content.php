@@ -104,56 +104,68 @@
 			)
 		);
 		?>
+
+		<?php edit_post_link( geoffrey_crofte_get_icon_def('edit') ,'',''); ?>
 	</div><!-- .entry-content -->
 
 	<aside aria-label="<?php _e('Author Info', 'juiz'); ?>" class="article-aside section is-dark">
 		<?php echo geoffreycrofte_get_author_box(); ?>
 	</aside>
 
-	<?php edit_post_link( geoffrey_crofte_get_icon_def('edit') ,'',''); ?>
+	<footer class="section is-small-section is-dark is-darker entry-footer">
+		<div class="article-footer grid container is-medium" style="--xs-repeat:1;--md-repeat:3;">
+			<div class="col">
+				<?php 
+					$post_cats = get_the_category();
+					$categories_list = '';
 
-	<footer class="article-footer cols-3 entry-footer">
-		<div class="col col-art-1">
-			<p class="title-col"><?php _e( 'Categories', 'juiz' ); ?></p>
-			<?php 
-			//the_category(', ') 
-			$post_cats = get_the_category();
-			$categories_list = '';
+					foreach ( $post_cats as $cat ) {
+						$categories_list .= '<a itemprop="about" href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . $cat->name . '</a>, ';
+					}
+					$categories_list = trim( $categories_list, ', ' );
+				?>
 
-			foreach ( $post_cats as $cat ) {
-				$categories_list .= '<a itemprop="about" href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . $cat->name . '</a>, ';
-			}
+				<p class="title-col"><?php echo _n( 'Category', 'Categories', count( $post_cats ), 'juiz' ); ?></p>
 
-			$categories_list = trim( $categories_list, ', ' );
-			echo $categories_list;
-			?>
-		</div>
+				<?php echo $categories_list; ?>
 
-		<div class="col col-art-2">
-			<p class="title-col"><?php _e( 'Keywords', 'juiz' ); ?></p>
-			<ul class="keywords">
-				<?php
-					the_tags(
-						'<li itemprop="keywords" rel="tag">',
-						'</li> <li itemprop="keywords" rel="tag">',
-						'</li>'
-					);
-				?> 
-			</ul>
-		</div>
+			</div>
 
-		<div class="col col-art-3">
-			<p class="title-col"><?php _e( 'Informations', 'juiz' ); ?></p>
-			<?php _e( 'Last update:', 'juiz' ); ?> <time class="updated" datetime="<?php the_modified_time('c'); ?>" itemprop="dateModified"><?php the_modified_time('j M. Y'); ?></time>
-			<br>
-			<a title="<?php echo esc_attr( 
-									sprintf( 
-										__( 'Permalink to the post &quot;%s&quot;', 'juiz'),
-										esc_attr( get_the_title() )
-									)
-								); 
+			<div class="col">
+				<p class="title-col" id="keywords-title"><?php _e( 'Keywords', 'juiz' ); ?></p>
+				<ul class="keywords" aria-labelledby="keywords-title">
+					<?php
+						the_tags(
+							'<li itemprop="keywords" rel="tag">',
+							'</li> <li itemprop="keywords" rel="tag">',
+							'</li>'
+						);
+					?> 
+				</ul>
+			</div>
+
+			<dl class="col">
+				<dt class="title-col"><?php _e( 'Informations', 'juiz' ); ?></dt>
+				<dd>
+					<?php _e( 'Last update:', 'juiz' ); ?>
+					<time class="updated" datetime="<?php the_modified_time('c'); ?>" itemprop="dateModified"><?php the_modified_time('j M. Y'); ?></time>
+				</dd>
+				<dd>
+					<a title="<?php echo esc_attr( 
+							sprintf( 
+								__( 'Permalink to the post &quot;%s&quot;', 'juiz'),
+								esc_attr( get_the_title() )
+							)
+						); 
 						?>" itemprop="url" rel="bookmark" class="article-permalink" href="<?php the_permalink(); ?>"><?php _e( 'Permalink', 'juiz' ); ?></a>
+				</dd>
+			</dl>
 		</div>
-
 	</footer>
 </article><!-- #post-<?php the_ID(); ?> -->
+
+<aside class="section is-alt">
+	<div class="container">
+		<p>A section to put some notification system like the newsletter form or the notification subcription.</p>
+	</div>
+</aside>

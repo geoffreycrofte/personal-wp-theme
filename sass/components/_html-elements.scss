@@ -246,8 +246,10 @@ table {
 
 a {
 	--effect-color: var(--gc-color-primary);
+	--link-color: var(--gc-color-primary);
+
 	position: relative;
-	color: var(--gc-color-primary);
+	color: var(--link-color);
 	transition: all .3s;
 	text-decoration: none;
 	background: linear-gradient(to top, var(--effect-color), var(--effect-color)) left 100% no-repeat;
@@ -255,24 +257,42 @@ a {
 
 	&:visited {
 		--effect-color: var(--gc-color-link-visited);
-		color: var(--gc-color-link-visited);
+		--link-color: var(--gc-color-link-visited);
 	}
 
 	&:hover,
 	&:focus {
-		color: #fff;
+		--link-color: var(--wp--preset--color--neutral-050);
 		background-size: auto 1.7em;
 		border-radius: 4px;
+
+		&:active {
+			--link-color: var(--wp--preset--color--neutral-050); 
+		}
 	}
 
 	&:active {
 		--effect-color: var(--gc-color-link-hover);
-		color: var(--gc-color-link-hover);
+		--link-color: var(--gc-color-link-hover);
 	}
 
 	&:focus-visible {
 		outline: 2px dotted var(--effect-color);
 		outline-offset: 4px;
 		border-radius: 4px;
+	}
+
+	.is-dark & {
+		--effect-color: var(--wp--preset--color--neutral-050);
+		--link-color: var(--wp--preset--color--neutral-050);
+
+		&:hover,
+		&:focus {
+			--link-color: var(--wp--preset--color--neutral-900);
+		}
+
+		&:active {
+			--gc-color-link-hover: var(--wp--preset--color--neutral-200);
+		}
 	}
 }

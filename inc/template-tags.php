@@ -180,7 +180,7 @@ if ( ! function_exists('geoffreycrofte_get_author_box') ) {
 
 		    		// main markup
 		    	$markup .= '
-					<div class="vcard author-box container" id="author-info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+					<div class="vcard author-box container is-medium" id="author-info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
 						<div class="author-avatar" itemprop="image">' . get_avatar( $co_author->user_email, 100 ) . '</div>
 						<div class="author-description">
 							<h2>' . $presents . ' <span itemprop="name">' . $co_author->display_name . '</span></h2>
@@ -221,7 +221,7 @@ if ( ! function_exists('geoffreycrofte_get_author_box') ) {
 	    	$a_author_twitter = ( get_the_author_meta('contact_twitter') != '') ? '<a rel="nofollow" class="button-primary author_twitter is-tiny" href="https://twitter.com/'.preg_replace('#@#','',get_the_author_meta('contact_twitter')).'"><i class="icon-twitter"></i>' . _x('Twitter', 'about an author', 'juiz') . '</a>' : '';
 
 	    	$markup .= '
-				<div class="vcard author-box container" id="author-info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+				<div class="vcard author-box container is-medium" id="author-info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
 					<div class="author-avatar" itemprop="image">'. get_avatar( get_the_author_meta( 'user_email' ),100).'</div>
 					<div class="author-description">
 						<h2>' . sprintf( __( 'About %s', 'juiz' ), '<span itemprop="name">'.get_the_author().'</span>' ) . '</h2>

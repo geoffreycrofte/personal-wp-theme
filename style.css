@@ -396,8 +396,9 @@ table {
 
 a {
 	--effect-color: var(--gc-color-primary);
+	--link-color: var(--gc-color-primary);
 	position: relative;
-	color: var(--gc-color-primary);
+	color: var(--link-color);
 	transition: all .3s;
 	text-decoration: none;
 	background: linear-gradient(to top, var(--effect-color), var(--effect-color)) left 100% no-repeat;
@@ -406,24 +407,41 @@ a {
 
 a:visited {
 	--effect-color: var(--gc-color-link-visited);
-	color: var(--gc-color-link-visited);
+	--link-color: var(--gc-color-link-visited);
 }
 
 a:hover, a:focus {
-	color: #fff;
+	--link-color: var(--wp--preset--color--neutral-050);
 	background-size: auto 1.7em;
 	border-radius: 4px;
 }
 
+a:hover:active, a:focus:active {
+	--link-color: var(--wp--preset--color--neutral-050);
+}
+
 a:active {
 	--effect-color: var(--gc-color-link-hover);
-	color: var(--gc-color-link-hover);
+	--link-color: var(--gc-color-link-hover);
 }
 
 a:focus-visible {
 	outline: 2px dotted var(--effect-color);
 	outline-offset: 4px;
 	border-radius: 4px;
+}
+
+.is-dark a {
+	--effect-color: var(--wp--preset--color--neutral-050);
+	--link-color: var(--wp--preset--color--neutral-050);
+}
+
+.is-dark a:hover, .is-dark a:focus {
+	--link-color: var(--wp--preset--color--neutral-900);
+}
+
+.is-dark a:active {
+	--gc-color-link-hover: var(--wp--preset--color--neutral-200);
 }
 
 /**
@@ -883,6 +901,10 @@ input[type="submit"], .is-dark
 	width: auto;
 }
 
+.container.is-medium {
+	width: 120ch;
+}
+
 .section {
 	--section-margin-top: 0;
 	--section-background: #fff;
@@ -918,6 +940,26 @@ input[type="submit"], .is-dark
 	background: var(--wp--preset--color--neutral-900);
 }
 
+.section.is-dark.is-darker {
+	position: relative;
+}
+
+.section.is-dark.is-darker .container {
+	position: relative;
+}
+
+.section.is-dark.is-darker::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.15);
+}
+
+.section.is-dark + .is-dark {
+	margin-top: -40px;
+	padding-top: 24px;
+}
+
 .section.is-dark + .has-ovale::after, .section.is-alt + .has-ovale::after {
 	content: '';
 	position: absolute;
@@ -929,6 +971,16 @@ input[type="submit"], .is-dark
 
 .section.is-reference {
 	position: relative;
+}
+
+.section.is-small-section {
+	padding: 16px 0;
+}
+
+@media (min-width: 640px) {
+	.section.is-small-section {
+		padding: 24px 0;
+	}
 }
 
 .section.has-ovale {
@@ -2004,7 +2056,6 @@ p.center {
 .article-aside .author-box {
 	display: flex;
 	gap: 32px;
-	width: 120ch;
 }
 
 .article-aside .author-avatar {
@@ -2050,6 +2101,17 @@ p.center {
 
 .post-edit-link:hover {
 	color: inherit;
+}
+
+.entry-footer .article-footer .title-col {
+	font-weight: bold;
+	margin-bottom: 0;
+}
+
+.entry-footer .article-footer ul, .entry-footer .article-footer dl, .entry-footer .article-footer dt, .entry-footer .article-footer dd {
+	padding: 0;
+	margin: 0;
+	list-style: none;
 }
 
 a:has(img) {
