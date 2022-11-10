@@ -1,4 +1,13 @@
 /**
+ * The Page container
+ */
+[id="page"] {
+	.blog & {
+		overflow-x: hidden;
+	}
+}
+
+/**
  * Containers
  */
 .container {

@@ -1,14 +1,65 @@
 /**
  * Comments
  */
+// Container
+.comments-area {
+
+}
+
+.comments-title {
+	margin-top: 0;
+	text-align: center;
+	font-size: 3rem;
+
+	span {
+		display: block;
+		width: 66ch;
+		max-width: 100%;
+		margin: 0 auto;
+		font-size: .5em;
+	}
+}
+
+.comment {
+	--comment-bg: var(--wp--preset--color--information-100);
+
+	&.comment-author-geoffrey {
+		--comment-bg: var(--wp--preset--color--secondary-100);
+	}
+
+	&.bypostauthor {
+		--comment-bg: var(--wp--preset--color--primary-100);
+	}
+
+	&::before {
+		content: none;
+	}
+
+	article {
+		width: #{'max(65%, 60ch)'};
+		max-width: 100%;
+		padding: 40px;
+		background: var(--comment-bg);
+	}
+
+	&.depth-2 {
+		article { 	
+			margin-left: auto;
+		}
+	}
+
+	.avatar {
+		float: left;
+		margin-right: 1em;
+		border-radius: 100px;
+		border: 4px solid white;
+	}
+}
+
 .comment-content a {
 	word-wrap: break-word;
 }
 
 .bypostauthor {
 	display: block;
-}
-
-.comments-area {
-
 }
