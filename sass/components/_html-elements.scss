@@ -13,7 +13,8 @@ body {
 	--gc-color-link-hover: var(--wp--preset--color--primary-800);
 
 	// Forms
-	--gc-input-background: var(--wp--preset--color--primary-100);
+	--gc-input-border-color: var(--gc-color-primary);
+	--gc-input-background: var(--wp--preset--color--primary-200);
 
 	// Some default values
 	padding: 0;
@@ -244,6 +245,7 @@ table {
 	width: 100%;
 }
 
+//a:not(.comment-reply-link):not([class*=button]) {
 a {
 	--effect-color: var(--gc-color-primary);
 	--link-color: var(--gc-color-primary);

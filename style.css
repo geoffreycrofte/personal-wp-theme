@@ -94,7 +94,8 @@ body {
 	--gc-color-background-alt: var(--wp--preset--color--secondary-050);
 	--gc-color-link-visited: var(--wp--preset--color--secondary-700);
 	--gc-color-link-hover: var(--wp--preset--color--primary-800);
-	--gc-input-background: var(--wp--preset--color--primary-100);
+	--gc-input-border-color: var(--gc-color-primary);
+	--gc-input-background: var(--wp--preset--color--primary-200);
 	padding: 0;
 	margin: 0;
 	color: var(--gc-color-text);
@@ -447,12 +448,24 @@ a:focus-visible {
 /**
  * Forms by default + specific (later in this doc)
  */
+label {
+	display: block;
+	font-weight: 700;
+	font-size: 1em;
+}
+
+input + label {
+	font-weight: normal;
+	display: inline-block;
+}
+
 input,
 textarea,
 select {
+	width: 100%;
 	padding: 10px 16px;
 	color: inherit;
-	border: 1px solid transparent;
+	border: 2px solid var(--gc-input-border-color);
 	background: var(--gc-input-background);
 	border-radius: 3px;
 	border-radius: 80px;
@@ -468,14 +481,15 @@ select::placeholder {
 input:focus,
 textarea:focus,
 select:focus {
+	--gc-input-background: var(--gc-color-background);
+	--gc-input-border-color: var(--gc-color-primary);
 	outline: none;
-	border: 1px solid var(--gc-color-primary);
-	background: var(--gc-color-background);
 }
 
 textarea {
 	width: 100%;
 	border-radius: 16px;
+	resize: vertical;
 }
 
 button,
@@ -487,6 +501,7 @@ textarea {
 	font-size: 100%;
 	margin: 0;
 	overflow: visible;
+	accent-color: var(--wp--preset--color--primary-600);
 }
 
 /**
@@ -533,8 +548,15 @@ textarea {
  */
 [type="checkbox"],
 [type="radio"] {
+	width: auto;
 	box-sizing: border-box;
 	padding: 0;
+	border-radius: 8px;
+}
+
+[type="checkbox"]:focus-visible,
+[type="radio"]:focus-visible {
+	box-shadow: 0 0 0 2px white, 0 0 0 4px var(--wp--preset--color--primary-600);
 }
 
 /**
@@ -577,7 +599,8 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
-[class^="button-"] {
+[class*="button-"],
+.comment-reply-link {
 	--btn-background: var(--gc-color-primary);
 	--btn-color: var(--gc-color-background);
 	--icon-size: 24px;
@@ -606,9 +629,12 @@ input[type="reset"]:visited:focus,
 input[type="submit"]:visited,
 input[type="submit"]:visited:hover,
 input[type="submit"]:visited:focus,
-[class^="button-"]:visited,
-[class^="button-"]:visited:hover,
-[class^="button-"]:visited:focus {
+[class*="button-"]:visited,
+[class*="button-"]:visited:hover,
+[class*="button-"]:visited:focus,
+.comment-reply-link:visited,
+.comment-reply-link:visited:hover,
+.comment-reply-link:visited:focus {
 	color: var(--btn-color);
 	border-radius: 80px;
 }
@@ -617,7 +643,8 @@ button::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
-[class^="button-"]::-moz-focus-inner {
+[class*="button-"]::-moz-focus-inner,
+.comment-reply-link::-moz-focus-inner {
 	border-style: none;
 	padding: 0;
 }
@@ -626,7 +653,8 @@ button:-moz-focusring,
 input[type="button"]:-moz-focusring,
 input[type="reset"]:-moz-focusring,
 input[type="submit"]:-moz-focusring,
-[class^="button-"]:-moz-focusring {
+[class*="button-"]:-moz-focusring,
+.comment-reply-link:-moz-focusring {
 	outline: 1px dotted ButtonText;
 }
 
@@ -637,8 +665,10 @@ input[type="reset"]:hover,
 input[type="reset"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus,
-[class^="button-"]:hover,
-[class^="button-"]:focus {
+[class*="button-"]:hover,
+[class*="button-"]:focus,
+.comment-reply-link:hover,
+.comment-reply-link:focus {
 	--btn-background: var(--gc-color-link-hover);
 	color: var(--btn-color);
 	border-radius: 80px;
@@ -648,7 +678,8 @@ button:focus-visible,
 input[type="button"]:focus-visible,
 input[type="reset"]:focus-visible,
 input[type="submit"]:focus-visible,
-[class^="button-"]:focus-visible {
+[class*="button-"]:focus-visible,
+.comment-reply-link:focus-visible {
 	outline-width: 2px;
 }
 
@@ -656,7 +687,8 @@ button svg,
 input[type="button"] svg,
 input[type="reset"] svg,
 input[type="submit"] svg,
-[class^="button-"] svg {
+[class*="button-"] svg,
+.comment-reply-link svg {
 	width: var(--icon-size);
 	height: var(--icon-size);
 }
@@ -669,8 +701,10 @@ input[type="reset"] span + svg,
 input[type="reset"] svg + span,
 input[type="submit"] span + svg,
 input[type="submit"] svg + span,
-[class^="button-"] span + svg,
-[class^="button-"] svg + span {
+[class*="button-"] span + svg,
+[class*="button-"] svg + span,
+.comment-reply-link span + svg,
+.comment-reply-link svg + span {
 	margin-left: var(--icon-spacing);
 }
 
@@ -678,7 +712,8 @@ button.is-big,
 input[type="button"].is-big,
 input[type="reset"].is-big,
 input[type="submit"].is-big,
-[class^="button-"].is-big {
+[class*="button-"].is-big,
+.comment-reply-link.is-big {
 	--icon-size: 32px;
 	--icon-spacing: 16px;
 	font-size: 1.125rem;
@@ -690,7 +725,8 @@ input[type="submit"].is-big,
 	input[type="button"], :root:not(.is-light)
 	input[type="reset"], :root:not(.is-light)
 	input[type="submit"], :root:not(.is-light)
-	[class^="button-"] {
+	[class*="button-"], :root:not(.is-light)
+	.comment-reply-link {
 		--btn-background: var(--wp--preset--color--information-050);
 		--btn-color: var(--wp--preset--color--information-500);
 	}
@@ -700,7 +736,8 @@ input[type="submit"].is-big,
 input[type="button"], .is-dark
 input[type="reset"], .is-dark
 input[type="submit"], .is-dark
-[class^="button-"] {
+[class*="button-"], .is-dark
+.comment-reply-link {
 	--btn-background: var(--wp--preset--color--information-050);
 	--btn-color: var(--wp--preset--color--information-500);
 }
@@ -2044,8 +2081,8 @@ p.center {
 .related-posts .wp-post-image {
 	display: block;
 	margin: 0 auto;
-	width: 100px;
-	height: auto;
+	height: 100px;
+	width: auto;
 	border-radius: 8px;
 }
 
@@ -2176,6 +2213,65 @@ a:has(img) {
 /**
  * Comments
  */
+.comment-respond {
+	width: 80ch;
+	max-width: 100%;
+	padding-top: 40px;
+	margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+	.comment-respond .comment-form-author,
+	.comment-respond .comment-form-email {
+		margin-top: 0;
+		width: calc(50% - 16px);
+	}
+	.comment-respond .comment-form-author {
+		float: left;
+	}
+	.comment-respond .comment-form-email {
+		float: right;
+	}
+	.comment-respond .comment-form-url {
+		margin-top: 1.7em;
+		clear: both;
+	}
+}
+
+.comment-respond input[type="submit"] {
+	width: auto;
+}
+
+.comment-respond .mc4wp-checkbox label {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.comment-respond .mc4wp-checkbox label span {
+	font-weight: normal;
+}
+
+.comment-respond .subscribe_reloaded input,
+.comment-respond .mc4wp-checkbox input {
+	width: 20px !important;
+	height: 20px;
+}
+
+.comment-respond .subscribe_reloaded input {
+	float: left;
+	margin-top: 2px;
+	margin-right: 8px;
+}
+
+.comment-respond .subscribe_reloaded span {
+	display: block;
+	opacity: .65;
+	clear: left;
+	margin-left: 28px;
+	margin-top: -.25em;
+}
+
 .comments-title {
 	margin-top: 0;
 	text-align: center;
@@ -2194,12 +2290,31 @@ a:has(img) {
 	--comment-bg: var(--wp--preset--color--information-100);
 }
 
+.comment a:link:not(.comment-reply-link) {
+	--effect-color: var(--wp--preset--color--information-600);
+	--link-color: var(--wp--preset--color--information-600);
+}
+
+.comment a:link:not(.comment-reply-link):hover, .comment a:link:not(.comment-reply-link):focus {
+	color: var(--wp--preset--color--neutral-050);
+}
+
 .comment.comment-author-geoffrey {
 	--comment-bg: var(--wp--preset--color--secondary-100);
 }
 
+.comment.comment-author-geoffrey a:link {
+	--effect-color: var(--wp--preset--color--secondary-600);
+	--link-color: var(--wp--preset--color--secondary-600);
+}
+
 .comment.bypostauthor {
 	--comment-bg: var(--wp--preset--color--primary-100);
+}
+
+.comment.bypostauthor a:link {
+	--effect-color: var(--wp--preset--color--primary-600);
+	--link-color: var(--wp--preset--color--primary-600);
 }
 
 .comment::before {
@@ -2211,6 +2326,7 @@ a:has(img) {
 	max-width: 100%;
 	padding: 40px;
 	background: var(--comment-bg);
+	border-radius: 19% 73% 18% 12% / 31% 23% 85% 61%;
 }
 
 .comment.depth-2 article {
@@ -2221,7 +2337,22 @@ a:has(img) {
 	float: left;
 	margin-right: 1em;
 	border-radius: 100px;
-	border: 4px solid white;
+	border: 4px solid var(--wp--preset--color--neutral-050);
+}
+
+.comment .comment-reply-link {
+	--btn-color: var(--wp--preset--color--information-600);
+	--btn-background: var(--wp--preset--color--neutral-050);
+}
+
+.comment.comment-author-geoffrey .comment-reply-link {
+	--btn-color: var(--wp--preset--color--secondary-600);
+	--btn-background: var(--wp--preset--color--neutral-050);
+}
+
+.comment.bypostauthor .comment-reply-link {
+	--btn-color: var(--wp--preset--color--primary-600);
+	--btn-background: var(--wp--preset--color--neutral-050);
 }
 
 .comment-content a {
@@ -2371,33 +2502,17 @@ a:has(img) {
 }
 
 .site-footer a {
+	--effect-color: var(--wp--preset--color--neutral-300);
+	--link-color: var(--wp--preset--color--neutral-300);
 	position: relative;
 	display: inline-block;
 	padding-bottom: .25em;
-	color: inherit;
 	text-decoration: none;
 }
 
-.site-footer a::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	height: 2px;
-	background: var(--wp--preset--color--neutral-600);
-	transform-origin: 50% 100%;
-	transition: all .3s;
-}
-
 .site-footer a:hover, .site-footer a:focus {
-	outline: none;
-	color: var(--wp--preset--color--neutral-100);
-}
-
-.site-footer a:hover::after, .site-footer a:focus::after {
-	transform: scaleY(2);
-	background: var(--wp--preset--color--neutral-400);
+	padding-block: .125em;
+	background-size: auto 2.7em;
 }
 
 /**

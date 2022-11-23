@@ -26,33 +26,18 @@
 	}
 
 	a {
+		--effect-color: var(--wp--preset--color--neutral-300);
+		--link-color: var(--wp--preset--color--neutral-300);
+
 		position: relative;
 		display: inline-block;
 		padding-bottom: .25em;
-		color: inherit;
 		text-decoration: none;
-
-		&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			height: 2px;
-			background: var(--wp--preset--color--neutral-600);
-			transform-origin: 50% 100%;
-			transition: all .3s;
-		}
 
 		&:hover,
 		&:focus {
-			outline: none;
-			color: var(--wp--preset--color--neutral-100);
-			
-			&::after {
-				transform:scaleY(2);
-				background: var(--wp--preset--color--neutral-400);
-			}
+			padding-block: .125em;
+			background-size: auto 2.7em;
 		}
 	}
 }

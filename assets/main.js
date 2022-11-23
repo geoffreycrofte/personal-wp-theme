@@ -21,7 +21,7 @@
 	}
 
 	/**
-	 * WP Rocket passby request
+	 * WP Rocket bypass request
 	 * (for reading counters)
 	 */
 	var request = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -50,10 +50,11 @@
 	);
 
 	/**
+	 * 
 	 * Replace next/prev links by a Button
 	 * to call an XHR instead.
+	 * 
 	 */
-	
 	let posts_nav = document.querySelector('.posts-navigation');
 	let is_page = window.location.href.match('https:\/\/geoffreycrofte.local\/[^\/]+\/page\/[0-9]+');
 	let current_page = is_page === null ? null : is_page[0].split('/page/')[1];
@@ -81,6 +82,7 @@
 			callback(false, e);
 		}
 	};
+
 	let cb_add_new_articles = function(xhr_response, next_page) {
 		let more_button = document.getElementById('load-more');
 
@@ -146,4 +148,10 @@
 		// Should I do something about it?
 		// When people fall onto the last paginated content directly (weird TBH)
 	}
+
+	/**
+	 * Comment form optimization.
+	 */
+	document.querySelector('.comment-form').removeAttribute('novalidate');
+
 })();

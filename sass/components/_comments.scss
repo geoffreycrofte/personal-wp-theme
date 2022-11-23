@@ -6,6 +6,75 @@
 
 }
 
+.comment-respond {
+	width: 80ch;
+	max-width: 100%;
+	padding-top: 40px;
+	margin: 0 auto;
+
+	@media (min-width: map-get($breakpoints, 'md')) {
+		.comment-form-author,
+		.comment-form-email {
+			margin-top: 0;
+			width: calc(50% - 16px);
+		}
+
+		.comment-form-author {
+			float: left;
+		}
+
+		.comment-form-email {
+			float: right;
+		}
+
+		.comment-form-url {
+			margin-top: 1.7em;
+			clear: both;
+		}
+	}
+
+	input[type="submit"] {
+		width: auto;
+	}
+
+	// Checkboxes build with developers feet xD
+	.mc4wp-checkbox {
+		label {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+
+			span {
+				font-weight: normal;
+			}
+		}
+	}
+
+	.subscribe_reloaded,
+	.mc4wp-checkbox {
+		input {
+			width: 20px!important; // no choice here
+			height: 20px;
+		}
+	}
+
+	.subscribe_reloaded {
+		input {
+			float: left;
+			margin-top: 2px;
+			margin-right: 8px;
+		}
+
+		span {
+			display: block;
+			opacity: .65;
+			clear: left;
+			margin-left: 28px;
+			margin-top: -.25em;
+		}
+	}
+}
+
 .comments-title {
 	margin-top: 0;
 	text-align: center;
@@ -23,12 +92,32 @@
 .comment {
 	--comment-bg: var(--wp--preset--color--information-100);
 
+	a:link:not(.comment-reply-link) {
+		--effect-color: var(--wp--preset--color--information-600);
+		--link-color: var(--wp--preset--color--information-600);
+
+		&:hover,
+		&:focus {
+			color: var(--wp--preset--color--neutral-050);
+		}
+	}
+
 	&.comment-author-geoffrey {
 		--comment-bg: var(--wp--preset--color--secondary-100);
+
+		a:link {
+			--effect-color: var(--wp--preset--color--secondary-600);
+			--link-color: var(--wp--preset--color--secondary-600);
+		}
 	}
 
 	&.bypostauthor {
 		--comment-bg: var(--wp--preset--color--primary-100);
+
+		a:link {
+			--effect-color: var(--wp--preset--color--primary-600);
+			--link-color: var(--wp--preset--color--primary-600);
+		}
 	}
 
 	&::before {
@@ -40,6 +129,7 @@
 		max-width: 100%;
 		padding: 40px;
 		background: var(--comment-bg);
+		border-radius: 19% 73% 18% 12% / 31% 23% 85% 61%;
 	}
 
 	&.depth-2 {
@@ -52,7 +142,26 @@
 		float: left;
 		margin-right: 1em;
 		border-radius: 100px;
-		border: 4px solid white;
+		border: 4px solid var(--wp--preset--color--neutral-050);
+	}
+
+	.comment-reply-link {
+		--btn-color: var(--wp--preset--color--information-600);
+		--btn-background: var(--wp--preset--color--neutral-050);
+	}
+
+	&.comment-author-geoffrey {
+		.comment-reply-link {
+			--btn-color: var(--wp--preset--color--secondary-600);
+			--btn-background: var(--wp--preset--color--neutral-050);
+		}
+	}
+
+	&.bypostauthor {
+		.comment-reply-link {
+			--btn-color: var(--wp--preset--color--primary-600);
+			--btn-background: var(--wp--preset--color--neutral-050);
+		}
 	}
 }
 

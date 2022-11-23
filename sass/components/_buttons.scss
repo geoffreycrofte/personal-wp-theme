@@ -5,7 +5,8 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
-[class^="button-"] {
+[class*="button-"],
+.comment-reply-link {
 	--btn-background: var(--gc-color-primary);
 	--btn-color: var(--gc-color-background);
 	--icon-size: 24px;

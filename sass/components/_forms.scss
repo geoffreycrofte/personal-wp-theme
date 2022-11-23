@@ -1,12 +1,24 @@
 /**
  * Forms by default + specific (later in this doc)
  */
+label {
+	display: block;
+	font-weight: 700;
+	font-size: 1em;
+
+	input + & {
+		font-weight: normal;
+		display: inline-block;
+	}
+}
+
 input,
 textarea,
 select {
+	width: 100%;
 	padding: 10px 16px;
 	color: inherit;
-	border: 1px solid transparent;
+	border: 2px solid var(--gc-input-border-color);
 	background: var(--gc-input-background);
 	border-radius: 3px;
 	border-radius: 80px;
@@ -17,15 +29,17 @@ select {
 	}
 
 	&:focus {
+		--gc-input-background: var(--gc-color-background);
+		--gc-input-border-color: var(--gc-color-primary);
+
 		outline: none;
-		border: 1px solid var(--gc-color-primary);
-		background: var(--gc-color-background);
 	}
 }
 
 textarea {
 	width: 100%;
 	border-radius: 16px;
+	resize: vertical;
 }
 
 // 1. Change the font styles in all browsers.
@@ -39,6 +53,7 @@ textarea {
 	font-size: 100%;
 	margin: 0;
 	overflow: visible; // shows the overflow in IE/EDGE
+	accent-color: var(--wp--preset--color--primary-600);
 }
 
 /**
@@ -85,8 +100,14 @@ textarea {
  */
 [type="checkbox"],
 [type="radio"] {
+	width: auto;
 	box-sizing: border-box;
 	padding: 0;
+	border-radius: 8px;
+
+	&:focus-visible {
+		box-shadow: 0 0 0 2px white, 0 0 0 4px var(--wp--preset--color--primary-600);
+	}
 }
 
 /**
