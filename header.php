@@ -28,7 +28,7 @@
 
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'geoffreycrofte' ); ?></a>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="site-header" role="banner">
 		<div class="container">
 			<div class="site-branding">
 				<?php $el = is_front_page() && is_home() ? 'h1' : 'p'; ?>
@@ -39,7 +39,7 @@
 					</<?php echo $el; ?>>
 			</div><!-- .site-branding -->
 
-			<nav id="site-navigation" class="main-navigation">
+			<nav role="navigation" id="site-navigation" class="main-navigation">
 				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'geoffreycrofte' ); ?></button>
 				<?php
 				wp_nav_menu(

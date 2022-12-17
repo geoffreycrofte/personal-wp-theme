@@ -10,8 +10,8 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Geoffrey_Crofte
- * 
- * Template Name: Full Width (default)
+ *
+ * Template Name: Narrow (Blog post-like)
  */
 
 get_header();

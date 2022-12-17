@@ -30,36 +30,42 @@
 }
 
 .section {
-	--section-margin-top: 0;
+	--section-padding: 80px;
 	--section-background: #fff;
 	--section-color: inherit;
 	--section-title-color: var(--gc-color-primary);
 
-	margin: var(--section-margin-top) 0 0 0;
-	padding: 40px 0;
+	margin: 0;
+	padding: var(--section-padding) 0;
 	background: var(--section-background);
 	color: var(--section-color);
 
 	@media (min-width: 640px) {
-		padding: 80px 0;
+		--section-padding: 160px;
+	}
+
+	// some exceptions
+	+ .section:not(.has-ovale),
+	main + & {
+		padding-top: 0;
+	}
+
+	&.has-small-padding {
+		--section-padding: 40px;
+
+		@media (min-width: 640px) {
+			--section-padding: 80px;
+		}
 	}
 
 	&.is-alt {
 		--section-background: var(--gc-color-background-alt);
-
-		+ .has-ovale::after {
-			background: var(--gc-color-background-alt);
-		}
 	}
 
 	&.is-dark {
 		--section-background: var(--wp--preset--color--neutral-900);
 		--section-color: var(--wp--preset--color--neutral-200);
 		--section-title-color: var(--wp--preset--color--primary-500);
-
-		+ .has-ovale::after {
-			background: var(--wp--preset--color--neutral-900);
-		}
 
 		&.is-darker {
 			position: relative;
@@ -82,20 +88,6 @@
 		}
 	}
 
-	&.is-dark,
-	&.is-alt {
-		+ .has-ovale {
-			&::after {
-				content: '';
-				position: absolute;
-				bottom: 100%;
-				left: 0;
-				right: 0;
-				height: 80px;
-			}
-		}
-	}
-
 	&.is-reference {
 		position: relative;
 	}
@@ -105,32 +97,6 @@
 
 		@media (min-width: 640px) {
 			padding: 24px 0;
-		}
-	}
-
-	&.has-ovale {
-		--section-margin-top: 72px;
-
-		position: relative;
-		padding-top: 48px;
-
-		&:before {
-			content: '';
-			position: absolute;
-			z-index: 1;
-			top: calc(-1 * var(--section-margin-top));
-			left: -33%;
-			right: -10%;
-			background: var(--section-background);
-			width: 140%;
-			height: 190px;
-			border-radius: 100%;
-			transform: rotate(-2.47deg);
-		}
-
-		> * {
-			position: relative;
-			z-index: 2;
 		}
 	}
 
@@ -177,6 +143,11 @@
 
 		&.is-text-left {
 			text-align: left;
+		}
+
+		&.archive-description {
+			max-width: 840px;
+			font-size: 1.125rem;
 		}
 	}
 

@@ -90,6 +90,8 @@
 }
 
 .comment {
+	--avatar-size: 64px;
+	--avatar-margin: 1em;
 	--comment-bg: var(--wp--preset--color--information-100);
 
 	a:link:not(.comment-reply-link) {
@@ -138,9 +140,13 @@
 		}
 	}
 
+	.comment-meta {
+		overflow: hidden;
+	}
+
 	.avatar {
 		float: left;
-		margin-right: 1em;
+		margin-right: var(--avatar-margin);
 		border-radius: 100px;
 		border: 4px solid var(--wp--preset--color--neutral-050);
 	}
@@ -162,6 +168,11 @@
 			--btn-color: var(--wp--preset--color--primary-600);
 			--btn-background: var(--wp--preset--color--neutral-050);
 		}
+	}
+
+	.comment-content,
+	.reply {
+		padding-left: calc(var(--avatar-margin) + var(--avatar-size));
 	}
 }
 

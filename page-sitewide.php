@@ -10,8 +10,8 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Geoffrey_Crofte
- * 
- * Template Name: Full Width (default)
+ *
+ * Template Name: Site Wide
  */
 
 get_header();

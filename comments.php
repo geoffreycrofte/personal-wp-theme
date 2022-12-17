@@ -19,7 +19,10 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<section id="comments" class="section comments-area">
+<section id="comments" class="section has-ovale comments-area">
+
+	<?php ovale(); ?>
+
 	<div class="container">
 	<?php
 	// You can start editing here -- including this comment!
@@ -78,7 +81,7 @@ if ( post_password_required() ) {
 
 	else:
 	?>
-		<h2 class="comment-title no-comments">
+		<h2 class="comments-title no-comments">
 			<?php esc_html_e( 'No comment, be the first to give your thought!', 'geoffreycrofte' ); ?>
 		</h2>
 	<?php

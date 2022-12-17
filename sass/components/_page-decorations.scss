@@ -28,3 +28,31 @@
 		width: 100%;
 	}
 }
+
+// Ovale management
+.section.has-ovale {
+	--decoration-color: var(--section-background);
+
+	position: relative;
+	padding-top: 48px;
+
+	> svg ~ * {
+		position: relative;
+		z-index: 2;
+	}
+
+	.ovale {
+		position: absolute;
+		top: -72px;
+		width: 100%;
+		z-index: 1;
+	}
+
+	&.content-n-sidebar {
+		padding-top: 80px;
+
+		.ovale {
+			top: 0;
+		}
+	}
+}

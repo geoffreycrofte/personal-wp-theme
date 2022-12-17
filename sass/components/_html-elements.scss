@@ -86,6 +86,12 @@ h1,
 	}
 }
 
+h3,
+.h3-like {
+	font-size: 1.6rem;
+	color: var(--wp--preset--color--neutral-700);
+}
+
 p {
 	margin-bottom: 1.7em;
 }
@@ -290,11 +296,14 @@ a {
 
 		&:hover,
 		&:focus {
-			--link-color: var(--wp--preset--color--neutral-900);
-		}
+			--link-color: var(--wp--preset--color--neutral-900);		}
 
 		&:active {
 			--gc-color-link-hover: var(--wp--preset--color--neutral-200);
 		}
+	}
+
+	&:has(img) {
+		background: transparent;
 	}
 }

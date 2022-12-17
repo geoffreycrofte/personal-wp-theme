@@ -159,6 +159,9 @@ get_header();
 
 
 	<section id="trusted" class="section is-reference has-ovale">
+
+		<?php ovale() ?>
+
 		<div class="container grid" style="--l-pattern: 4fr 1fr 7fr; --repeat: 1;">
 			<div>
 				<h2 class="section-title is-text-left">
@@ -198,6 +201,9 @@ get_header();
 	</section>
 
 	<section id="talks" class="section is-dark has-ovale">
+
+		<?php ovale() ?>
+
 		<div class="container">
 			<h2 class="section-title">
 				<?php echo get_field( 'latest_talks_title' ); ?>
@@ -278,6 +284,9 @@ get_header();
 	</section>
 
 	<section id="blog" class="section has-ovale">
+
+		<?php ovale() ?>
+
 		<div class="container">
 			<h2 class="section-title">
 				<?php echo get_field( 'latest_posts_title' ); ?>

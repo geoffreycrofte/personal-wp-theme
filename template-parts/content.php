@@ -75,7 +75,7 @@
 
 		<?php } ?>
 
-		<svg class="wave" preserveAspectRatio="none" width="1679" height="322" viewBox="0 0 1679 322" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation" tabindex="-1" role="presentation" tabindex="-1"><path d="M758 114.5C972 189.999 1284.5 215 1679 0V321.5H-5V92C252.5 27 544 39.0006 758 114.5Z" fill="#F8F6FA"/></svg>
+		<?php wave(); ?>
 	</header>
 
 	<?php geoffreycrofte_post_thumbnail(); ?>
@@ -108,7 +108,7 @@
 		<?php edit_post_link( geoffrey_crofte_get_icon_def('edit') ,'',''); ?>
 	</div><!-- .entry-content -->
 
-	<aside aria-label="<?php _e('Author Info', 'juiz'); ?>" class="article-aside section is-dark">
+	<aside id="author" aria-label="<?php _e('Author Info', 'juiz'); ?>" class="article-aside section is-dark has-small-padding">
 		<?php echo geoffreycrofte_get_author_box(); ?>
 	</aside>
 
@@ -125,14 +125,24 @@
 					$categories_list = trim( $categories_list, ', ' );
 				?>
 
-				<p class="title-col"><?php echo _n( 'Category', 'Categories', count( $post_cats ), 'juiz' ); ?></p>
+				<p class="title-col">
+					<?php 
+						get_icon('folder');
+						echo _n( 'Category', 'Categories', count( $post_cats ), 'juiz' );
+					?>
+				</p>
 
 				<?php echo $categories_list; ?>
 
 			</div>
 
 			<div class="col">
-				<p class="title-col" id="keywords-title"><?php _e( 'Keywords', 'juiz' ); ?></p>
+				<p class="title-col" id="keywords-title">
+					<?php
+						get_icon('tag');
+						_e( 'Keywords', 'juiz' );
+					?>
+				</p>
 				<ul class="keywords" aria-labelledby="keywords-title">
 					<?php
 						the_tags(
@@ -145,7 +155,12 @@
 			</div>
 
 			<dl class="col">
-				<dt class="title-col"><?php _e( 'Informations', 'juiz' ); ?></dt>
+				<dt class="title-col">
+					<?php
+						get_icon('info');
+						_e( 'Informations', 'juiz' );
+					?>
+				</dt>
 				<dd>
 					<?php _e( 'Last update:', 'juiz' ); ?>
 					<time class="updated" datetime="<?php the_modified_time('c'); ?>" itemprop="dateModified"><?php the_modified_time('j M. Y'); ?></time>

@@ -117,7 +117,12 @@ a.post-thumbnail {
 		}
 	}
 
-	.post:not(.card) & {
+	iframe,
+	video {
+		border-radius: 24px;
+	}
+
+	.hentry:not(.card) & {
 		min-height: 250px;
 		display: flex;
 		padding: 16px 0;
@@ -146,7 +151,7 @@ a.post-thumbnail {
 
 	display: grid;
 	grid-template-columns: 1fr 408px;
-	padding: 40px;
+	padding: 80px 40px;
 	grid-gap: var(--blog-gap);
 
 	@media (min-width: map-get($breakpoints, 'l')) {
@@ -155,7 +160,7 @@ a.post-thumbnail {
 
 	@media (min-width: map-get($breakpoints, 'xl')) {
 		--blog-gap: 64px; // used into the inner grid itself (see HTML)
-		padding: 40px 80px;
+		padding: 160px 80px;
 	}
 }
 
@@ -165,21 +170,64 @@ a.post-thumbnail {
 }
 
 /**
- * Blog contents
+ * Blog contents & Containers
  */
-.single .entry-content {
+.entry-content {
 	--color-h2: var(--wp--preset--color--primary-600);
 	--color-h3: var(--wp--preset--color--primary-700);
 	--color-h4: var(--wp--preset--color--primary-800);
+	--max-width: 52rem;
+	--h-padding: 24px;
 
-	max-width: 72ch;
-	padding: 64px 24px;
-	margin: 0 auto;
+	padding-bottom: 80px;
 	font-size: 1.25rem;
 	line-height: 1.75;
+}
 
-	
-	p:first-child {
+.single .entry-content,
+.page-template-page-narrow .entry-content {
+	max-width: var(--max-width);
+	padding: 64px var(--h-padding);
+	margin: 0 auto;
+}
+
+.page.page-template-page-sitewide .entry-content {
+	max-width: #{$w-container};
+	padding: 64px var(--h-padding);
+	margin: 0 auto;
+
+	> p:first-child {
+		margin-inline: 0;
+	}
+}
+
+.page-template-page .entry-content > :is( h2, h3, h4, ul, ol, blockquote, p, pre) {
+	max-width: var(--max-width);
+	padding-inline: var(--h-padding);
+	margin-inline: auto;
+}
+
+// Gutenberg specific
+.wp-block-columns {
+	width: var(--max-width);
+	max-width: 100%;
+	padding-inline: var(--h-padding);
+	margin-inline: auto;
+
+	&.alignwide {
+		--max-width: #{$w-container};
+	}
+
+	&.alignfull {
+		--max-width: auto;
+	}
+}
+
+/* Typography in blog posts and pages */
+.single .entry-content,
+.page .entry-content {
+
+	> p:first-child {
 		font-size: 1.25rem;
 		margin-bottom: 3em;
 
@@ -190,7 +238,7 @@ a.post-thumbnail {
 	}
 
 	p, ul, ol, figure {
-		margin: 2em 0;
+		margin-block: 2em;
 	}
 
 	ul,
@@ -439,6 +487,12 @@ p {
 	.author-box {
 		display: flex;
 		gap: 32px;
+
+		& + .author-box {
+			margin-top: 32px;
+			padding-top: 40px;
+			border-top: 1px solid var(--wp--preset--color--neutral-700);
+		}
 	}
 
 	.author-avatar {
@@ -492,13 +546,27 @@ p {
 .entry-footer .article-footer {
 
 	.title-col {
+		display: flex;
+		align-items: center;
+		gap: 8px;
 		font-weight: bold;
-		margin-bottom: 0;
+		margin-block: 0 8px;
+
+		svg {
+			width: 24px;
+			height: 24px;
+		}
 	}
 
 	ul, dl, dt, dd {
 		padding: 0;
 		margin: 0;
 		list-style: none;
+	}
+
+	.keywords {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 16px;
 	}
 }
