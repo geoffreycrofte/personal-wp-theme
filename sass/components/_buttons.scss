@@ -30,7 +30,7 @@ input[type="submit"],
 	&:visited {
 		&,
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			color: var(--btn-color);
 			border-radius: 80px; // pills
 		}
@@ -44,11 +44,11 @@ input[type="submit"],
 	}
 
 	&:-moz-focusring {
-		outline: 1px dotted ButtonText
+		outline: 1px solid var(--effect-color);
 	}
 
 	&:hover,
-	&:focus {
+	&:focus-visible {
 		--btn-background: var(--gc-color-link-hover);
 		color: var(--btn-color);
 		border-radius: 80px; // pills
@@ -89,7 +89,7 @@ input[type="submit"],
 			--btn-color: var(--wp--preset--color--primary-700);
 
 			&:hover,
-			&:focus {
+			&:focus-visible {
 				--btn-background: var(--wp--preset--color--primary-200);
 				--btn-color: var(--wp--preset--color--primary-800);				
 			}

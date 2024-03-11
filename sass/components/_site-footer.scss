@@ -33,7 +33,7 @@
 		text-decoration: none;
 
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			padding-block: .125em;
 			background-size: auto 2.7em;
 		}

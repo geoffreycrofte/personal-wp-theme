@@ -152,6 +152,6 @@
 	/**
 	 * Comment form optimization.
 	 */
-	document.querySelector('.comment-form').removeAttribute('novalidate');
+	document.querySelector('.comment-form')?.removeAttribute('novalidate');
 
 })();

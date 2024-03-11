@@ -64,7 +64,7 @@
 				align-items: center;
 
 				&:active,
-				&:focus {
+				&:focus-visible {
 					--notch-y: 0;
 					outline: none;
 					carret-color: white;
@@ -91,7 +91,8 @@
 
 			// The current page of parent page item get a distinction.
 			&.current_page_parent,
-			&.current_page_item {
+			&.current_page_item,
+			&.current-menu-ancestor {
 				> a {
 					--notch-y: 0;
 				}
@@ -135,7 +136,7 @@
 	}
 
 	a:hover,
-	a:focus {
+	a:focus-visible {
 		+ .sub-menu {
 			z-index: 10;
 			opacity: 1;

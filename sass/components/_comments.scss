@@ -99,7 +99,7 @@
 		--link-color: var(--wp--preset--color--information-600);
 
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			color: var(--wp--preset--color--neutral-050);
 		}
 	}

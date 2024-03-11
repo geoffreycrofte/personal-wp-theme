@@ -8,7 +8,6 @@
  *
  * @package Geoffrey_Crofte
  */
-
 ?><!doctype html>
 <html <?php language_attributes(); ?> class="is-light">
 <head>
@@ -19,7 +18,20 @@
 	<?php wp_head(); ?>
 
 	<link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Bold.woff2" type="font/woff2" crossorigin>
-	<link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Regular.woff2" type="font/woff2" crossorigin>
+	<link rel="preload" as="font" href="<?php echo GC_ASSETS; ?>fonts/FiraSans-Regular.woff2" type="font/woff2" crossorigin>	
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/geoffreycrofte/assets/img/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/geoffreycrofte/assets/img/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/geoffreycrofte/assets/img/favicons/favicon-16x16.png">
+	<link rel="manifest" href="/wp-content/themes/geoffreycrofte/assets/img/favicons/site.webmanifest">
+	<link rel="mask-icon" href="/wp-content/themes/geoffreycrofte/assets/img/favicons/safari-pinned-tab.svg" color="#a40162">
+	<link rel="shortcut icon" href="/wp-content/themes/geoffreycrofte/assets/img/favicons/favicon.ico">
+	<meta name="apple-mobile-web-app-title" content="Geoffrey Crofte">
+	<meta name="application-name" content="Geoffrey Crofte">
+	<meta name="msapplication-TileColor" content="#a40162">
+	<meta name="msapplication-config" content="/wp-content/themes/geoffreycrofte/assets/img/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#a40162">
+
 </head>
 
 <body <?php body_class(); ?>>

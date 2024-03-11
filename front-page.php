@@ -11,7 +11,6 @@
 
 get_header();
 ?>
-
 	<main id="primary" class="site-main">
 		<div class="container">
 			<div class="blob">
@@ -214,6 +213,7 @@ get_header();
 
 			<?php
 			$posts = get_field( 'latest_talks_posts' );
+
 			if ( ! empty( $posts ) ) {
 			?>
 
@@ -223,7 +223,7 @@ get_header();
 						$post_link = get_the_permalink( $post->ID );
 						$talk_metas = speekr_get_talk_metas( $post->ID );
 
-						if ( $talk_metas['error'] ) return;
+						if ( isset( $talk_metas['error'] ) ) return;
 				?>
 
 				<li class="card-item">
@@ -274,8 +274,16 @@ get_header();
 			?>
 			</ul>
 
+			<?php
+			$talks_link = get_post_type_archive_link( 'talks' );
+
+			if ( function_exists('speekr_get_pages_id') ) {
+				$talks_link = speekr_get_pages_id('list_page') ? get_permalink( speekr_get_pages_id('list_page') ) : $talks_link;
+			}
+			?>
+
 			<p class="section-cta is-text-center">
-				<a class="button-primary is-big" href="<?php echo get_post_type_archive_link( 'talks' ); ?>">
+				<a class="button-primary is-big" href="<?php echo $talks_link; ?>">
 					<span><?php echo _e( 'See all the talks', 'geoffreycrofte' ) ?></span>
 					<?php get_icon('arrow-right'); ?>
 				</a>

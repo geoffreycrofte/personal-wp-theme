@@ -269,7 +269,7 @@ a {
 	}
 
 	&:hover,
-	&:focus {
+	&:focus-visible {
 		--link-color: var(--wp--preset--color--neutral-050);
 		background-size: auto 1.7em;
 		border-radius: 4px;
@@ -285,7 +285,7 @@ a {
 	}
 
 	&:focus-visible {
-		outline: 2px dotted var(--effect-color);
+		outline: 2px solid var(--effect-color);
 		outline-offset: 4px;
 		border-radius: 4px;
 	}
@@ -295,7 +295,7 @@ a {
 		--link-color: var(--wp--preset--color--neutral-050);
 
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			--link-color: var(--wp--preset--color--neutral-900);		}
 
 		&:active {

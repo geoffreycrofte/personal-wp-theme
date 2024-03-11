@@ -417,13 +417,13 @@ a:visited {
 	--link-color: var(--gc-color-link-visited);
 }
 
-a:hover, a:focus {
+a:hover, a:focus-visible {
 	--link-color: var(--wp--preset--color--neutral-050);
 	background-size: auto 1.7em;
 	border-radius: 4px;
 }
 
-a:hover:active, a:focus:active {
+a:hover:active, a:focus-visible:active {
 	--link-color: var(--wp--preset--color--neutral-050);
 }
 
@@ -433,7 +433,7 @@ a:active {
 }
 
 a:focus-visible {
-	outline: 2px dotted var(--effect-color);
+	outline: 2px solid var(--effect-color);
 	outline-offset: 4px;
 	border-radius: 4px;
 }
@@ -443,7 +443,7 @@ a:focus-visible {
 	--link-color: var(--wp--preset--color--neutral-050);
 }
 
-.is-dark a:hover, .is-dark a:focus {
+.is-dark a:hover, .is-dark a:focus-visible {
 	--link-color: var(--wp--preset--color--neutral-900);
 }
 
@@ -630,22 +630,22 @@ input[type="submit"],
 	transition: all .3s;
 }
 
-button:visited, button:visited:hover, button:visited:focus,
+button:visited, button:visited:hover, button:visited:focus-visible,
 input[type="button"]:visited,
 input[type="button"]:visited:hover,
-input[type="button"]:visited:focus,
+input[type="button"]:visited:focus-visible,
 input[type="reset"]:visited,
 input[type="reset"]:visited:hover,
-input[type="reset"]:visited:focus,
+input[type="reset"]:visited:focus-visible,
 input[type="submit"]:visited,
 input[type="submit"]:visited:hover,
-input[type="submit"]:visited:focus,
+input[type="submit"]:visited:focus-visible,
 [class*="button-"]:visited,
 [class*="button-"]:visited:hover,
-[class*="button-"]:visited:focus,
+[class*="button-"]:visited:focus-visible,
 .comment-reply-link:visited,
 .comment-reply-link:visited:hover,
-.comment-reply-link:visited:focus {
+.comment-reply-link:visited:focus-visible {
 	color: var(--btn-color);
 	border-radius: 80px;
 }
@@ -666,20 +666,20 @@ input[type="reset"]:-moz-focusring,
 input[type="submit"]:-moz-focusring,
 [class*="button-"]:-moz-focusring,
 .comment-reply-link:-moz-focusring {
-	outline: 1px dotted ButtonText;
+	outline: 1px solid var(--effect-color);
 }
 
-button:hover, button:focus,
+button:hover, button:focus-visible,
 input[type="button"]:hover,
-input[type="button"]:focus,
+input[type="button"]:focus-visible,
 input[type="reset"]:hover,
-input[type="reset"]:focus,
+input[type="reset"]:focus-visible,
 input[type="submit"]:hover,
-input[type="submit"]:focus,
+input[type="submit"]:focus-visible,
 [class*="button-"]:hover,
-[class*="button-"]:focus,
+[class*="button-"]:focus-visible,
 .comment-reply-link:hover,
-.comment-reply-link:focus {
+.comment-reply-link:focus-visible {
 	--btn-background: var(--gc-color-link-hover);
 	color: var(--btn-color);
 	border-radius: 80px;
@@ -758,7 +758,7 @@ input[type="submit"], .is-dark
 	--btn-color: var(--wp--preset--color--primary-700);
 }
 
-.button-primary.is-light:hover, .button-primary.is-light:focus {
+.button-primary.is-light:hover, .button-primary.is-light:focus-visible {
 	--btn-background: var(--wp--preset--color--primary-200);
 	--btn-color: var(--wp--preset--color--primary-800);
 }
@@ -1159,7 +1159,7 @@ main + .section {
 	align-items: center;
 }
 
-.site-header .menu > li > a:active, .site-header .menu > li > a:focus {
+.site-header .menu > li > a:active, .site-header .menu > li > a:focus-visible {
 	--notch-y: 0;
 	outline: none;
 	carret-color: white;
@@ -1182,7 +1182,7 @@ main + .section {
 	transition: all 0.5s cubic-bezier(0.48, 0.01, 0.03, 1.01);
 }
 
-.site-header .menu > li.current_page_parent > a, .site-header .menu > li.current_page_item > a {
+.site-header .menu > li.current_page_parent > a, .site-header .menu > li.current_page_item > a, .site-header .menu > li.current-menu-ancestor > a {
 	--notch-y: 0;
 }
 
@@ -1221,7 +1221,7 @@ main + .section {
 }
 
 .site-header a:hover + .sub-menu,
-.site-header a:focus + .sub-menu {
+.site-header a:focus-visible + .sub-menu {
 	z-index: 10;
 	opacity: 1;
 	pointer-events: all;
@@ -1491,7 +1491,14 @@ main + .section {
 }
 
 .logos a[href] {
+	display: inline-flex;
 	--effect-color: transparent;
+}
+
+.logos a[href]:focus-visible {
+	color: var(--wp--preset--color--primary-600);
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
 }
 
 /**
@@ -1563,6 +1570,17 @@ main + .section {
 	height: 100%;
 }
 
+.card-image {
+	display: flex;
+	height: auto;
+	width: 100%;
+	aspect-ratio: auto 16/9;
+}
+
+.card-image iframe {
+	height: 100%;
+}
+
 .card-content {
 	height: 100%;
 }
@@ -1580,7 +1598,7 @@ main + .section {
 	background-size: auto 0;
 }
 
-.card-content h1 a:hover, .card-content h1 a:focus {
+.card-content h1 a:hover, .card-content h1 a:focus-visible {
 	color: var(--card-background);
 	background-size: auto 1.75em;
 }
@@ -1625,7 +1643,7 @@ main + .section {
 	color: inherit;
 }
 
-.card-meta a:hover, .card-meta a:focus {
+.card-meta a:hover, .card-meta a:focus-visible {
 	color: var(--card-background);
 }
 
@@ -1726,7 +1744,7 @@ main + .section {
 	color: inherit;
 }
 
-.page-header .post-meta a:hover, .page-header .post-meta a:focus {
+.page-header .post-meta a:hover, .page-header .post-meta a:focus-visible {
 	color: #fff;
 }
 
@@ -1843,7 +1861,7 @@ a.post-thumbnail img {
 /**
  * Blog contents & Containers
  */
-.entry-content {
+.entry-content:not(.card-description) {
 	--color-h2: var(--wp--preset--color--primary-600);
 	--color-h3: var(--wp--preset--color--primary-700);
 	--color-h4: var(--wp--preset--color--primary-800);
@@ -2161,7 +2179,7 @@ p.center {
 	border-radius: 8px;
 }
 
-.related-posts .related-post-item a:hover, .related-posts .related-post-item a:focus {
+.related-posts .related-post-item a:hover, .related-posts .related-post-item a:focus-visible {
 	color: inherit;
 	box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
 }
@@ -2405,7 +2423,7 @@ a:has(img) {
 	--link-color: var(--wp--preset--color--information-600);
 }
 
-.comment a:link:not(.comment-reply-link):hover, .comment a:link:not(.comment-reply-link):focus {
+.comment a:link:not(.comment-reply-link):hover, .comment a:link:not(.comment-reply-link):focus-visible {
 	color: var(--wp--preset--color--neutral-050);
 }
 
@@ -2625,7 +2643,7 @@ a:has(img) {
 	text-decoration: none;
 }
 
-.site-footer a:hover, .site-footer a:focus {
+.site-footer a:hover, .site-footer a:focus-visible {
 	padding-block: .125em;
 	background-size: auto 2.7em;
 }
