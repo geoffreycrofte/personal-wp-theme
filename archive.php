@@ -13,6 +13,7 @@ get_header();
 <section class="page-content">
 
 	<header class="page-header section pt-0 pb-40">
+
 		<?php
 			the_archive_title( '<h1 class="section-title page-title">', '</h1>' );
 			the_archive_description( '<div class="section-subtitle archive-description">', '</div>' );
@@ -32,15 +33,15 @@ get_header();
 
 			<ul class="card-list grid is-clean" style="--xs-repeat:1;--md-repeat:2;--xxl-repeat:3;--md-gap:var(--blog-gap, 24px)">
 			
-			<?php
-				/* Start the Loop */
-				while ( have_posts() ) :
-					the_post();
+			<?php while ( have_posts() ) : the_post(); ?>
+			
+				<li id="list-item-<?php the_ID(); ?>" class="card-item">
+			
+			<?php get_template_part( 'template-parts/content', get_post_type() . '-card' ); ?>
+			
+				</li>
 
-					get_template_part( 'template-parts/content', get_post_type() . '-card' );
-
-				endwhile;
-			?>
+			<?php endwhile; ?>
 				
 			</ul>
 

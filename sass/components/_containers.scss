@@ -1,6 +1,7 @@
 /**
  * The Page container
  */
+@use '../abstracts' as *;
 [id="page"] {
 	.blog & {
 		overflow-x: hidden;

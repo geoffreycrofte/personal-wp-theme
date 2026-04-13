@@ -1,6 +1,7 @@
 /**
  * Comments
  */
+@use '../abstracts' as *;
 // Container
 .comments-area {
 
@@ -12,7 +13,7 @@
 	padding-top: 40px;
 	margin: 0 auto;
 
-	@media (min-width: map-get($breakpoints, 'md')) {
+	@media (min-width: bp('md')) {
 		.comment-form-author,
 		.comment-form-email {
 			margin-top: 0;

@@ -19,29 +19,27 @@ Geoffrey Crofte is based on Underscores https://underscores.me/, (C) 2012-2020 A
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
 
-// Import variables and mixins.
-@import "abstracts/variables";
-@import "abstracts/mixins";
-@import "abstracts/font-face";
+// Abstracts
+@use "abstracts/font-face";
 
 // Components
-@import "components/html-elements";
-@import "components/forms";
-@import "components/buttons";
-@import "components/utilities";
-@import "components/grid";
-@import "components/containers";
-@import "components/site-header";
+@use "components/html-elements";
+@use "components/forms";
+@use "components/buttons";
+@use "components/utilities";
+@use "components/grid";
+@use "components/containers";
+@use "components/site-header";
 
 // Some specific page needs.
-@import "components/page-decorations";
-@import "components/page-home";
-@import "components/portfolio";
-@import "components/logo-list";
-@import 'components/wp-contents';
-@import 'components/card';
-@import 'components/blog-post';
-@import 'components/image-n-gallery';
-@import "components/comments";
-@import "components/widgets";
-@import "components/site-footer";
+@use "components/page-decorations";
+@use "components/page-home";
+@use "components/portfolio";
+@use "components/logo-list";
+@use "components/wp-contents";
+@use "components/card";
+@use "components/blog-post";
+@use "components/image-n-gallery";
+@use "components/comments";
+@use "components/widgets";
+@use "components/site-footer";

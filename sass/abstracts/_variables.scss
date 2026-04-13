@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Breakpoints
 // Content-first logic (mobile first with native behavior taken into account)
 $breakpoints: (
@@ -6,6 +8,10 @@ $breakpoints: (
 	'xl': 1200px,
 	'xxl': 1680px
 );
+
+@function bp($key) {
+	@return map.get($breakpoints, $key);
+}
 
 // Colors
 $colors: (
@@ -96,8 +102,7 @@ $colors: (
 );
 
 // Typography
-$font-main: "Fira Sans", "Helvetica Neue", Helvetica, sans-serif;
-//$font-main: "Poppins", "Helvetica Neue", Helvetica, sans-serif;
+$font-main: "Inclusive Sans", "Helvetica Neue", Helvetica, sans-serif;
 $font-code: consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 $font-line-height-body: 1.5;
 $font-line-height-pre: 1.6;

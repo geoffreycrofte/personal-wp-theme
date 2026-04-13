@@ -1,6 +1,7 @@
 /**
  * Card System
  */
+@use '../abstracts' as *;
 .card {
 	--r: 66;
 	--g: 11;

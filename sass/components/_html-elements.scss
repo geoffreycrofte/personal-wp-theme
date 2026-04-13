@@ -1,6 +1,9 @@
 /**
  * Basic HTML Elements
  */
+@use '../abstracts' as *;
+@use 'plugin-pastacode' as *;
+
 body {
 	// Text and background for main contents
 	--gc-color-primary: var(--wp--preset--color--primary-700);
@@ -14,7 +17,7 @@ body {
 
 	// Forms
 	--gc-input-border-color: var(--gc-color-primary);
-	--gc-input-background: var(--wp--preset--color--primary-200);
+	--gc-input-background: var(--wp--preset--color--primary-100);
 
 	// Some default values
 	padding: 0;
@@ -144,8 +147,6 @@ code:not(pre code) {
 	background: var(--wp--preset--color--tertiary-100)
 }
 
-@import 'plugin-pastacode';
-
 code,
 kbd,
 tt,
@@ -257,7 +258,7 @@ a {
 	--link-color: var(--gc-color-primary);
 
 	position: relative;
-	color: var(--link-color);
+	color: var(--link-color)!important;
 	transition: all .3s;
 	text-decoration: none;
 	background: linear-gradient(to top, var(--effect-color), var(--effect-color)) left 100% no-repeat;
@@ -270,12 +271,12 @@ a {
 
 	&:hover,
 	&:focus-visible {
-		--link-color: var(--wp--preset--color--neutral-050);
+		--link-color: var(--wp--preset--color--primary-050);
 		background-size: auto 1.7em;
 		border-radius: 4px;
 
 		&:active {
-			--link-color: var(--wp--preset--color--neutral-050); 
+			--link-color: var(--wp--preset--color--primary-050); 
 		}
 	}
 

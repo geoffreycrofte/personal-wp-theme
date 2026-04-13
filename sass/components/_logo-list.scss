@@ -10,12 +10,5 @@
 
 	a[href] {
 		display: inline-flex;
-		--effect-color: transparent;
-
-		&:focus-visible {
-			color: var(--wp--preset--color--primary-600);
-			outline: 2px solid currentColor;
-			outline-offset: 2px;
-		}
 	}
 }

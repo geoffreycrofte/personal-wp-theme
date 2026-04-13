@@ -1,6 +1,8 @@
 /**
  * All kind of buttons
  */
+@use '../abstracts' as *;
+
 button,
 input[type="button"],
 input[type="reset"],
@@ -19,11 +21,12 @@ input[type="submit"],
 	font-weight: 700;
 	border: 0 none;
 	text-decoration: none;
-	color: var(--btn-color);
+	color: var(--btn-color, var(--link-color))!important;
 	background: var(--btn-background);
 	border-radius: 80px; // pills
 	cursor: pointer;
 	-webkit-appearance: button;
+	appearance: button;
 	transition: all .3s;
 
 	// Avoid link.button being purple-color (:visited state)

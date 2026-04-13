@@ -1,16 +1,4 @@
 /**
- * Header
- */
-.site-header {
-	border-top: 2px solid var(--wp--preset--color--primary-700);
-
-	.container {
-		display: flex;
-		justify-content: space-between;
-	}
-}
-
-/**
  * Navigation
  */
 .main-navigation,
@@ -20,6 +8,14 @@
 .site-header {
 	--gap: 16px;
 	--line-size: 32px;
+	--link-color: var(--wp--preset--color--primary-900);
+
+	border-top: 2px solid var(--wp--preset--color--primary-700);
+
+	.container {
+		display: flex;
+		justify-content: space-between;
+	}
 
 	ul, li {
 		margin: 0;
@@ -35,7 +31,6 @@
 		display: block;
 		font-size: 1.125rem;
 		font-weight: bold;
-		color: var(--wp--preset--color--primary-900);
 		background: none;
 	}
 
@@ -73,7 +68,13 @@
 				&:hover,
 				&:focus-visible {
 					--notch-y: -40%;
+					--link-color: inherit;
 					outline: none;
+				}
+
+				&:has(.sub-menu:focus-within),
+				&:has(.sub-menu:hover) {
+					--notch-y: 0%;
 				}
 
 				&::before {
@@ -102,19 +103,19 @@
 
 	.sub-menu {
 		position: absolute;
-		left: calc(var(--gap) + var(--line-size));
+		right: calc(50% - var(--line-size));
 		top: calc(50% + 1.7em);
 		flex-direction: column;
-		min-width: 100%;
+		min-width: 220px;
 		border: 2px solid var(--wp--preset--color--primary-800);
-		padding: 16px;
+		padding: 12px;
 		background: white;
 		box-shadow: 0 4px 12px -8px var(--wp--preset--color--primary-900);
 		border-radius: 16px;
 		z-index: -1;
 		opacity: 0;
 		pointer-events: none;
-		transform: translateY(10%);
+		transform: translateY(10%) translateX(40%);
 		transition: all .7s;
 
 		li,
@@ -129,6 +130,7 @@
 
 			&:hover,
 			&:focus-visible {
+				--link-color: inherit;
 				padding-inline: 12px 4px;
 				background: var(--wp--preset--color--primary-100);
 			}
@@ -141,7 +143,7 @@
 			z-index: 10;
 			opacity: 1;
 			pointer-events: all;
-			transform: translateY(0);
+			transform: translateY(0) translateX(50%);
 		}
 	}
 
@@ -150,7 +152,7 @@
 		z-index: 10;
 		opacity: 1;
 		pointer-events: all;
-		transform: translateY(0);
+		transform: translateY(0) translateX(50%);
 	}
 }
 

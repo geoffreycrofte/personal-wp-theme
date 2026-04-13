@@ -233,7 +233,7 @@ if ( ! function_exists('geoffreycrofte_get_author_box') ) {
  * Use geoffrey_crofte_get_icon_def() to return an icon, get_icon() to print it.
  */
 function geoffrey_crofte_get_icon_def( $name, $title = null ){
-	$attrs = isset( $title ) ? 'aria-labelledby="' . $title . '"' : 'role="presentation" tabindex="-1"';
+	$attrs = isset( $title ) ? 'aria-labelledby="' . $title . '"' : 'focusable="false" role="none"';
 	$title = isset( $title ) ? '<title>' . $title . '</title>' : '';
 
 	$icons = array(
@@ -318,9 +318,9 @@ function get_icon( $name = null, $title = null ) {
 }
 
 function wave() {
-	echo '<svg class="wave" preserveAspectRatio="none" width="1679" height="322" viewBox="0 0 1679 322" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation" tabindex="-1"><path d="M758 114.5C972 189.999 1284.5 215 1679 0V321.5H-5V92C252.5 27 544 39.0006 758 114.5Z" fill="var(--decoration-color, #F8F6FA)"/></svg>';
+	echo '<svg class="wave" preserveAspectRatio="none" width="1679" height="322" viewBox="0 0 1679 322" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" role="none"><path d="M758 114.5C972 189.999 1284.5 215 1679 0V321.5H-5V92C252.5 27 544 39.0006 758 114.5Z" fill="var(--decoration-color, #F8F6FA)"/></svg>';
 }
 
 function ovale() {
-	echo '<svg class="ovale" preserveAspectRatio="none" width="1680" height="221" viewBox="0 0 1680 221" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation" tabindex="-1"><path d="M1680 101.838C1466.65 142.551 1018.14 183.579 498.46 205.985C322.186 213.585 153.887 218.346 0 220.453L1.21537e-06 44.102C151.444 33.1847 316.899 23.6368 490.275 16.1616C1012.86 -6.37009 1465.37 -3.94689 1680 18.5998V101.838Z" fill="var(--decoration-color, #26344B)"/></svg>';
+	echo '<svg class="ovale" preserveAspectRatio="none" width="1680" height="221" viewBox="0 0 1680 221" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" role="none"><path d="M1680 101.838C1466.65 142.551 1018.14 183.579 498.46 205.985C322.186 213.585 153.887 218.346 0 220.453L1.21537e-06 44.102C151.444 33.1847 316.899 23.6368 490.275 16.1616C1012.86 -6.37009 1465.37 -3.94689 1680 18.5998V101.838Z" fill="var(--decoration-color, #26344B)"/></svg>';
 }

@@ -1,6 +1,8 @@
-/** 
+/**
  * Blog + Sidebar
  */
+@use '../abstracts' as *;
+
 .page-header {
 	padding-inline: 24px;
 
@@ -41,11 +43,11 @@
 		list-style: none;
 		color: var(--wp--preset--color--neutral-500);
 
-		@media (min-width: map-get($breakpoints, 'md')) {
+		@media (min-width: bp('md')) {
 			gap: 64px;
 		}
 
-		@media (min-width: map-get($breakpoints, 'xl')) {
+		@media (min-width: bp('xl')) {
 			gap: 80px;
 		}
 
@@ -87,8 +89,8 @@ a.post-thumbnail {
 		min-width: 200px;
 	}
 
-	@supports (aspect-ratio: 2 / 1) {
-		aspect-ratio: 2 / 1;
+	@supports (aspect-ratio: 16 / 9) {
+		aspect-ratio: 16 / 9;
 
 		img {
 			width: 100%;
@@ -113,7 +115,7 @@ a.post-thumbnail {
 		// Legacy thumbnail sizes.
 		&[width="200"],
 		&[width="100"] {
-			max-width: 100px;
+			
 		}
 	}
 
@@ -154,12 +156,12 @@ a.post-thumbnail {
 	padding: 80px 40px;
 	grid-gap: var(--blog-gap);
 
-	@media (min-width: map-get($breakpoints, 'l')) {
+	@media (min-width: bp('l')) {
 		--blog-gap: 40px; // used into the inner grid itself (see HTML)
 	}
 
-	@media (min-width: map-get($breakpoints, 'xl')) {
-		--blog-gap: 64px; // used into the inner grid itself (see HTML)
+	@media (min-width: bp('xl')) {
+		--blog-gap: 32px; // used into the inner grid itself (see HTML)
 		padding: 160px 80px;
 	}
 }
@@ -272,7 +274,7 @@ a.post-thumbnail {
 		line-height: 1.45;
 	}
 
-	@media (min-width: map-get($breakpoints, l)) {
+	@media (min-width: bp('l')) {
 		h2, h3, h4 {
 			margin-top: 2em;
 			margin-bottom: .75em;

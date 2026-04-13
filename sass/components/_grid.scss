@@ -1,6 +1,7 @@
 /**
  * Grid System
  */
+@use '../abstracts' as *;
 .grid {
 	--repeat: var(--xs-repeat, 2);
 	--pattern: var(--xs-pattern, 1fr);
@@ -10,25 +11,25 @@
 	grid-template-columns: repeat(var(--repeat), var(--pattern));
 	grid-gap: var(--gap);
 
-	@media (min-width: map-get($breakpoints, 'md')) {
+	@media (min-width: bp('md')) {
 		--repeat: var(--md-repeat, var(--xs-repeat, 2));
 		--pattern: var(--md-pattern, var(--xs-pattern, 1fr));
 		--gap: var(--md-gap, var(--xs-gap, 40px));
 	}
 
-	@media (min-width:  map-get($breakpoints, 'l')) {
+	@media (min-width:  bp('l')) {
 		--repeat: var(--l-repeat, var(--md-repeat, var(--xs-repeat, 2)));
 		--pattern: var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr)));
 		--gap: var(--l-gap, var(--md-gap, var(--xs-gap, 40px)));
 	}
 
-	@media (min-width:  map-get($breakpoints, 'xl')) {
+	@media (min-width:  bp('xl')) {
 		--repeat: var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-repeat, 2))));
 		--pattern: var(--xl-pattern, var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr))));
 		--gap: var(--xl-gap, var(--l-gap, var(--md-gap, var(--xs-gap, 48px))));
 	}
 
-	@media (min-width:  map-get($breakpoints, 'xxl')) {
+	@media (min-width:  bp('xxl')) {
 		--repeat: var(--xxl-repeat, var(--xl-repeat, var( --l-repeat, var(--md-repeat, var(--xs-repeat, 2)))));
 		--pattern: var(--xxl-pattern, var(--xl-pattern, var(--l-pattern, var(--md-pattern, var(--xs-pattern, 1fr)))));
 		--gap: var(--xxl-gap, var(--xl-gap, var(--l-gap, var(--md-gap, var(--xs-gap, 56px)))));
